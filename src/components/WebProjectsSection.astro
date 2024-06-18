@@ -7,28 +7,45 @@ import WebIcon from "./icons/Web.astro";
 const webProjs = [
     {
         title: "ASESIN-ADA",
-        description: "Online game to play cluedo with your friends. Chat with them, find the killer and win the game.",
-        img: "https://raw.githubusercontent.com/841723/asesin-ada/4351fc320594a907edee5b1662034655b0a7389c/front-end-shared/images/logo.png",
+        description:
+            "Online game to play Cluedo with bots or your friends. Chat with them, find the killer, the weapon, and the room, and win the game.",
+        img: "/asesin-ada/logo.png",
         gh_link: "https://github.com/841723/asesin-ada",
-        used_tech: ["React", "Node.js", "Socket.io", "PostgreSQL"],
+        used_tech: [
+            "React",
+            "Node.js",
+            "Socket.io",
+            "CSS",
+            "Python",
+            "PostgreSQL",
+        ],
     },
     {
         title: "PC ARP",
-        description: "Ecommerce web inspired in PC Componentes. Search for products, filter and order them, add products to your cart and buy the ones you like.",
-        img: "https://raw.githubusercontent.com/841723/pcarp/main/public/media/logo.jpg",
+        description:
+            "Ecommerce website inspired by PC Componentes. Search for products, filter, sort and add them to your cart. Purchase the ones you like.",
+        img: "/pc-arp/logo_square.png",
         gh_link: "https://github.com/841723/pcarp",
         used_tech: ["HTML", "CSS", "JavaScript", "Node.js", "PostgreSQL"],
+    },
+    {
+        title: "PORTFOLIO",
+        description: "This portfolio you are seeing right now.",
+        img: "/portfolio/logo.png",
+        gh_link: "https://github.com/841723/portfolio",
+        preview_link: "http://localhost:4321/",
+        used_tech: ["Astro", "React", "TailwindCSS"],
     },
 ];
 ---
 
-<Section title="Web Projects">
+<Section title="Web Projects" id="web">
     <WebIcon slot="icon" />
     <ol class="flex flex-col gap-y-6">
         {
             webProjs.map((proj) => (
                 <li>
-                    <Card {...proj}/>
+                    <Card {...proj} />
                 </li>
             ))
         }

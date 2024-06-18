@@ -1,40 +1,69 @@
 ---
+import TechPill from "./TechPill.astro";
+import GithubIcon from "./icons/Github.astro";
+import LinkIcon from "./icons/Link.astro";
+
 interface Props {
     title: string;
     description: string;
     img: string;
-    gh_link: string;
+    gh_link?: string;
+    preview_link?: string;
     used_tech: string[];
 }
 
-const { title, description, img, gh_link, used_tech } = Astro.props;
+const { title, description, img, gh_link, preview_link, used_tech } =
+    Astro.props;
 ---
 
-<a
-    href={gh_link}
-    class="flex flex-col items-center border rounded-lg shadow md:flex-row w-full border-gray-700 bg-gray-800 hover:bg-gray-700"
-    target="_blank"
+<article
+    class="flex flex-col relative items-center border rounded-lg shadow md:flex-row w-full border-gray-700 bg-gray-800 hover:scale-105 hover:bg-gray-700 transition-all duration-500"
 >
     <img
-        class="object-cover w-full rounded-t-lg h-96 bg-white md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
+        class="object-cover min-w-48 rounded-t-lg h-full aspect-square bg-white md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
         src={img}
         alt=""
     />
-    <div class="flex flex-col justify-between p-4 leading-normal">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">
-            {title}
-        </h5>
-        <p class="mb-3 font-normal text-gray-400">
+    <div class="flex flex-col justify-between w-full p-4 leading-normal">
+        <div class="flex flex-row justify-between">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">
+                {title}
+            </h5>
+            <ul class="flex flex-row justify-end gap-x-2">
+                <li>
+                    {
+                        preview_link && (
+                            <a
+                                href={preview_link}
+                                target="_blank"
+                                class="flex flex-row gap-x-1 items-center rounded-xl py-1 px-2 border border-1 hover:bg-gray-800  transition-all duration-100"
+                            >
+                                <LinkIcon /> Preview
+                            </a>
+                        )
+                    }
+                </li>
+
+                <li>
+                    {
+                        gh_link && (
+                            <a
+                                href={gh_link}
+                                target="_blank"
+                                class="flex flex-row gap-x-1 items-center rounded-xl py-1 px-2 border border-1 hover:bg-gray-800  transition-all duration-100"
+                            >
+                                <GithubIcon /> Code
+                            </a>
+                        )
+                    }
+                </li>
+            </ul>
+        </div>
+        <p class="my-3 font-normal text-gray-400">
             {description}
         </p>
         <div class="flex flex-wrap gap-2">
-            {
-                used_tech?.map((tech) => (
-                    <span class="px-2 py-1 text-sm font-semibold text-white bg-gray-700 rounded-md">
-                        {tech}
-                    </span>
-                ))
-            }
+            {used_tech?.map((tech) => <TechPill tech={tech} />)}
         </div>
     </div>
-</a>
+</article>

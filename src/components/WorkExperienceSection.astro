@@ -4,9 +4,16 @@ import Section from "./Section.astro";
 
 import ExperienceItem from "./WorkExperienceItem.astro";
 const experienceList = [
+    // {
+    //     date: "2024",
+    //     title: "Web Developer.",
+    //     company: "La Banda AC",
+    //     description:
+    //         "I worked using WordPress developing a website for a Spanish business.",
+    // },
     {
         date: "2023-2024",
-        title: "Private Classes",
+        title: "Private Classes.",
         company: "",
         description:
             "I gave classes to a first-year computer science student, as well as mathematics and technical drawing classes to high school students.",
@@ -14,7 +21,7 @@ const experienceList = [
 ];
 ---
 
-<Section title="Work Experience">
+<Section title="Work Experience" id="work">
     <WorkIcon slot="icon" />
     <ol>
         {
