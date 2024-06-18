@@ -1,0 +1,28 @@
+---
+import WorkIcon from "../components/icons/Work.astro";
+import Section from "./Section.astro";
+
+import ExperienceItem from "./WorkExperienceItem.astro";
+const experienceList = [
+    {
+        date: "2023-2024",
+        title: "Private Classes",
+        company: "",
+        description:
+            "I gave classes to a first-year computer science student, as well as mathematics and technical drawing classes to high school students.",
+    },
+];
+---
+
+<Section title="Work Experience">
+    <WorkIcon slot="icon" />
+    <ol>
+        {
+            experienceList.map((exp) => (
+                <li class="">
+                    <ExperienceItem {...exp} />
+                </li>
+            ))
+        }
+    </ol>
+</Section>

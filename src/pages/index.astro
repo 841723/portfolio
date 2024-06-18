@@ -1,15 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Badge from "../components/Badge.astro";
-import SocialPill from "../components/SocialPill.astro";
-import LinkedinIcon from "../components/Icons/Linkedin.astro";
-import GithubIcon from "../components/Icons/Github.astro";
-import MailIcon from "../components/Icons/Mail.astro";
-import WebIcon from "../components/Icons/Web.astro";
-import ProjectIcon from "../components/Icons/Project.astro";
-import WorkIcon from "../components/Icons/Work.astro";
-import Card from "../components/Card.astro";
-// import CVIcon from "../components/Icons/CV.astro";
+import PresentationSection from "../components/PresentationSection.astro";
+import WebProjectsSection from "../components/WebProjectsSection.astro";
+import OtherProjectsSection from "../components/OtherProjectsSection.astro";
+import WorkExperienceSection from "../components/WorkExperienceSection.astro";
 ---
 
 <Layout
@@ -17,92 +11,9 @@ import Card from "../components/Card.astro";
 	description="Diego Roldan's Portfolio. Computer Science Student "
 >
 	<main>
-		<section
-			class="flex flex-col gap-y-4 w-full lg:w-[740px] mx-auto py-20"
-		>
-			<h1
-				class="text-white text-5xl font-bold flex flex-row items-center gap-x-4"
-			>
-				Hey, I'm Diego Roldan
-				<a
-					href="https://linkedin.com/in/diego-roldan"
-					target="_blank"
-					rel="noopener"
-					class="flex justify-center items-center"
-				>
-					<Badge>Available for hire</Badge></a
-				>
-			</h1>
-			<h2 class="text-xl opacity-90 mb-4">
-				Last Year <span class="text-yellow-300"
-					>Computer Science Student</span
-				> from Zaragoza, Spain.
-			</h2>
-
-			<ul class="flex justify-start gap-x-3">
-				<li>
-					<SocialPill href="https://linkedin.com/in/diego-roldan">
-						<LinkedinIcon />
-						Linkedin
-					</SocialPill>
-				</li>
-				<li>
-					<SocialPill href="https://github.com/841723">
-						<GithubIcon />
-						Github
-					</SocialPill>
-				</li>
-				<li>
-					<SocialPill href="mailto:diegoraulroldan@gmail.com">
-						<MailIcon />
-						diegoraulroldan@gmail.com
-					</SocialPill>
-				</li>
-				<!-- <li>
-					<SocialPill href="/public/DiegoRaúlRoldanUrueña-cv.pdf">
-						<CVIcon />
-						CV
-					</SocialPill>
-				</li> -->
-			</ul>
-		</section>
-
-		<section
-			class="flex flex-col gap-y-4 w-full lg:w-[740px] mx-auto py-20"
-		>
-			<h2
-				class="flex items-center gap-x-2 text-white text-3xl font-semibold mb-4"
-			>
-				<WebIcon />Web Projects
-			</h2>
-			<ul class="flex flex-col gap-y-6">
-				<li>
-					<Card />
-				</li>
-				<li>
-					<Card />
-				</li>
-			</ul>
-		</section>
-
-		<section
-			class="flex flex-col gap-y-4 w-full lg:w-[740px] mx-auto py-20"
-		>
-			<h2
-				class="flex items-center gap-x-2 text-white text-3xl font-semibold mb-4"
-			>
-				<ProjectIcon />Other Projects
-			</h2>
-		</section>
-
-		<section
-			class="flex flex-col gap-y-4 w-full lg:w-[740px] mx-auto py-20"
-		>
-			<h2
-				class="flex items-center gap-x-2 text-white text-3xl font-semibold mb-4"
-			>
-				<WorkIcon />Work Experience
-			</h2>
-		</section>
+		<PresentationSection />
+		<WebProjectsSection />
+		<OtherProjectsSection />
+		<WorkExperienceSection />
 	</main>
 </Layout>

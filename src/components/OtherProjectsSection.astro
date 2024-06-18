@@ -1,0 +1,28 @@
+---
+import ProjectIcon from "../components/icons/Project.astro";
+import Card from "./Card.astro";
+import Section from "./Section.astro";
+
+const otherProjs = [
+    {
+        title: "BETRIS",
+        description: "Given a list of pieces, betris solves the problem of finding a way to fill a given number of rows.",
+        img: "https://m.media-amazon.com/images/I/61M3rDwh4qL.png",
+        gh_link: "https://github.com/841723/betris",
+        used_tech: ["C++"],
+    },
+];
+---
+
+<Section title="Other Projects">
+    <ProjectIcon slot="icon" />
+    <ol class="flex flex-col gap-y-6">
+        {
+            otherProjs.map((proj) => (
+                <li>
+                    <Card {...proj}/>
+                </li>
+            ))
+        }
+    </ol>
+</Section>

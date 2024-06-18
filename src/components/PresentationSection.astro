@@ -1,0 +1,55 @@
+---
+import Badge from "./Badge.astro";
+import SocialPill from "./SocialPill.astro";
+
+import LinkedinIcon from "../components/icons/Linkedin.astro";
+import GithubIcon from "../components/icons/Github.astro";
+import MailIcon from "../components/icons/Mail.astro";
+---
+
+<section class="flex flex-col gap-y-4 w-full lg:w-[740px] mx-auto py-20">
+    <h1
+        class="text-white text-5xl font-bold flex flex-row items-center gap-x-4"
+    >
+        Hey, I'm Diego Roldan
+        <a
+            href="https://linkedin.com/in/diego-roldan"
+            target="_blank"
+            rel="noopener"
+            class="flex justify-center items-center"
+        >
+            <Badge>Available for hire</Badge></a
+        >
+    </h1>
+    <h2 class="text-xl opacity-90 mb-4">
+        Last Year <span class="text-yellow-300">Computer Science Student</span> from
+        Zaragoza, Spain.
+    </h2>
+
+    <ul class="flex justify-start gap-x-3">
+        <li>
+            <SocialPill href="https://linkedin.com/in/diego-roldan">
+                <LinkedinIcon />
+                Linkedin
+            </SocialPill>
+        </li>
+        <li>
+            <SocialPill href="https://github.com/841723">
+                <GithubIcon />
+                Github
+            </SocialPill>
+        </li>
+        <li>
+            <SocialPill href="mailto:diegoraulroldan@gmail.com">
+                <MailIcon />
+                diegoraulroldan@gmail.com
+            </SocialPill>
+        </li>
+        <!-- <li>
+            <SocialPill href="/public/DiegoRaúlRoldanUrueña-cv.pdf">
+                <CVIcon />
+                CV
+            </SocialPill>
+        </li> -->
+    </ul>
+</section>
