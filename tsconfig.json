@@ -3,10 +3,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@layouts/*": ["/portfolio/src/layouts/*"],
-      "@components/*": ["/portfolio/src/components/*"],
-      "@icons/*": ["/portfolio/src/components/icons/*"],
-      "@src/*": ["/portfolio/src/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@components/*": ["src/components/*"],
+      "@icons/*": ["src/components/icons/*"],
+      "@src/*": ["src/*"],
     }
   },
 }
