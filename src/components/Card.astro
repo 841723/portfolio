@@ -1,4 +1,5 @@
 ---
+import type { TAGInfo } from "../tags";
 import TechPill from "./TechPill.astro";
 import GithubIcon from "./icons/Github.astro";
 import LinkIcon from "./icons/Link.astro";
@@ -9,7 +10,7 @@ interface Props {
     img: string;
     gh_link?: string;
     preview_link?: string;
-    used_tech: string[];
+    used_tech: TAGInfo[];
 }
 
 const { title, description, img, gh_link, preview_link, used_tech } =

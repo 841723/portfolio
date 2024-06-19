@@ -1,62 +1,14 @@
 ---
-import ReactIcon from "./icons/React.astro";
-import NodeJsIcon from "./icons/NodeJs.astro";
-import SocketIoIcon from "./icons/SocketIo.astro";
-import SQLIcon from "./icons/SQL.astro";
-import HTMLIcon from "./icons/HTML.astro";
-import CSSIcon from "./icons/CSS.astro";
-import JavaScriptIcon from "./icons/JavaScript.astro";
-import CplusplusIcon from "./icons/Cplusplus.astro";
-import TailwindCSSIcon from "./icons/TailwindCSS.astro";
-import AstroIcon from "./icons/Astro.astro";
-import PythonIcon from "./icons/Python.astro";
-import JavaIcon from "./icons/Java.astro";
-import AndroidIcon from "./icons/Android.astro";
-import GolangIcon from "./icons/Golang.astro";
-import WordpressIcon from "./icons/Wordpress.astro";
-import AssemblyIcon from "./icons/Assembly.astro";
+import { type TAGInfo } from "../tags";
 
 interface Props {
-    tech: string;
+    tech: TAGInfo
 }
+
 const { tech } = Astro.props;
-
-const techList = [
-    { name: "React", style: "text-blue-100 bg-blue-500/60", icon: ReactIcon },
-    { name: "Node.js", style: "text-green-100 bg-green-800/60", icon: NodeJsIcon },
-    { name: "Socket.io", style: "text-yellow-100 bg-yellow-700/60", icon: SocketIoIcon },
-    { name: "PostgreSQL", style: "text-red-100 bg-red-700/60", icon: SQLIcon },
-    { name: "HTML", style: "text-orange-100 bg-orange-600/60", icon: HTMLIcon },
-    { name: "CSS", style: "text-blue-100 bg-blue-600/60", icon: CSSIcon },
-    { name: "JavaScript", style: "text-black bg-yellow-400/60", icon: JavaScriptIcon },
-    { name: "C++", style: "text-blue-100 bg-blue-700/60", icon: CplusplusIcon },
-    { name: "C", style: "text-blue-100 bg-blue-700/55", icon: CplusplusIcon },
-    { name: "TailwindCSS", style: "text-blue-100 bg-blue-300/60", icon: TailwindCSSIcon },
-    { name: "Astro", style: "text-purple-100 bg-purple-400/60", icon: AstroIcon },
-    { name: "Python", style: "text-yellow-950 bg-yellow-300/60", icon: PythonIcon },
-    { name: "Java", style: "text-black bg-orange-400/60", icon: JavaIcon },
-    { name: "JavaCC", style: "text-black bg-orange-400/55", icon: JavaIcon },
-    { name: "Android", style: "text-green-100 bg-green-500/60", icon: AndroidIcon },
-    { name: "Go" , style: "text-blue-100 bg-blue-400/60", icon: GolangIcon },
-    { name: "SQLite", style: "text-blue-200 bg-blue-400/60", icon: SQLIcon },
-    { name: "WordPress", style: "text-blue-100 bg-blue-800/60", icon: WordpressIcon },
-    { name: "ARM Assembly", style: "text-black bg-gray-100/60", icon:AssemblyIcon }
-];
-
-const IconComponent = techList.find((item) => item.name === tech)?.icon ;
-
-const techStyles = techList.reduce((acc, curr) => {
-    acc[`${curr.style}`] = tech === curr.name;
-    return acc;
-}, {});
-
-if (!IconComponent) {
-    techStyles["text-black bg-gray-400/60"] = true;
-}
-
 ---
 
-<span class:list={["flex flex-row items-center gap-x-1 px-2 py-1 text-sm font-semibold rounded-md", techStyles]}>
-    {IconComponent && <IconComponent />}
-    {tech}
+<span class=`flex flex-row items-center gap-x-1 px-2 py-1 text-sm font-semibold rounded-md ${tech.style}`>
+    {tech.icon && <tech.icon />}
+    {tech.name}
 </span>
