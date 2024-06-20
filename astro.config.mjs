@@ -6,5 +6,16 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   site: 'https://841723.github.io',
   base: '/portfolio',
-  integrations: [tailwind()]
+  integrations: [tailwind()],
+  vite: {
+    resolve: {
+      alias: {
+        '@layouts': '/src/layouts',
+        '@components': '/src/components',
+        '@icons': '/src/components/icons',
+        '@src': '/src',
+
+      }
+    }
+  }
 });
