@@ -1,5 +1,6 @@
 ---
-const BASE_URL = import.meta.env.BASE_URL;
+// const BASEURL = import.meta.env.BASE_URL;
+const BASEURL = "/portfolio";
 
 import Badge from "@/components/Badge.astro";
 import SocialPill from "@/components/SocialPill.astro";
@@ -15,7 +16,7 @@ import MailIcon from "@/components/icons/Mail.astro";
 >
     <div class="flex items-end gap-x-4">
         <img
-            src=`/${BASE_URL}/mypic.jpg`
+            src=`/portfolio/mypic.jpg`
             alt="Diego"
             class="rounded-full size-32 object-cover object-center border-2 border-white"
         />
