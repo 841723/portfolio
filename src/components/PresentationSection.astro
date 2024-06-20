@@ -11,7 +11,7 @@ import MailIcon from "@/components/icons/Mail.astro";
 
 <section
     id="me"
-    class="flex flex-col gap-y-4 w-full lg:w-[740px] mx-auto pt-20"
+    class="flex flex-col gap-y-4 w-full max-w-[740px] mx-auto pt-20 px-2 mt-5 md:mt-0"
 >
     <div class="flex items-end gap-x-4">
         <img
@@ -33,14 +33,14 @@ import MailIcon from "@/components/icons/Mail.astro";
     >
         Hey, I'm Diego Roldan
     </h1>
-    <h2 class="text-xl opacity-90 mb-4">
+    <h2 class="text-xl opacity-90 mb-4 text-pretty">
         Last Year <span class="text-yellow-300">Computer Science Student</span> from
         Zaragoza, Spain. Great passion for becoming the best <span
             class="text-yellow-300">Full Stack</span
         > Web Developer.
     </h2>
 
-    <ul class="flex justify-start gap-x-3">
+    <ul class="flex flex-wrap items-center justify-start gap-3">
         <li>
             <SocialPill href="https://linkedin.com/in/diego-roldan">
                 <LinkedinIcon />

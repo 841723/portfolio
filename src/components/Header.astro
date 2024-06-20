@@ -7,9 +7,9 @@ const nav = [
 ];
 ---
 
-<header class="fixed flex justify-center w-full z-10 mt-4">
+<header class="fixed flex justify-center w-full z-10 mt-4 px-2">
     <nav
-        class="flex flex-row align-center justify-center gap-x-8 py-2 px-8 rounded-full bg-slate-500 bg-blend-color-burn"
+        class="flex flex-row align-center justify-center gap-x-0 md:gap-x-8 py-2 px-8 rounded-full bg-slate-500 bg-blend-color-burn"
     >
         {
             nav.map((navElem) => (
@@ -24,7 +24,7 @@ const nav = [
         }
     </nav>
 </header>
-<script>
+<!-- <script>
     document.addEventListener("DOMContentLoaded", () => {
         const sections = document.querySelectorAll("section");
         const navItems = document.querySelectorAll("header nav a");
@@ -36,9 +36,9 @@ const nav = [
                         if (
                             item.getAttribute("aria-label") == entry.target.id
                         ) {
-                            item.classList.add("text-yellow-500");
+                            // item.classList.add("text-yellow-500");
                         } else {
-                            item.classList.remove("text-yellow-500");
+                            // item.classList.remove("text-yellow-500");
                         }
                     });
                 }
@@ -66,4 +66,4 @@ const nav = [
             }
         };
     });
-</script>
+</script> -->
