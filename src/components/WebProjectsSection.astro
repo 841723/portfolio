@@ -1,13 +1,13 @@
 ---
 import Card from "@/components/Card.astro";
 import Section from "@/components/Section.astro";
-// import WebIcon from "@/components/icons/Web.astro";
+import Web from "@/components/icons/Web.astro";
 
 import { WEB_PROJECTS } from "@/web_projects";
 ---
 
 <Section title="Web Projects" id="web">
-    <!-- <WebIcon slot="icon" /> -->
+    <Web slot="icon" />
     <ol class="flex flex-col gap-y-6">
         {
             WEB_PROJECTS.map((proj) => (
