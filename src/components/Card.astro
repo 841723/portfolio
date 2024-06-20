@@ -21,8 +21,9 @@ const { title, description, img, gh_link, preview_link, used_tech } =
 <article
     class="flex flex-col relative items-center border rounded-lg shadow md:flex-row w-full border-gray-700 bg-gray-800 hover:scale-105 hover:bg-gray-700 transition-all duration-500"
 >
+<!-- class="object-cover min-w-48 rounded-t-lg h-full aspect-square bg-white md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" -->
     <img
-        class="object-cover min-w-48 rounded-t-lg h-full aspect-square bg-white md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
+        class="object-cover rounded-t-lg aspect-square h-auto w-48 md:rounded-none md:rounded-s-lg"
         src={BASE_URL + img}
         alt=`${title} icon`
     />
