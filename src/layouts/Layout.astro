@@ -1,4 +1,6 @@
 ---
+import { BASE_URL } from "@/consts";
+
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
@@ -18,7 +20,7 @@ const { title, description } = Astro.props;
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href=`${BASE_URL}/favicon.svg` />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
