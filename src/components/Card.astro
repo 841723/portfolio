@@ -1,4 +1,6 @@
 ---
+const BASE_URL = import.meta.env.BASE_URL;
+
 import type { TAGInfo } from "@/tags";
 import TechPill from "@/components/TechPill.astro";
 import GithubIcon from "@/components/icons/Github.astro";
@@ -22,7 +24,7 @@ const { title, description, img, gh_link, preview_link, used_tech } =
 >
     <img
         class="object-cover min-w-48 rounded-t-lg h-full aspect-square bg-white md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-        src={img}
+        src={BASE_URL + img}
         alt=""
     />
     <div class="flex flex-col justify-between w-full p-4 leading-normal">

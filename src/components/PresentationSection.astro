@@ -1,4 +1,6 @@
 ---
+const BASE_URL = import.meta.env.BASE_URL;
+
 import Badge from "@/components/Badge.astro";
 import SocialPill from "@/components/SocialPill.astro";
 
@@ -7,10 +9,13 @@ import GithubIcon from "@/components/icons/Github.astro";
 import MailIcon from "@/components/icons/Mail.astro";
 ---
 
-<section id="me" class="flex flex-col gap-y-4 w-full lg:w-[740px] mx-auto pt-20">
+<section
+    id="me"
+    class="flex flex-col gap-y-4 w-full lg:w-[740px] mx-auto pt-20"
+>
     <div class="flex items-end gap-x-4">
         <img
-            src="/mypic.jpg"
+            src=`/${BASE_URL}/mypic.jpg`
             alt="Diego"
             class="rounded-full size-32 object-cover object-center border-2 border-white"
         />
@@ -29,7 +34,10 @@ import MailIcon from "@/components/icons/Mail.astro";
         Hey, I'm Diego Roldan
     </h1>
     <h2 class="text-xl opacity-90 mb-4">
-        Last Year <span class="text-yellow-300">Computer Science Student</span> from Zaragoza, Spain. Great passion for becoming the best <span class="text-yellow-300">Full Stack</span> Web Developer.
+        Last Year <span class="text-yellow-300">Computer Science Student</span> from
+        Zaragoza, Spain. Great passion for becoming the best <span
+            class="text-yellow-300">Full Stack</span
+        > Web Developer.
     </h2>
 
     <ul class="flex justify-start gap-x-3">
