@@ -1,7 +1,7 @@
 ---
 import type { TAGInfo } from "@/tags";
 import TechPill from "@/components/TechPill.astro";
-// import GithubIcon from "@/components/icons/Github.astro";
+import GithubIcon from "@/components/icons/Github.astro";
 import LinkIcon from "@/components/icons/Link.astro";
 
 interface Props {
@@ -53,7 +53,7 @@ const { title, description, img, gh_link, preview_link, used_tech } =
                                 target="_blank"
                                 class="flex flex-row gap-x-1 items-center rounded-xl py-1 px-2 border border-1 hover:bg-gray-800  transition-all duration-100"
                             >
-                                {/* <GithubIcon /> Code */}
+                                <GithubIcon /> Code
                             </a>
                         )
                     }
