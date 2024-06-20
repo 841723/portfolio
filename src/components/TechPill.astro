@@ -2,13 +2,15 @@
 import { type TAGInfo } from "@src/tags";
 
 interface Props {
-    tech: TAGInfo
+    tech: TAGInfo;
 }
 
 const { tech } = Astro.props;
 ---
 
-<span class=`flex flex-row items-center gap-x-1 px-2 py-1 text-sm font-semibold rounded-md ${tech.style}`>
+<span
+    class=`flex flex-row items-center gap-x-1 px-2 py-1 text-sm font-semibold rounded-md ${tech.style}`
+>
     {tech.icon && <tech.icon />}
     {tech.name}
 </span>
