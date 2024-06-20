@@ -22,7 +22,7 @@ export const OTHER_PROJECTS = [
         title: "RAN - TRAVEL APP",
         description:
             "A travel app designed to assist older travelers. Users can book activities, tours, and more. Guides can create new activities and chat with users.",
-        img: "/ran/logo.png",
+        img: "/ran/logo.jpg",
         gh_link: BASE_GITHUB_URL+"ran",
         used_tech: [TAGS.AxureRP],
     },

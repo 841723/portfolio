@@ -21,12 +21,14 @@ const { title, description, img, gh_link, preview_link, used_tech } =
 <article
     class="flex flex-col relative items-center border rounded-lg shadow md:flex-row w-full border-gray-700 bg-gray-800 hover:scale-105 hover:bg-gray-700 transition-all duration-500"
 >
-<!-- class="object-cover min-w-48 rounded-t-lg h-full aspect-square bg-white md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" -->
-    <img
-        class="object-cover rounded-t-lg aspect-square h-auto w-48 md:rounded-none md:rounded-s-lg"
-        src={BASE_URL + img}
-        alt=`${title} icon`
-    />
+    <div class="min-w-48 w-48 h-[232px]">
+        <img
+            class="object-cover rounded-t-lg aspect-square h-full md:rounded-none md:rounded-s-lg"
+            src={BASE_URL + img}
+            alt=`${title} icon`
+        />
+    </div>
+
     <div class="flex flex-col justify-between w-full p-4 leading-normal">
         <div class="flex flex-row justify-between">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">
@@ -62,7 +64,7 @@ const { title, description, img, gh_link, preview_link, used_tech } =
                 </li>
             </ul>
         </div>
-        <p class="my-3 font-normal text-gray-400">
+        <p class="my-3 font-normal text-gray-400 text-pretty">
             {description}
         </p>
         <div class="flex flex-wrap gap-2">
