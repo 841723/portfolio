@@ -3,6 +3,13 @@ import { BASE_GITHUB_URL } from "./consts";
 
 export const WEB_PROJECTS = [
     {
+        title: "REFORMAS LAS CANTERAS",
+        description:
+            "WORK IN PROGRESS - Website page for a small kitchen and bathroom reform company. Check their services, projects, and contact them.",
+        img: "/las-canteras/logo.jpg",
+        used_tech: [TAGS.Astro, TAGS.Typescript, TAGS.TailwindCSS],
+    },
+    {
         title: "ASESIN-ADA",
         description:
             "Online game to play Cluedo with bots or your friends. Chat with them, find the killer, the weapon, and the room, and win the game.",
