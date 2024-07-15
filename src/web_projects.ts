@@ -4,8 +4,9 @@ import { BASE_GITHUB_URL } from "./consts";
 export const WEB_PROJECTS = [
     {
         title: "REFORMAS LAS CANTERAS",
+        subtitle: "Currently in progress...",
         description:
-            "WORK IN PROGRESS - Website page for a small kitchen and bathroom reform company. Check their services, projects, and contact them.",
+            "Website page for a small kitchen and bathroom reform company. Check their services, projects, and contact them.",
         img: "/las-canteras/logo.jpg",
         used_tech: [TAGS.Astro, TAGS.Typescript, TAGS.TailwindCSS],
     },

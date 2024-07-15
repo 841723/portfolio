@@ -3,13 +3,23 @@ import { type TAGInfo } from "@/tags";
 
 interface Props {
     tech: TAGInfo;
+    size?: "sm" | "md" | "lg" | "xl";
 }
 
-const { tech } = Astro.props;
+const sizes = {
+    sm: "md:text-xs text-sm",
+    md: "md:text-sm text-base",
+    lg: "md:text-base text-lg",
+    xl: "md:text-lg text-xl",
+};
+
+
+if (!Astro.props.size) Astro.props.size = "md";
+const { size, tech } = Astro.props;
 ---
 
 <span
-    class=`flex flex-row items-center gap-x-1 px-2 py-1 text-sm font-semibold rounded-md ${tech.style}`
+    class=`flex flex-row items-center gap-x-1 px-2 py-1 ${size ? sizes[size]:"text-sm"} font-semibold rounded-md ${tech.style}`
 >
     {tech.icon && <tech.icon />}
     {tech.name}

@@ -1,6 +1,7 @@
 ---
 const nav = [
     { name: "Me", label: "me" },
+    { name: "Tech Stack", label: "techstack"},
     { name: "Web Projects", label: "web" },
     // { name: "Work Experience", label: "work" },
     { name: "Other Projects", label: "other" },
@@ -9,13 +10,13 @@ const nav = [
 
 <header class="fixed flex justify-center w-full z-10 mt-4 px-2">
     <nav
-        class="flex flex-row align-center justify-center gap-x-0 md:gap-x-8 py-2 px-8 rounded-full bg-slate-500 bg-blend-color-burn"
+        class="flex flex-row align-center justify-center gap-x-0 md:gap-x-8 py-2 px-8 rounded-full bg-slate-500/50 backdrop-blur-xl  text-white font-semibold"
     >
         {
             nav.map((navElem) => (
                 <a
                     href={"#" + navElem.label}
-                    class="flex items-center text-center opacity-85 hover:opacity-100 px-2 rounded-full hover:scale-105 transform transition duration-200 ease-in-out"
+                    class="flex items-center text-center opacity-95 hover:opacity-100 px-2 rounded-full hover:scale-105 transform transition duration-200 ease-in-out"
                     aria-label={navElem.label}
                 >
                     {navElem.name}
@@ -24,46 +25,3 @@ const nav = [
         }
     </nav>
 </header>
-<!-- <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const sections = document.querySelectorAll("section");
-        const navItems = document.querySelectorAll("header nav a");
-
-        const callback = (entries: any[]) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    navItems.forEach((item) => {
-                        if (
-                            item.getAttribute("aria-label") == entry.target.id
-                        ) {
-                            // item.classList.add("text-yellow-500");
-                        } else {
-                            // item.classList.remove("text-yellow-500");
-                        }
-                    });
-                }
-            });
-        };
-
-        const observer = new IntersectionObserver(callback, {
-            root: null,
-            rootMargin: "0px",
-            threshold: 0.6,
-        });
-
-        sections.forEach((section) => {
-            observer.observe(section);
-        });
-
-        // Cleanup function
-        document.onvisibilitychange = () => {
-            if (document.visibilityState === "hidden") {
-                observer.disconnect();
-            } else {
-                sections.forEach((section) => {
-                    observer.observe(section);
-                });
-            }
-        };
-    });
-</script> -->

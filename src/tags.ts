@@ -15,6 +15,13 @@ import GolangIcon from "./components/icons/Golang.astro";
 import WordpressIcon from "./components/icons/Wordpress.astro";
 import AssemblyIcon from "./components/icons/Assembly.astro";
 import TypescriptIcon from "./components/icons/Typescript.astro";
+import AxureRP from "./components/icons/AxureRP.astro";
+import DockerIcon from "./components/icons/Docker.astro";
+import ApacheIcon from "./components/icons/Apache.astro";
+import BashIcon from "./components/icons/Bash.astro";
+import NginxIcon from "./components/icons/Nginx.astro";
+import HaskellIcon from "./components/icons/Haskell.astro";
+import KubernetesIcon from "./components/icons/Kubernetes.astro";
 
 
 export type TAGInfo = { name: string, style: string, icon: ((_props: Record<string, any>) => any) | null };
@@ -38,6 +45,12 @@ export const TAGS = {
     Golang: { name: "Go", style: "text-blue-100 bg-blue-400/60", icon: GolangIcon },
     Wordpress: { name: "WordPress", style: "text-blue-100 bg-blue-800/60", icon: WordpressIcon },
     Assembly: { name: "ARM Assembly", style: "text-black bg-gray-100/60", icon: AssemblyIcon },
-    AxureRP: { name: "Axure RP", style: "text-black bg-gray-200/60", icon: null },
+    AxureRP: { name: "Axure RP", style: "text-black bg-gray-200/60", icon: AxureRP },
     Typescript: { name: "TypeScript", style: "text-blue-100 bg-blue-700/60", icon: TypescriptIcon },
+    Docker: { name: "Docker", style: "text-blue-100 bg-blue-400/60", icon: DockerIcon },
+    Apache: { name: "Apache", style: "text-gray-200 bg-red-500/70", icon: ApacheIcon },
+    Bash: { name: "Bash", style: "text-gray-950 bg-purple-300/60", icon: BashIcon },
+    Nginx: { name: "Nginx", style: "text-gray-200 bg-green-500/60", icon: NginxIcon },
+    Haskell: { name: "Haskell", style: "text-gray-300 bg-purple-900/60", icon: HaskellIcon },
+    Kubernetes: { name: "Kubernetes", style: "text-blue-100 bg-blue-700/60", icon: KubernetesIcon },
 }

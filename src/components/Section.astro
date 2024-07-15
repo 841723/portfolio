@@ -6,9 +6,9 @@ interface Props {
 const { title, id } = Astro.props;
 ---
 
-<section id={id} class="flex flex-col gap-y-4 w-full max-w-[740px] mx-auto mt-20 pt-20 px-2">
+<section id={id} class="flex flex-col gap-y-4 w-full max-w-[740px] mx-auto pt-20 px-2">
     <h2
-        class="flex items-center gap-x-2 text-white text-3xl font-semibold mb-4"
+        class="flex items-center gap-x-2 text-white text-3xl font-semibold"
     >
         <slot name="icon" />{title}
     </h2>
