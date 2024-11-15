@@ -3,6 +3,12 @@ import { BASE_GITHUB_URL } from "./consts";
 
 export const WEB_PROJECTS = [
     {
+        title: "LOCATOPEDIA",
+        description: "",
+        img: "/tfg/logo.jpg",
+        used_tech: [TAGS.React, TAGS.NodeJs, TAGS.PostgreSQL, TAGS.TailwindCSS, TAGS.Docker, TAGS.JavaScript, TAGS.Nginx],
+    }
+    {
         title: "REFORMAS LAS CANTERAS",
         subtitle: "Currently in progress...",
         description:
