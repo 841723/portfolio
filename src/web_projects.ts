@@ -6,7 +6,7 @@ export const WEB_PROJECTS = [
         title: "LOCATOPEDIA",
         subtitle: "Currently in progress...",
         description:
-            "Wiki-like website to search for locations and their information. Add new locations and edit them. Check the map to see the locations. Create an account to save your favorite locations.",
+            "Wiki-like website to search for locations and their information. Add new locations and edit them. Check the map to see the most popular locations.",
         img: "/tfg/logo.jpg",
         // gh_link: BASE_GITHUB_URL + "wikiplace",
         used_tech: [
