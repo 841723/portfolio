@@ -45,7 +45,7 @@ export const WEB_PROJECTS = [
     {
         title: "PC ARP",
         description:
-            "Ecommerce website inspired by PC Componentes. Search for products, filter, sort and add them to your cart. Purchase the ones you like.",
+            "Ecommerce website inspired by PcComponentes. Search for products, filter, sort and add them to your cart. Purchase the ones you like.",
         img: "/pc-arp/logo_square.png",
         gh_link: BASE_GITHUB_URL + "pcarp",
         used_tech: [
