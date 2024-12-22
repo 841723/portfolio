@@ -18,9 +18,12 @@ if (!Astro.props.size) Astro.props.size = "md";
 const { size, tech } = Astro.props;
 ---
 
-<span
-    class=`flex flex-row items-center gap-x-1 px-2 py-1 ${size ? sizes[size]:"text-sm"} font-semibold rounded-md ${tech.style}`
+<a
+    class=`flex flex-row items-center gap-x-1 px-2 py-1 ${size ? sizes[size]:"text-sm"} font-semibold rounded-md ${tech.style} hover:opacity-70 transition-all duration-200 ease-in-out`
+    href={tech.link}
+    target="_blank"
+    rel="noopener noreferrer"
 >
     {tech.icon && <tech.icon />}
     {tech.name}
-</span>
+</a>

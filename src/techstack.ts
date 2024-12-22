@@ -3,7 +3,8 @@ import { TAGS } from "./tags";
 export const TECH_STACK = [
     {
         title: "Frontend",
-        used_tech: [TAGS.HTML, TAGS.CSS, TAGS.JavaScript, TAGS.Typescript, TAGS.React, TAGS.Astro, TAGS.SocketIo, TAGS.TailwindCSS],
+        used_tech: [TAGS.HTML, TAGS.CSS, TAGS.JavaScript, TAGS.Typescript, TAGS.React, TAGS.Astro, TAGS.Angular, TAGS.SocketIo, TAGS.TailwindCSS, TAGS.Android
+        ],
 
     },
     {
@@ -12,6 +13,6 @@ export const TECH_STACK = [
     },
     {
         title: "Others",
-        used_tech: [TAGS.Cplusplus, TAGS.Python, TAGS.Java, TAGS.Golang, TAGS.Haskell, TAGS.Assembly, TAGS.AxureRP, TAGS.Android, TAGS.Bash, TAGS.Apache, TAGS.Nginx, TAGS.Docker, TAGS.Kubernetes],
+        used_tech: [TAGS.Cplusplus, TAGS.Python, TAGS.NumPy, TAGS.Pandas, TAGS.Java, TAGS.Golang, TAGS.Haskell, TAGS.Assembly, TAGS.AxureRP, TAGS.Bash, TAGS.Apache, TAGS.Nginx, TAGS.Docker, TAGS.Kubernetes, TAGS.STM32],
     },
 ];
