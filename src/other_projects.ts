@@ -1,7 +1,15 @@
 import { TAGS } from "./tags";
-import {BASE_GITHUB_URL } from "./consts";
+import { BASE_GITHUB_URL } from "./consts";
 
 export const OTHER_PROJECTS = [
+    {
+        title: "RAFT - DISTRIBUTED CONSENSUS",
+        description:
+            "A distributed consensus algorithm that ensures that all the nodes in a cluster agree on the same value.",
+        img: "/raft/states.png",
+        gh_link: BASE_GITHUB_URL + "raft",
+        used_tech: [TAGS.Golang],
+    },
     {
         title: "BETRIS",
         description:
@@ -42,13 +50,5 @@ export const OTHER_PROJECTS = [
         img: "/car-assembly/logo.jpg",
         gh_link: BASE_GITHUB_URL + "car-assembly",
         used_tech: [TAGS.Assembly],
-    },
-    {
-        title: "RAFT - DISTRIBUTED CONSENSUS",
-        description:
-            "A distributed consensus algorithm that ensures that all the nodes in a cluster agree on the same value.",
-        img: "/raft/states.png",
-        gh_link: BASE_GITHUB_URL + "raft",
-        used_tech: [TAGS.Golang],
     },
 ];

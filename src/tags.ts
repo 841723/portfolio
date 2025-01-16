@@ -26,6 +26,9 @@ import AngularIcon from "./components/icons/Angular.astro";
 import NumpyIcon from "./components/icons/Numpy.astro";
 import PandasIcon from "./components/icons/Pandas.astro";
 import STMIcon from "./components/icons/STM.astro";
+import AWSIcon from "./components/icons/AWS.astro";
+import AzureIcon from "./components/icons/Azure.astro";
+import GoogleCloudIcon from "./components/icons/GoogleCloud.astro";
 
 
 export type TAGInfo = { name: string, style: string, icon: ((_props: Record<string, any>) => any), link: string | null };
@@ -210,5 +213,23 @@ export const TAGS = {
         style: "text-black bg-pink-500/60",
         icon: AngularIcon,
         link: "https://angular.io/",
+    },
+    AWS: {
+        name: "AWS",
+        style: "text-orange-200 bg-slate-600/60",
+        icon: AWSIcon,
+        link: "https://aws.amazon.com/",
+    },
+    Azure: {
+        name: "Azure",
+        style: "text-white bg-blue-600/60",
+        icon: AzureIcon,
+        link: "https://azure.microsoft.com/",
+    },
+    GoogleCloud: {
+        name: "Google Cloud",
+        style: "text-green-100 bg-green-400/60",
+        icon: GoogleCloudIcon,
+        link: "https://cloud.google.com/",
     },
 };

@@ -8,7 +8,7 @@ export const WEB_PROJECTS = [
         description:
             "Wiki-like website to search for locations and their information. Add new locations and edit them. See the most popular locations.",
         img: "/tfg/logo.jpg",
-        // gh_link: BASE_GITHUB_URL + "wikiplace",
+        // preview_link: "https://www.locatopedia.com",
         used_tech: [
             TAGS.React,
             TAGS.NodeJs,
@@ -17,6 +17,7 @@ export const WEB_PROJECTS = [
             TAGS.Docker,
             TAGS.JavaScript,
             TAGS.Nginx,
+            TAGS.Azure,
         ],
     },
     {
@@ -40,6 +41,7 @@ export const WEB_PROJECTS = [
             TAGS.CSS,
             TAGS.Python,
             TAGS.PostgreSQL,
+            TAGS.AWS,
         ],
     },
     {
@@ -54,6 +56,7 @@ export const WEB_PROJECTS = [
             TAGS.JavaScript,
             TAGS.NodeJs,
             TAGS.PostgreSQL,
+            TAGS.AWS,
         ],
     },
     {
