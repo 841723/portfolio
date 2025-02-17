@@ -2,21 +2,6 @@ import { TAGS } from "./tags";
 
 export const TECH_STACK = [
     {
-        title: "Cloud",
-        used_tech: [
-            TAGS.AWS,
-            TAGS.GoogleCloud,
-            TAGS.Azure,
-            TAGS.Docker,
-            TAGS.Kubernetes,
-            TAGS.Golang,
-            TAGS.Bash,
-            TAGS.Apache,
-            TAGS.Nginx,
-        ],
-        double: true,
-    },
-    {
         title: "Frontend",
         used_tech: [
             TAGS.HTML,
@@ -40,6 +25,21 @@ export const TECH_STACK = [
             TAGS.SQLite,
             TAGS.SocketIo,
         ],
+    },
+    {
+        title: "Cloud",
+        used_tech: [
+            TAGS.AWS,
+            TAGS.GoogleCloud,
+            TAGS.Azure,
+            TAGS.Docker,
+            TAGS.Kubernetes,
+            TAGS.Golang,
+            TAGS.Bash,
+            TAGS.Apache,
+            TAGS.Nginx,
+        ],
+        double: true,
     },
     {
         title: "Others",

@@ -216,7 +216,7 @@ export const TAGS = {
     },
     AWS: {
         name: "AWS",
-        style: "text-orange-200 bg-slate-600/60",
+        style: "text-white bg-slate-600/60",
         icon: AWSIcon,
         link: "https://aws.amazon.com/",
     },
