@@ -1,0 +1,98 @@
+---
+import "src/styles/markdown.css";
+import { getCollection, getEntry, render } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import Section from '@/components/Section.astro';
+import { BASE_URL } from '@/consts';
+
+const { slug } = Astro.params;
+const entry = await getEntry('walkthroughs', slug);
+if (!entry) {
+  Astro.redirect(BASE_URL + 'walkthroughs', 404, {
+    statusText: 'Walkthrough not found',
+  });
+}
+const { Content } = await render(entry);
+console.log(`Rendering walkthrough: ${Content}`);
+for (const [key, value] of Object.entries(Content)) {
+  console.log(`${key}: ${value}`);
+}
+
+const back_url = BASE_URL+"#walkthroughs";
+
+const { name, difficulty, os, img } = entry.data;
+const title = `${name} Walkthrough - Diego Roldan`;
+const description = `Walkthrough for the ${name} machine on Hack The Box. Difficulty: ${difficulty}, OS: ${os}.`;
+
+export const getStaticPaths = async () => {
+  const allWalkthroughs = await getCollection('walkthroughs');
+  return allWalkthroughs.map((walkthrough) => ({
+    params: { slug: walkthrough.id },
+  }));  
+};
+---
+
+<Layout title={title} description={description}>
+  <main class="flex flex-col items-center w-full max-w-[740px] mx-auto">
+    <Section title="Walkthroughs" id="walkthroughs">
+      <p class="text-lg">
+        Here you can find some walkthroughs of Hack The Box machines that I have solved. These walkthroughs are meant to help others learn and understand the process of solving these machines.
+      </p>
+
+        <p class="text-lg">
+            Feel free to reach out if you have any questions or suggestions for future walkthroughs.
+        </p>
+
+        <a href={back_url} class="hover:underline">
+            View all Walkthroughs
+        </a>
+        <hr class="border-gray-400 border-2 my-8" />
+        <header class="rounded-lg border-gray-700 bg-gray-800 p-4 mb-8">
+            <h1 class="text-3xl font-bold mb-4 text-center">
+                {name} Walkthrough
+            </h1>
+    
+            <div class="flex flex-row-reverse justify-center gap-4 h-40">
+                <div class="flex flex-col items-center justify-center w-fit">
+                  <p class="text-md font-normal mb-2">
+                      Difficulty:
+                      {
+                      difficulty === "easy" &&
+                      <span class="font-bold text-center bg-green-500 rounded-md px-2 py-1">
+                          Easy
+                      </span>
+                      }
+                      {
+                      difficulty === "medium" &&
+                      <span class="font-semibold text-center bg-yellow-500 rounded-md px-2 py-1 ml-2">
+                          Medium
+                      </span>
+                      }
+                      {
+                      difficulty === "hard" &&
+                      <span class="font-semibold text-center bg-red-500 rounded-md px-2 py-1 ml-2">
+                          Hard
+                      </span>
+                      }
+                      {
+                      difficulty === "insane" &&
+                      <span class="font-semibold text-center bg-purple-500 rounded-md px-2 py-1 ml-2">
+                          Insane
+                      </span>
+                      }
+                  </p>
+                  <p class="text-md font-normal">
+                      OS:
+                      {os === "windows" && <span class="font-semibold">Windows</span>}
+                      {os === "linux" && <span class="font-semibold">Linux</span>}
+                  </p>
+                </div>
+                <img src={img} alt={`${name} icon`} class="aspect-square h-full object-cover rounded-lg" />
+            </div>
+        </header>
+        <article class="markdown">
+            <Content />
+        </article>
+    </Section>
+    </main>
+</Layout> 

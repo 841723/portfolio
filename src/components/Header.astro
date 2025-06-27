@@ -1,10 +1,13 @@
 ---
+import { BASE_URL } from "@/consts";
+
 const nav = [
-    { name: "Me", label: "me" },
-    { name: "Tech Stack", label: "techstack"},
-    { name: "Web Projects", label: "web" },
-    // { name: "Work Experience", label: "work" },
-    { name: "Other Projects", label: "other" },
+    { name: "Me", label: "#me" },
+    { name: "Work Experience", label: "#work" },
+    { name: "Tech Stack", label: "#techstack"},
+    { name: "Web Projects", label: "#web" },
+    { name: "Other Projects", label: "#other" },
+    { name: "Walkthroughs", label: "#walkthroughs" },
 ];
 ---
 
@@ -15,7 +18,7 @@ const nav = [
         {
             nav.map((navElem) => (
                 <a
-                    href={"#" + navElem.label}
+                    href={BASE_URL+navElem.label}
                     class="flex items-center text-center opacity-95 hover:opacity-100 px-2 rounded-full hover:scale-105 transform transition duration-200 ease-in-out"
                     aria-label={navElem.label}
                 >

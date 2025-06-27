@@ -2,8 +2,10 @@
 import Work from "@/components/icons/Work.astro";
 import Section from "@/components/Section.astro";
 
-import ExperienceItem from "@/components/WorkExperienceItem.astro";
-const experienceList = [
+import CardWork from "@/components/CardWork.astro";
+
+import type { WorkExperienceItem, Company } from "@/types";
+const experienceList: WorkExperienceItem[] = [
     // {
     //     date: "2024",
     //     title: "Web Developer.",
@@ -12,11 +14,17 @@ const experienceList = [
     //         "I worked using WordPress developing a site for a Spanish business.",
     // },
     {
-        date: "2023-2024",
-        title: "Private Classes.",
-        company: "",
+        date: "2025",
+        title: "DIGITALIZATION PRODUCTION SYSTEMS",
+        company: {
+            name: "BSH",
+            href: "https://www.bsh-group.com/",
+            color: "text-[#FF6840]",
+        },
+        img: "/bsh/logo.png",
+        height: "280",
         description:
-            "I gave classes to a first-year computer science engineering student, as well as mathematics and technical drawing classes to high school students.",
+            "I supported the digitalization of production systems by developing corporative Power Apps and automating Power Automate workflows. I also optimized the efficiency by creating Power Bi dashboards. I collaborated with cross-functional teams to improve process monitoring and data-driven decision-making. ",
     },
 ];
 ---
@@ -27,7 +35,7 @@ const experienceList = [
         {
             experienceList.map((exp) => (
                 <li class="">
-                    <ExperienceItem {...exp} />
+                    <CardWork {...exp} />
                 </li>
             ))
         }

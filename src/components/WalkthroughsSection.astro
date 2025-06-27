@@ -1,0 +1,51 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import Section from './Section.astro';
+const allWalkthroughs = await getCollection('walkthroughs');
+
+
+---
+<Section
+    title="Walkthroughs"
+    id="walkthroughs"
+>
+    <p class="text-lg">
+        Here you can find some walkthroughs of Hack The Box machines that I have solved. These walkthroughs are meant to help others learn and understand the process of solving these machines.
+    </p>
+    <p class="text-lg">
+        Feel free to reach out if you have any questions or suggestions for future walkthroughs.
+    </p>
+    <hr class="border-gray-400 border-2 my-8" />
+    { allWalkthroughs.length === 0 ? (
+        <p class="text-md italic">No walkthroughs available at the moment.</p>
+    ) : (
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {allWalkthroughs.map((walkthrough) => (
+                <a
+                    href={`/portfolio/walkthroughs/${walkthrough.id}`}
+                    class="flex flex-col items-center justify-between bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-colors"
+                >
+                    <picture class="h-40 aspect-square flex items-center justify-center">
+                        <img 
+                            class="rounded-lg h-40 object-cover"
+                            src={walkthrough.data.img}
+                            alt={walkthrough.data.name}
+                        >
+                    </picture>
+                    <h2 class="text-xl font-bold mt-4">{walkthrough.data.name}</h2>
+                    <p class="text-md font-normal">
+                        Difficulty: 
+                        <span class={`font-semibold ${walkthrough.data.difficulty === 'easy' ? 'text-green-500' : walkthrough.data.difficulty === 'medium' ? 'text-yellow-500' : walkthrough.data.difficulty === 'hard' ? 'text-red-500' : 'text-purple-500'}`}>
+                            {walkthrough.data.difficulty.charAt(0).toUpperCase() + walkthrough.data.difficulty.slice(1)}
+                        </span>
+                    </p>
+                    <p class="text-md font-normal">
+                        OS: 
+                        <span class="font-semibold">{walkthrough.data.os.charAt(0).toUpperCase() + walkthrough.data.os.slice(1)}</span>
+                    </p>
+                </a>
+            ))}
+        </div>
+    )}
+</Section>
