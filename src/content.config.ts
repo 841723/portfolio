@@ -6,7 +6,6 @@ const walkthroughs = defineCollection({
     loader: glob({ pattern: ["**/*.md",'!dev-*'], base: "src/content/walkthroughs" }),
     schema: z.object({
         name: z.string(),
-        slug: z.string(),
         difficulty: z.enum(["easy", "medium", "hard", "insane"]),
         os: z.enum(["linux", "windows"]),
         img: z.string().optional(),

@@ -1,10 +1,10 @@
 ---
-name: Example Machine 
+name: Soccer
 difficulty: easy
 os: linux
 platform: htb
 
-img: https://labs.hackthebox.com/storage/avatars/e6633d6c2b1d824c3756eb21aeed7590.png
+img: https://labs.hackthebox.com/storage/avatars/ca7f69a02eebf53deb3cd1611dd3f55e.png
 ---
 
 

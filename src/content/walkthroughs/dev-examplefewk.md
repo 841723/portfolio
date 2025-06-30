@@ -1,6 +1,5 @@
 ---
 name: Prettier Machine 
-slug: example1
 difficulty: medium
 os: windows
 platform: htb

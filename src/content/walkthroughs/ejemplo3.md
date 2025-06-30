@@ -1,6 +1,5 @@
 ---
-name: Example Machine 
-slug: example3
+name: Example
 difficulty: hard
 os: linux
 platform: htb
