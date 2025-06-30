@@ -3,6 +3,7 @@ name: Prettier Machine
 slug: example1
 difficulty: medium
 os: windows
+platform: htb
 
 img: https://labs.hackthebox.com/storage/avatars/f990caf7a8b5b680435ce36b9b1a4815.png
 ---
