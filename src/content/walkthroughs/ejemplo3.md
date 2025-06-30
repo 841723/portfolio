@@ -3,6 +3,7 @@ name: Example Machine
 slug: example3
 difficulty: hard
 os: linux
+platform: htb
 
 img: https://labs.hackthebox.com/storage/avatars/e6633d6c2b1d824c3756eb21aeed7590.png
 ---
