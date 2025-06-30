@@ -1,14 +1,14 @@
 ---
-import { getCollection, getEntry, render } from 'astro:content';
+import DirectionsIcon from './icons/Directions.astro';
+import { getCollection } from 'astro:content';
 import Section from './Section.astro';
 const allWalkthroughs = await getCollection('walkthroughs');
-
-
 ---
 <Section
     title="Walkthroughs"
     id="walkthroughs"
 >
+    <DirectionsIcon slot="icon" />
     <p class="text-lg">
         Here you can find some walkthroughs of Hack The Box machines that I have solved. These walkthroughs are meant to help others learn and understand the process of solving these machines.
     </p>
@@ -33,7 +33,7 @@ const allWalkthroughs = await getCollection('walkthroughs');
                             alt={walkthrough.data.name}
                         >
                     </picture>
-                    <h2 class="text-xl font-bold mt-4">{walkthrough.data.name}</h2>
+                    <h2 class="text-2xl font-bold mt-4 text-center">{walkthrough.data.name}</h2>
                     <p class="text-md font-normal">
                         Difficulty: 
                         <span class={`font-semibold ${walkthrough.data.difficulty === 'easy' ? 'text-green-500' : walkthrough.data.difficulty === 'medium' ? 'text-yellow-500' : walkthrough.data.difficulty === 'hard' ? 'text-red-500' : 'text-purple-500'}`}>

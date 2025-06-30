@@ -10,6 +10,7 @@ const walkthroughs = defineCollection({
         difficulty: z.enum(["easy", "medium", "hard", "insane"]),
         os: z.enum(["linux", "windows"]),
         img: z.string().optional(),
+        platform: z.enum(["htb", "vulnhub", "other"]), // Enum for platform type
         content: z.string().optional(), // Optional content field for markdown content
     }),
 });

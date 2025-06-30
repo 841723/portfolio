@@ -11,15 +11,41 @@ const nav = [
 ];
 ---
 
-<header class="fixed flex justify-center w-full z-10 mt-4 px-2">
+<header class="fixed flex md:hidden flex-row-reverse justify-start w-full z-10">
+    <button id="burger" class="z-20 flex flex-col gap-[5px] items-center justify-center w-fit mt-4 px-4 py-2 bg-slate-500/50 backdrop-blur-xl rounded-full">
+        <span class={`bg-white opacity-95 w-7 h-1 transform transition duration-500 ease-in-out`}>
+        </span>
+        <span class={`bg-white opacity-95 w-7 h-1 transform transition duration-500 ease-in-out`}>
+        </span>
+        <span class={`bg-white opacity-95 w-7 h-1 transform transition duration-500 ease-in-out`}>
+        </span>
+    </button>
     <nav
-        class="flex flex-row align-center justify-center gap-x-0 md:gap-x-8 py-2 px-8 rounded-full bg-slate-500/50 backdrop-blur-xl  text-white font-semibold"
+        id="menu"
+        class="close absolute top-0 flex flex-col w-full h-screen align-center justify-start gap-12 py-20 px-8 bg-slate-500/50 backdrop-blur-xl text-white font-semibold transition duration-500 translate-x-full"
     >
         {
             nav.map((navElem) => (
                 <a
                     href={BASE_URL+navElem.label}
-                    class="flex items-center text-center opacity-95 hover:opacity-100 px-2 rounded-full hover:scale-105 transform transition duration-200 ease-in-out"
+                    class="text-center text-2xl opacity-95 hover:opacity-100 px-2 rounded-full hover:scale-105 transform transition duration-200 ease-in-out"
+                    aria-label={navElem.label}
+                >
+                    {navElem.name}
+                </a>
+            ))
+        }
+</header>
+
+<header class="hidden fixed md:flex justify-center w-full z-10 mt-4 px-2">
+    <nav
+        class="flex flex-col w-full md:w-fit md:flex-row flex-wrap align-center justify-center gap-x-0 md:gap-x-8 py-2 px-8 rounded-full bg-slate-500/50 backdrop-blur-xl text-white font-semibold"
+    >
+        {
+            nav.map((navElem) => (
+                <a
+                    href={BASE_URL+navElem.label}
+                    class="text-center opacity-95 hover:opacity-100 px-2 rounded-full hover:scale-105 transform transition duration-200 ease-in-out"
                     aria-label={navElem.label}
                 >
                     {navElem.name}
@@ -28,3 +54,50 @@ const nav = [
         }
     </nav>
 </header>
+
+<script>
+    const burger = document.getElementById('burger');
+    const menu = document.getElementById('menu');
+    if (!burger || !menu) {
+        // If the burger or menu element is not found, log an error
+      console.error('Burger or menu element not found');
+    } 
+    else {
+        const [topLine, middleLine, bottomLine] = burger.querySelectorAll('span');
+    
+        burger?.addEventListener('click', () => {
+            const isOpen = menu.classList.toggle('translate-x-0');
+            menu?.classList.toggle('translate-x-full');
+        
+            // Animación burger -> X
+            topLine.classList.toggle('rotate-45');
+            topLine.classList.toggle('translate-y-[9px]');
+        
+            middleLine.classList.toggle('opacity-0');
+            middleLine.classList.toggle('opacity-95');
+        
+            bottomLine.classList.toggle('-rotate-45');
+            bottomLine.classList.toggle('-translate-y-[9px]');
+            if (isOpen) {
+                document.body.classList.add('overflow-hidden');
+            } else {
+                document.body.classList.remove('overflow-hidden');
+            }
+        });
+
+        // Close the menu when a link is clicked
+        const closeLinks = document.querySelectorAll('.close');
+        closeLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.toggle('translate-x-full');
+                menu.classList.toggle('translate-x-0');
+                topLine.classList.toggle('rotate-45');
+                topLine.classList.toggle('translate-y-[9px]');
+                middleLine.classList.toggle('opacity-0');
+                middleLine.classList.toggle('opacity-95');
+                bottomLine.classList.toggle('-rotate-45');
+                bottomLine.classList.toggle('-translate-y-[9px]');
+            });
+        });
+    }
+  </script>
