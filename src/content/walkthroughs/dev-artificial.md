@@ -1,5 +1,5 @@
 ---
-name: Example Machine 
+name: Artificial
 difficulty: easy
 os: linux
 platform: htb
@@ -10,27 +10,43 @@ img: https://labs.hackthebox.com/storage/avatars/e6633d6c2b1d824c3756eb21aeed759
 
 ## Enumeration
 ### Nmap Scan
+#### Normal Scan
 ```bash
-nmap -sC -sV -oN nmap.txt 10.0.1.3
+nmap -p- --open -sS --min-rate 5000 -n -Pn -vvv 10.10.11.74 -o content/allPortsFiltered
+```
+
+##### Results
+```
+PORT   STATE SERVICE REASON
+22/tcp open  ssh     syn-ack ttl 63
+80/tcp open  http    syn-ack ttl 63
+```
+
+### Web 
+When accessing `http://10.10.11.74` it redirects to `http://artificial.htb`, which is a custom domain. We need to add this domain to our `/etc/hosts` file:
+```bash
+echo "10.10.11.74 artificial.htb" | sudo tee -a /etc/hosts
+``` 
+
+Now we can access the web server using the custom domain `http://artificial.htb`.
+
+We creare an account in the web application, which is a simple login page. After creating an account, we can log in with the credentials we set.
+
+#### Directory Enumeration
+Use a tool like `gobuster` or `dirb` to enumerate directories:
+```bash
+gobuster dir -u http://artificial.htb -w /usr/share/wordlists/dirb/common.txt
 ```
 ### Results
 ```
-PORT   STATE SERVICE REASON         VERSION
-22/tcp open  ssh     syn-ack ttl 64 OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
-80/tcp open  http    syn-ack ttl 64 Apache httpd 2.4.18 ((Ubuntu))
-| http-methods:
-|   Supported Methods: GET HEAD POST OPTIONS
-|_  Potentially risky methods: POST
-|_http-server-header: Apache/2.4.18 (Ubuntu)
-|_http-title: Example Machine
+/dashboard            (Status: 302) [Size: 199] [--> /login]
+/login                (Status: 200) [Size: 857]
+/logout               (Status: 302) [Size: 189] [--> /]
 ```
-### Web Enumeration
-Access the web server at `http://10.0.1.3`. The page displays a simple message indicating that this is an example machine.
-### Directory Enumeration
-Use a tool like `gobuster` or `dirb` to enumerate directories:
-```bash
-gobuster dir -u http://10.0.1.3 -w /usr/share/wordlists/dirb/common.txt
-```
+
+
+Access the web server at `http://10.10.11.74`. The page displays a simple message indicating that this is an example machine.
+
 ### Results
 ```
 /robots.txt            (Status: 200) [Size: 20]
