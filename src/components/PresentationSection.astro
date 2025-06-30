@@ -6,8 +6,6 @@ import SocialPill from "@/components/SocialPill.astro";
 
 import LinkedinIcon from "@/components/icons/Linkedin.astro";
 import GithubIcon from "@/components/icons/Github.astro";
-import MailIcon from "@/components/icons/Mail.astro";
-import CVIcon from "@/components/icons/CV.astro";
 ---
 
 <section
@@ -15,37 +13,69 @@ import CVIcon from "@/components/icons/CV.astro";
     class="flex flex-col gap-y-4 w-full max-w-[740px] mx-auto pt-20 px-2 mt-5 md:mt-0"
 >
     <div class="flex items-end gap-x-4">
-        <img
+        <!-- <img
             src=`${BASE_URL}/mypic.jpg`
             alt="Diego"
             class="rounded-full size-32 object-cover object-center border-2 border-white"
-        />
-        <a
+        /> -->
+        <!-- <a
             href="https://linkedin.com/in/diego-roldan"
             target="_blank"
             rel="noopener"
             class="flex justify-center items-center mb-2"
         >
             <Badge>Available for hire</Badge></a
-        >
+        > -->
     </div>
-    <h1
-        class="text-white text-5xl font-bold flex flex-row items-center gap-x-4"
-    >
-        Hey, I'm Diego Roldan
-    </h1>
+    <style>
+        .animated-gradient {
+          background-size: 200% 200%;
+          animation: gradientMove 10s ease infinite;
+        }
+      
+        @keyframes gradientMove {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+      </style>
+      
+      <h1
+        class="text-white text-5xl font-bold flex items-center gap-x-4 leading-tight"
+      >
+        Hi, I'm
+        <span
+          class="animated-gradient font-extrabold
+          bg-gradient-to-r from-yellow-300 via-amber-400 to-pink-400
+            bg-clip-text text-transparent"
+        >
+          Diego Roldán
+        </span>
+      </h1>
+      
+      
     <h2 class="text-xl opacity-90 mb-4 text-pretty">
-        Last Year <span class="text-yellow-300">Computer Science Engineering Student</span> from
-        Zaragoza, Spain. Great passion for <span class="text-yellow-300">
+        <span class="text-yellow-300">Computer Science Engineer</span> from
+        Zaragoza, Spain. Great passion for <span class="text-yellow-300 opacity-100">
             Cibersecurity
         </span>
         and <span
-            class="text-yellow-300 bg-">Full Stack</span
+            class="text-yellow-300 opacity-100">Full Stack</span
         > Web Developer.
         Focused on building secure, innovative, and efficient digital solutions.
     </h2>
 
     <ul class="flex flex-wrap items-center justify-start gap-3">
+        <li>
+            <a
+                href="https://linkedin.com/in/diego-roldan"
+                target="_blank"
+                rel="noopener"
+                class="flex justify-center items-center"
+            >
+                <Badge>Available for hire</Badge></a
+            >
+        </li>
         <li>
             <SocialPill href="https://linkedin.com/in/diego-roldan">
                 <LinkedinIcon />
@@ -58,6 +88,7 @@ import CVIcon from "@/components/icons/CV.astro";
                 Github
             </SocialPill>
         </li>
+        
         <!-- <li>
             <SocialPill href="mailto:diegoraulroldan@gmail.com">
                 <MailIcon />
