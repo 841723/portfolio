@@ -109,7 +109,7 @@ stty raw -echo; fg
 reset xterm
 export TERM=xterm
 ```
-We can access the web page source code at app.py and we find credentials for database:
+We can access the web page source code at app.py and we find the database access:
 ```python
 app.config['SECRET_KEY'] = "7j4D5htxLHUiffsjLXB1z9GaZ5"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -166,14 +166,14 @@ This script is a script that backups a directory. We can pass as parameter this 
   ]
 }
 ```
-Note that the `directories_to_archive` field contains a path to `/var/....//root`, because the script removes al `../` from the path, it will end up being `/var/../root`, which is the root directory `/root`. 
+Note that the `directories_to_archive` field contains a path to `/var/....//root`, because the script removes `../` from the path, it will end up being `/var/../root`, which is the root directory `/root`. 
 
 And then run the script as root:
 ```bash
-sudo /usr/bin/backy.sh /home/martin/task.json'
+sudo /usr/bin/backy.sh /home/martin/task.json
 ```
 
-It will create a backup of the `/root` directory in the `/home/martin/test/` directory. We can extract the backup and find the root flag:
+It will create a backup of the `/root` directory the `/home/martin/test/`. We can extract the backup and find the root flag:
 ```bash
 tar -xvjf code_var_.._root_2025_July.tar.bz2 
 cat root/root.txt
