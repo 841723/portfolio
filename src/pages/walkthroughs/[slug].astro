@@ -41,6 +41,8 @@ const platformAllInfo ={
 }
 const platformInfo = platformAllInfo.url[platform] || 'none';
 const platformLogo = platformAllInfo.logo[platform] || 'none';
+const machineURL =
+  platform === 'htb' ? `https://www.hackthebox.com/machines/${name}` : '#'
 
 
 // This function generates the static paths for the dynamic pages based on the slugs of the walkthroughs
@@ -70,7 +72,9 @@ export const getStaticPaths = async () => {
             View all walkthroughs
         </a>
         <hr class="border-gray-400 border-2 my-8" />
-        <header class="rounded-lg border-gray-700 bg-gray-800 p-4 mb-8">
+        <header 
+          class="flex flex-col rounded-lg border-gray-700 bg-gray-800 p-4 mb-8"
+        >
             <h1 class="text-3xl font-bold mb-4 text-center">
                 {name}
             </h1>
@@ -89,7 +93,7 @@ export const getStaticPaths = async () => {
                   </p>
                   {platformInfo !== 'none' && (
                     <a 
-                      href={platformInfo}
+                      href={machineURL}
                       class="bg-white rounded-lg p-2 w-fit h-10"
                       target="_blank"
                     >
@@ -97,10 +101,9 @@ export const getStaticPaths = async () => {
                         class="h-full object-contain"
                         src={platformLogo}
                         alt={`${platform} logo`}
-                      >
+                      />
                     </a>
                   )}
-                  
                 </div>
             </div>
         </header>
