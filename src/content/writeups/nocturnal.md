@@ -3,9 +3,9 @@ name: Nocturnal
 difficulty: easy
 os: linux
 platform: htb
-date: 9999
+date: 2025/07/02
 
-img: https://labs.hackthebox.com/storage/avatars/c9efb253e7d1d9b407113e11afdaa905.png
+img: https://labs.hackthebox.com/storage/avatars/f6a56cec6e9826b4ed124fb4155abc66.png
 ---
 
 ## Enumeration
