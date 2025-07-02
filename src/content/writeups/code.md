@@ -3,6 +3,7 @@ name: Code
 difficulty: easy
 os: linux
 platform: htb
+date: 2025/07/01
 
 img: https://labs.hackthebox.com/storage/avatars/55cc3528cd7ad96f67c4f0c715efe286.png
 ---

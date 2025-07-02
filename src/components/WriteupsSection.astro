@@ -1,0 +1,60 @@
+---
+import DirectionsIcon from './icons/Directions.astro';
+import { getCollection } from 'astro:content';
+import Section from './Section.astro';
+const allWriteups = await getCollection('writeups');
+
+// order the writeups by date alfabtically
+allWriteups.sort((a, b) => {
+    if (!a.data.date && !b.data.date) return 0; // If both dates are undefined, consider them equal
+    if (!a.data.date) return 1; // If a's date is undefined, it comes after b
+    if (!b.data.date) return -1; // If b's date is undefined,
+    // a comes before b
+    return new Date(b.data.date).getTime() - new Date(a.data.date).getTime(); // Sort by date, most recent first
+});
+---
+<Section
+    title="Write Ups"
+    id="writeups"
+>
+    <DirectionsIcon slot="icon" />
+    <p class="text-lg">
+        Here you can find some writeups of Hack The Box machines that I have solved. These writeups are meant to help others learn and understand the process of solving these machines.
+    </p>
+    <p class="text-lg">
+        Feel free to reach out if you have any questions or suggestions for future writeups.
+    </p>
+    <hr class="border-gray-400 border-2 my-8" />
+    { allWriteups.length === 0 ? (
+        <p class="text-md italic">No writeups available at the moment.</p>
+    ) : (
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {allWriteups.map((writeup) => (
+                <a
+                    href={`/portfolio/writeups/${writeup.id}`}
+                    class="flex flex-col items-center justify-between bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-colors"
+                >
+                    <picture class="h-40 aspect-square flex items-center justify-center">
+                        <img 
+                            class="rounded-lg h-40 object-cover"
+                            src={writeup.data.img}
+                            alt={writeup.data.name}
+                        />
+                    </picture>
+                    <h2 class="text-2xl font-bold my-4 text-center">{writeup.data.name}</h2>
+                    <p class="text-sm font-normal">
+                        Difficulty: 
+                        <span class={`font-semibold ${writeup.data.difficulty === 'easy' ? 'text-green-500' : writeup.data.difficulty === 'medium' ? 'text-yellow-500' : writeup.data.difficulty === 'hard' ? 'text-red-500' : 'text-purple-500'}`}>
+                            {writeup.data.difficulty.charAt(0).toUpperCase() + writeup.data.difficulty.slice(1)}
+                        </span>
+                    </p>
+                    <p class="text-sm font-normal">
+                        OS: 
+                        <span class="font-semibold">{writeup.data.os.charAt(0).toUpperCase() + writeup.data.os.slice(1)}</span>
+                    </p>
+                </a>
+            ))}
+        </div>
+    )}
+</Section>

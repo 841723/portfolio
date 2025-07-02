@@ -1,9 +1,11 @@
 import { defineCollection, z } from "astro:content";
-import { glob } from 'astro/loaders'; // Not available with legacy API
+import { glob } from "astro/loaders"; // Not available with legacy API
 
-
-const walkthroughs = defineCollection({
-    loader: glob({ pattern: ["**/*.md",'!dev-*'], base: "src/content/walkthroughs" }),
+const writeups = defineCollection({
+    loader: glob({
+        pattern: ["**/*.md", "!dev-*"],
+        base: "src/content/writeups",
+    }),
     schema: z.object({
         name: z.string(),
         difficulty: z.enum(["easy", "medium", "hard", "insane"]),
@@ -11,19 +13,10 @@ const walkthroughs = defineCollection({
         img: z.string().optional(),
         platform: z.enum(["htb", "vulnhub", "other"]), // Enum for platform type
         content: z.string().optional(), // Optional content field for markdown content
+        date: z.string().optional(), // Optional date field for writeup date
     }),
 });
 
-console.log("Walkthroughs collection defined with schema:", walkthroughs.type);
+console.log("Writeups collection defined with schema:", writeups.type);
 
-export const collections = { walkthroughs };
-
-
-/*
-name: Example Machine 
-slug: example1
-difficulty: hard
-os: linux
-
-img: https://labs.hackthebox.com/storage/avatars/e6633d6c2b1d824c3756eb21aeed7590.png
-*/
+export const collections = { writeups };

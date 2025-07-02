@@ -3,6 +3,7 @@ name: Soccer
 difficulty: easy
 os: linux
 platform: htb
+date: 9999
 
 img: https://labs.hackthebox.com/storage/avatars/ca7f69a02eebf53deb3cd1611dd3f55e.png
 ---

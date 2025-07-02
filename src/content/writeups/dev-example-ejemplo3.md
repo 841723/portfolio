@@ -3,6 +3,7 @@ name: Example
 difficulty: hard
 os: linux
 platform: htb
+date: 9999
 
 img: https://labs.hackthebox.com/storage/avatars/e6633d6c2b1d824c3756eb21aeed7590.png
 ---

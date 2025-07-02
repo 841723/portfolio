@@ -3,6 +3,7 @@ name: Planning
 difficulty: easy
 os: linux
 platform: htb
+date: 2025/07/02
 
 img: https://labs.hackthebox.com/storage/avatars/c9efb253e7d1d9b407113e11afdaa905.png
 ---

@@ -8,27 +8,28 @@ import DirectionsIcon from "@/components/icons/Directions.astro";
 import LeftArrowIcon from "@/components/icons/LeftArrow.astro";
 
 const { slug } = Astro.params;
-const entry = await getEntry('walkthroughs', slug);
+const entry = await getEntry('writeups', slug);
 if (!entry) {
-  Astro.redirect(BASE_URL + 'walkthroughs', 404, {
-    statusText: 'Walkthrough not found',
+  Astro.redirect(BASE_URL + 'writeups', 404, {
+    statusText: 'Writeup not found',
   });
 }
 const { Content } = await render(entry);
 
-const back_url = BASE_URL+"#walkthroughs";
+const back_url = BASE_URL+"#writeups";
 
-const { name, difficulty, os, img, platform }: {
+const { name, difficulty, os, img, platform, date }: {
   name: string;
   difficulty: string;
   os: string;
   img: string;
-  platform: 'htb' | 'vulnhub'
+  platform: 'htb' | 'vulnhub',
+  date?: string;
 }
  = entry.data;
-console.log({ name, difficulty, os, img, platform });
-const title = `${name} Walkthrough - Diego Roldan`;
-const description = `Walkthrough for the ${name} machine on Hack The Box. Difficulty: ${difficulty}, OS: ${os}.`;
+
+const title = `${name} Writeup - Diego Roldan`;
+const description = `Writeup for the ${name} machine on Hack The Box. Difficulty: ${difficulty}, OS: ${os}.`;
 const platformAllInfo ={
   url: {
     htb: 'https://www.hackthebox.com/',
@@ -45,31 +46,31 @@ const machineURL =
   platform === 'htb' ? `https://www.hackthebox.com/machines/${name}` : '#'
 
 
-// This function generates the static paths for the dynamic pages based on the slugs of the walkthroughs
+// This function generates the static paths for the dynamic pages based on the slugs of the writeups
 // It will be used by Astro to generate the static pages at build time.
 export const getStaticPaths = async () => {
-  const allWalkthroughs = await getCollection('walkthroughs');
-  return allWalkthroughs.map((walkthrough) => ({
-    params: { slug: walkthrough.id },
+  const allWriteups = await getCollection('writeups');
+  return allWriteups.map((writeup) => ({
+    params: { slug: writeup.id },
   }));  
 };
 ---
 
 <Layout title={title} description={description}>
   <main class="flex flex-col items-center w-full max-w-[740px] mx-auto">
-    <Section title="Walkthroughs" id="walkthroughs">
+    <Section title="Writeups" id="writeups">
       <DirectionsIcon slot="icon" />
       <p class="text-lg">
-        Here you can find some walkthroughs of Hack The Box machines that I have solved. These walkthroughs are meant to help others learn and understand the process of solving these machines.
+        Here you can find some writeups of Hack The Box machines that I have solved. These writeups are meant to help others learn and understand the process of solving these machines.
       </p>
 
         <p class="text-lg">
-            Feel free to reach out if you have any questions or suggestions for future walkthroughs.
+            Feel free to reach out if you have any questions or suggestions for future writeups.
         </p>
 
         <a href={back_url} class="flex items-center w-fit hover:opacity-100 hover:underline opacity-80 transition-opacity duration-500 ease-in-out">
           <LeftArrowIcon class="inline-block mr-2" />
-            View all walkthroughs
+            View all writeups
         </a>
         <hr class="border-gray-400 border-2 my-8" />
         <header 
@@ -91,6 +92,10 @@ export const getStaticPaths = async () => {
                     OS: 
                     <span class="font-semibold">{os.charAt(0).toUpperCase() + os.slice(1)}</span>
                   </p>
+                  <p class="text-sm font-normal">
+                    Solved on: 
+                    <span class="font-semibold">{date}</span>
+                </p>
                   {platformInfo !== 'none' && (
                     <a 
                       href={machineURL}
