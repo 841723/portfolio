@@ -4,7 +4,6 @@ import { BASE_GITHUB_URL } from "./consts";
 export const WEB_PROJECTS = [
     {
         title: "LOCATOPEDIA",
-        subtitle: "Currently in progress...",
         description:
             "Wiki-like website to search for locations and their information. Add new locations and edit them. See the most popular locations.",
         img: "/tfg/logo.jpg",
@@ -22,7 +21,6 @@ export const WEB_PROJECTS = [
     },
     {
         title: "REFORMAS LAS CANTERAS",
-        subtitle: "Currently in progress...",
         description:
             "Website page for a small kitchen and bathroom reform company. Check their services, projects, and contact them.",
         img: "/las-canteras/logo.jpg",
