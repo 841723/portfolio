@@ -57,12 +57,12 @@ export const WEB_PROJECTS = [
             TAGS.AWS,
         ],
     },
-    {
-        title: "PORTFOLIO",
-        description: "This portfolio you are seeing right now.",
-        img: "/portfolio/logo.png",
-        gh_link: BASE_GITHUB_URL + "portfolio",
-        preview_link: "https://841723.github.io/portfolio/",
-        used_tech: [TAGS.Astro, TAGS.Typescript, TAGS.TailwindCSS],
-    },
+    // {
+    //     title: "PORTFOLIO",
+    //     description: "This portfolio you are seeing right now.",
+    //     img: "/portfolio/logo.png",
+    //     gh_link: BASE_GITHUB_URL + "portfolio",
+    //     preview_link: "https://841723.github.io/portfolio/",
+    //     used_tech: [TAGS.Astro, TAGS.Typescript, TAGS.TailwindCSS],
+    // },
 ];
