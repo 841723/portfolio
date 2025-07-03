@@ -11,9 +11,10 @@ import "@fontsource-variable/onest";
 interface Props {
 	title: string;
 	description: string;
+	doGradient?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, doGradient=true } = Astro.props;
 ---
 
 <!doctype html>
@@ -26,7 +27,15 @@ const { title, description } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body class="dark bg-gradient-to-b from-slate-500 to-slate-900 w-full">
+	<body 
+		class={`dark w-full
+			${doGradient ? 
+				"bg-gradient-to-b from-slate-500 to-slate-900" 
+			:
+				"bg-slate-500"
+			}
+		`}
+	>
 		<Header />
 		<slot />
 		<Footer />

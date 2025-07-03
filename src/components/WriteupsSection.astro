@@ -4,8 +4,25 @@ import { getCollection } from 'astro:content';
 import Section from './Section.astro';
 const allWriteups = await getCollection('writeups');
 
-// order the writeups by date alfabtically
+// order the writeups by 
+// 1. difficulty (easy, medium, hard, insane)
+//  date alfabtically
 allWriteups.sort((a, b) => {
+
+    const difficultyOrder = {
+        easy: 1,
+        medium: 2,
+        hard: 3,
+        insane: 4
+    };
+    
+    const difficultyA = difficultyOrder[a.data.difficulty] || 0;
+    const difficultyB = difficultyOrder[b.data.difficulty] || 0;
+    if (difficultyA !== difficultyB) {
+        return difficultyB - difficultyA;
+    }
+    // If difficulties are the same, sort by date
+    
     if (!a.data.date && !b.data.date) return 0; // If both dates are undefined, consider them equal
     if (!a.data.date) return 1; // If a's date is undefined, it comes after b
     if (!b.data.date) return -1; // If b's date is undefined,
@@ -40,16 +57,26 @@ allWriteups.sort((a, b) => {
                             class="rounded-lg h-40 object-cover"
                             src={writeup.data.img}
                             alt={writeup.data.name}
+                            style={`view-transition-name: writeup-image-${writeup.id}`}
                         />
                     </picture>
-                    <h2 class="text-2xl font-bold my-4 text-center">{writeup.data.name}</h2>
-                    <p class="text-sm font-normal">
+                    <h2 
+                        class="text-2xl font-bold my-4 text-center"
+                        style={`view-transition-name: writeup-name-${writeup.id}`}
+                    >{writeup.data.name}</h2>
+                    <p 
+                        class="text-sm font-normal"
+                        style={`view-transition-name: writeup-diff-${writeup.id}`}
+                    >
                         Difficulty: 
                         <span class={`font-semibold ${writeup.data.difficulty === 'easy' ? 'text-green-500' : writeup.data.difficulty === 'medium' ? 'text-yellow-500' : writeup.data.difficulty === 'hard' ? 'text-red-500' : 'text-purple-500'}`}>
                             {writeup.data.difficulty.charAt(0).toUpperCase() + writeup.data.difficulty.slice(1)}
                         </span>
                     </p>
-                    <p class="text-sm font-normal">
+                    <p 
+                        class="text-sm font-normal"
+                        style={`view-transition-name: writeup-os-${writeup.id}`}
+                    >
                         OS: 
                         <span class="font-semibold">{writeup.data.os.charAt(0).toUpperCase() + writeup.data.os.slice(1)}</span>
                     </p>
