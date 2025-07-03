@@ -10,8 +10,6 @@ img: https://labs.hackthebox.com/storage/avatars/765cd4be6f3a366ca83c7ea60bbcaaa
 
 ## Enumeration
 
-### Port Scan
-
 We start by scanning the target machine for open ports using Nmap. We will use the `-p-` option to scan all ports and the `--open` option to filter out closed ports
 
 ```bash
@@ -86,6 +84,8 @@ Finished
 ===============================================================
 ```
 
+## User Exploitation
+
 We find a .jar file in the `/testing` directory, which is a Java application
 
 We can use `http://www.javadecompilers.com/` to decompile the .jar file and analyze its contents.
@@ -118,8 +118,6 @@ We use `nc` to connect to the reverse shell on the server:
   "password":"admin"
 }
 ```
-
-## User Exploitation
 
 Once we have a reverse shell, we can get a persistent shell by using the following commands on the reverse shell
 
@@ -206,6 +204,7 @@ root flag value
 ```
 
 ## Conclusion
+
 This writeup details the steps taken to exploit the Cypher machine on Hack The Box, from initial enumeration to privilege escalation and obtaining both user and root flags. The process involved web application exploitation, command injection, and leveraging a known vulnerability in the `bbot` utility to gain root access.
 This writeup serves as a guide for those looking to understand the exploitation techniques used in this machine
 

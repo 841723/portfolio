@@ -10,8 +10,6 @@ img: https://labs.hackthebox.com/storage/avatars/426830ea2ae4f05f7892ad89195f827
 
 ## Enumeration
 
-### Port Scan
-
 We start by scanning the target machine for open ports using Nmap. We will use the `-p-` option to scan all ports and the `--open` option to filter out closed ports:
 ```bash
 nmap -p- --open -sS --min-rate 5000 -n -Pn -vvv 10.10.11.58 -o allPorts
@@ -49,6 +47,7 @@ PORT   STATE SERVICE VERSION
 |_http-title: Home | Dog
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
+## User Exploitation
 
 As we can see, there is a web service running on port 80. This is exposing .git directory, which is a common misconfiguration in web applications. We can use this to our advantage.
 
@@ -57,7 +56,6 @@ We use `git-dumper` to download the contents of the `.git` directory:
 ```bash
 python git_dumper.py http://10.10.11.58/.git/ ./website
 ```
-## User Exploitation
 
 This way we can download the entire repository, including the source code and configuration files.
 

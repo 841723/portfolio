@@ -10,8 +10,6 @@ img: https://labs.hackthebox.com/storage/avatars/c9efb253e7d1d9b407113e11afdaa90
 
 ## Enumeration
 
-### Port Scan
-
 We start by scanning the target machine for open ports using Nmap. We will use the `-p-` option to scan all ports and the `--open` option to filter out closed ports:
 ```bash
 nmap -p- --open -sS --min-rate 5000 -n -Pn -vvv 10.10.11.68 -o allPorts

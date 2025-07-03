@@ -10,7 +10,6 @@ img: https://labs.hackthebox.com/storage/avatars/55cc3528cd7ad96f67c4f0c715efe28
 
 ## Enumeration
 
-### Port Scan
 
 We start by scanning the target machine for open ports using Nmap. We will use the `-p-` option to scan all ports and the `--open` option to filter out closed ports
 
@@ -105,8 +104,6 @@ print(output.decode())
 ```
 user flag value
 ```
-
-## Machine Access
 
 We can access the machine using a reverse shell. We can use the following Python code
 
