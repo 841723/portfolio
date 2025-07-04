@@ -10,8 +10,6 @@ img: https://labs.hackthebox.com/storage/avatars/e6633d6c2b1d824c3756eb21aeed759
 
 ## Enumeration
 
-### Port Scan
-
 We start by scanning the target machine for open ports using Nmap. We will use the `-p-` option to scan all ports and the `--open` option to filter out closed ports:
 ```bash
 nmap -p- --open -sS --min-rate 5000 -n -Pn -vvv 10.10.11.74 -o content/allPortsFiltered
@@ -44,28 +42,19 @@ gobuster dir -u http://artificial.htb -w /usr/share/wordlists/dirb/common.txt
 There are no interesting hidden directories. All of them are related to the web app functionality.
 
 
-## Exploitation
+## User Exploitation
 
-### SSH Access
+After registering and logging in, we can access the `/dashboard` page. The dashboard contains a form to upload `.h5` files.
 
-The SSH service is running on port 22. We can try to brute-force the SSH login using a tool like `hydra` or `medusa`. However, for this walkthrough, we will assume we have the credentials.
+We can generate a malicious `.h5` file that contains a payload to execute arbitrary code. We will use this github repository, `https://github.com/Splinter0/tensorflow-rce` to create the file.
 
-```bash
-ssh user@10.0.1.3
-```
 
-### Credentials
+[TO_CONTINUE]
+We upload the generated `.h5` file to the web application. 
 
-- Username: `user`
-- Password: `password`
 
-### User Flag
 
-Once logged in, we can find the user flag in the home directory:
 
-```bash
-cat /home/user/user.txt
-```
 
 ## Root Privilege Escalation
 

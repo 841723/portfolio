@@ -15,11 +15,13 @@ We start by scanning the target machine for open ports using Nmap. We will use t
 ```bash
 nmap -p- --open -sS --min-rate 5000 -n -Pn -vvv 10.10.11.53 -o allPorts
 ```
+
 ```
 PORT   STATE SERVICE REASON
 22/tcp open  ssh     syn-ack ttl 63
 80/tcp open  http    syn-ack ttl 63
 ```
+
 We can see that ports 22 and 80 are open, which are the SSH and HTTP services respectively.
 
 Now we add to `/etc/hosts` the domain `cat.htb` pointing to the target IP address
@@ -33,10 +35,11 @@ We try to get the SSH and HTTP services versions and script scanning using `-sC`
 ```bash
 nmap -p 22,80 -sCV -vvv 10.10.11.53 -o targeted
 ```
+
 ```
 PORT   STATE SERVICE REASON         VERSION
 22/tcp open  ssh     syn-ack ttl 63 OpenSSH 8.2p1 Ubuntu 4ubuntu0.11 (Ubuntu Linux; protocol 2.0)
-| ssh-hostkey: 
+| ssh-hostkey:
 |   3072 962df5c6f69f5960e56585ab49e47614 (RSA)
 | ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC/7/gBYFf93Ljst5b58XeNKd53hjhC57SgmM9qFvMACECVK0r/Z11ho0Z2xy6i9R5dX2G/HAlIfcu6i2QD9lILOnBmSaHZ22HCjjQKzSbbrnlcIcaEZiE011qtkVmtCd2e5zeVUltA9WCD69pco7BM29OU7FlnMN0iRlF8u962CaRnD4jni/zuiG5C2fcrTHWBxc/RIRELrfJpS3AjJCgEptaa7fsH/XfmOHEkNwOL0ZK0/tdbutmcwWf9dDjV6opyg4IK73UNIJSSak0UXHcCpv0GduF3fep3hmjEwkBgTg/EeZO1IekGssI7yCr0VxvJVz/Gav+snOZ/A1inA5EMqYHGK07B41+0rZo+EZZNbuxlNw/YLQAGuC5tOHt896wZ9tnFeqp3CpFdm2rPGUtFW0jogdda1pRmRy5CNQTPDd6kdtdrZYKqHIWfURmzqva7byzQ1YPjhI22cQ49M79A0yf4yOCPrGlNNzeNJkeZM/LU6p7rNJKxE9CuBAEoyh0=
 |   256 9ec4a440e9dacc62d1d65a2f9e7bd4aa (ECDSA)
@@ -45,16 +48,18 @@ PORT   STATE SERVICE REASON         VERSION
 |_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEOCpb672fivSz3OLXzut3bkFzO4l6xH57aWuSu4RikE
 80/tcp open  http    syn-ack ttl 63 Apache httpd 2.4.41 ((Ubuntu))
 |_http-title: Did not follow redirect to http://cat.htb/
-| http-methods: 
+| http-methods:
 |_  Supported Methods: HEAD POST OPTIONS
 |_http-server-header: Apache/2.4.41 (Ubuntu)
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
+
 We use `gobuster` to enumerate the directories and files in the web server
 
 ```bash
 gobuster dir -u http://cat.htb -w /usr/share/wordlists/dirb/common.txt -t 50
 ```
+
 ```
 ===============================================================
 Gobuster v3.6
@@ -88,13 +93,13 @@ Finished
 ===============================================================
 ```
 
-We can see that there is a `.git` directory, which may contain sensitive information. We can clone the repository using `git-dumper`: 
+We can see that there is a `.git` directory, which may contain sensitive information. We can clone the repository using `git-dumper`:
 
 ```bash
 python git_dumper.py http://cat.htb/ dump
 ```
 
-Now we have access to all files. 
+Now we have access to all files.
 
 - We can see there is a `sqlite` database in `/database/cat.db`
 
@@ -117,9 +122,6 @@ When we access the page and create a new cat registration, admin will be redirec
 ```
 
 We can set the cookie in our browser and access the admin page at `http://cat.htb/admin.php`
-
-
-
 
 ## Root Exploitation
 
