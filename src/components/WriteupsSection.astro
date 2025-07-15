@@ -46,15 +46,15 @@ allWriteups.sort((a, b) => {
         <p class="text-md italic">No writeups available at the moment.</p>
     ) : (
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-8 px-2 md:px-0">
             {allWriteups.map((writeup) => (
                 <a
                     href={`/portfolio/writeups/${writeup.id}`}
                     class="flex flex-col items-center justify-between bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-colors"
                 >
-                    <picture class="h-40 aspect-square flex items-center justify-center">
+                    <picture class="h-32 md:h-40 aspect-square flex items-center justify-center">
                         <img 
-                            class="rounded-lg h-40 object-cover"
+                            class="rounded-lg h-32 md:h-40 object-cover"
                             src={writeup.data.img}
                             alt={writeup.data.name}
                             style={`view-transition-name: writeup-image-${writeup.id}`}
