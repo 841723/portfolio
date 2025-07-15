@@ -5,9 +5,10 @@ This is the source code for Diego Roldan's personal portfolio website. It showca
 
 ## Features
 - **Presentation Section**: An introduction to Diego Roldan.
+- **Work Experience Section**: Details about Diego's professional experience.
+- **Write Ups Section**: A collection of technical write-ups and articles authored by Diego.
 - **Tech Stack Section**: A list of technologies and tools Diego is proficient in.
 - **Web Projects Section**: A showcase of Diego's web development projects.
-- **Work Experience Section**: Details about Diego's professional experience.
 - **Other Projects Section**: A collection of other notable projects.
 
 ## Installation
@@ -27,6 +28,6 @@ This is the source code for Diego Roldan's personal portfolio website. It showca
     ```bash
     npm run dev
     ```
-5. Open your browser and go to `http://localhost:4321` to view the site.
+5. Open your browser and go to `http://localhost:4321/portfolio` to view the site.
 
 
