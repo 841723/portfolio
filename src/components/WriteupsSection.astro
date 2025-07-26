@@ -1,14 +1,25 @@
 ---
 import DirectionsIcon from './icons/Directions.astro';
+import LockIcon from './icons/Lock.astro';
 import { getCollection } from 'astro:content';
 import Section from './Section.astro';
 const allWriteups = await getCollection('writeups');
 
 // order the writeups by 
-// 1. difficulty (easy, medium, hard, insane)
-//  date alfabtically
+// 1. releasedDate is not undefined and is less than current date
+// 2. difficulty (easy, medium, hard, insane)
+// 3. date alfabtically
 allWriteups.sort((a, b) => {
 
+    // Check if releasedDate is defined and less than current date
+    if (a.data.releasedDate && new Date(a.data.releasedDate) >= new Date()) return 1;
+    if (b.data.releasedDate && new Date(b.data.releasedDate) >= new Date()) return -1;
+    // If both releasedDate are valid, sort by difficulty
+    if (!a.data.releasedDate && !b.data.releasedDate) return 0
+    if (!a.data.releasedDate) return 1; // If a's releasedDate is undefined, it comes after b
+    if (!b.data.releasedDate) return -1; // If b's releasedDate is undefined, a comes before b
+
+    // If both releasedDate are valid, sort by difficulty
     const difficultyOrder = {
         easy: 1,
         medium: 2,
@@ -50,8 +61,14 @@ allWriteups.sort((a, b) => {
             {allWriteups.map((writeup) => (
                 <a
                     href={`/portfolio/writeups/${writeup.id}`}
-                    class="flex flex-col items-center justify-between bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-colors"
+                    class="relative flex flex-col items-center justify-between bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-colors"
                 >
+                    {
+                        !writeup.data.releasedDate || !(new Date(writeup.data.releasedDate) < new Date()) && (
+                        <picture class="absolute top-2 right-2 opacity-50" >
+                            <LockIcon/>
+                        </picture>)
+                    }
                     <picture class="h-32 md:h-40 aspect-square flex items-center justify-center">
                         <img 
                             class="rounded-lg h-32 md:h-40 object-cover"

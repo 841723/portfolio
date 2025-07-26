@@ -11,9 +11,12 @@ const writeups = defineCollection({
         difficulty: z.enum(["easy", "medium", "hard", "insane"]),
         os: z.enum(["linux", "windows"]),
         img: z.string().optional(),
-        platform: z.enum(["htb", "vulnhub", "other"]), // Enum for platform type
-        content: z.string().optional(), // Optional content field for markdown content
-        date: z.string().optional(), // Optional date field for writeup date
+        platform: z.enum(["htb", "vulnhub", "other"]),
+        content: z.string().optional(),
+        date: z.string().optional(), 
+        releasedDate: z.date().optional(),
+        userFlag: z.boolean().optional(),
+        rootFlag: z.boolean().optional()
     }),
 });
 

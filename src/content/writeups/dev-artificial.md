@@ -3,7 +3,10 @@ name: Artificial
 difficulty: easy
 os: linux
 platform: htb
-date: 9999
+date: 2025/07/01
+releasedDate: 2025-07-01
+userFlag: true
+rootFlag: false
 
 img: https://labs.hackthebox.com/storage/avatars/e6633d6c2b1d824c3756eb21aeed7590.png
 ---
@@ -187,6 +190,7 @@ Using default input encoding: UTF-8
  110   │ echo "Logs are available at ~/.local/share/backrest/processlogs/backrest.log"
 
  .config/backrest/config.json:10:        "passwordBcrypt": "JDJhJDEwJGNWR0l5OVZNWFFkMGdNNWdpbkNtamVpMmtaUi9BQ01Na1Nzc3BiUnV0WVA1OEVCWnovMFFP"
+```
 
 
 

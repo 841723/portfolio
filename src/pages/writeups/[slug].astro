@@ -6,6 +6,9 @@ import Section from '@/components/Section.astro';
 import { BASE_URL } from '@/consts';
 import DirectionsIcon from "@/components/icons/Directions.astro";
 import LeftArrowIcon from "@/components/icons/LeftArrow.astro";
+import type { d } from "node_modules/tailwindcss/dist/types-B254mqw1.d.mts";
+import type { z } from "astro:content";
+import Lock from "@/components/icons/Lock.astro";
 
 const { slug } = Astro.params;
 const entry = await getEntry('writeups', slug);
@@ -18,13 +21,14 @@ const { Content } = await render(entry);
 
 const back_url = BASE_URL+"#writeups";
 
-const { name, difficulty, os, img, platform, date }: {
+const { name, difficulty, os, img, platform, date, releasedDate  }: {
   name: string;
   difficulty: string;
   os: string;
   img: string;
   platform: 'htb' | 'vulnhub',
   date?: string;
+  releasedDate?: Date;
 }
  = entry.data;
 
@@ -126,9 +130,38 @@ export const getStaticPaths = async () => {
                 </div>
             </div>
         </header>
-        <article class="markdown">
+        {
+          releasedDate && (new Date(releasedDate) < new Date()) ? (
+          <article class="markdown">
             <Content />
-        </article>
+          </article>) : (
+            <p class="mt-10 text-2xl font-semibold flex justify-center items-start gap-x-2">
+              This post is currently locked <span class="inline-block"><Lock /></span>
+            </p>
+            <p class="text-gray-300 text-center mt-12 text-lg">
+              <span class="text-yellow-300 font-bold">
+                {name}
+              </span>
+              {' '} is still active on 
+              <span class="font-bold">
+                Hack The Box
+              </span>
+            </p>
+            <p class="text-gray-300 text-center text-lg mb-10">
+              Due to 
+              <a
+                href="https://help.hackthebox.com/en/articles/5188925-streaming-writeups-walkthrough-guidelines" 
+                class="m-0 font-bold hover:underline text-green-300"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                platform policies
+              </a>
+              <br />
+              The writeup will be available once the machine is retired.
+            </p>
+          )
+        }
     </Section>
     </main>
 </Layout> 

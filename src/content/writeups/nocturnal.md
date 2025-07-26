@@ -4,6 +4,9 @@ difficulty: easy
 os: linux
 platform: htb
 date: 2025/07/02
+releasedDate: 2099-12-31
+userFlag: true
+rootFlag: true
 
 img: https://labs.hackthebox.com/storage/avatars/f6a56cec6e9826b4ed124fb4155abc66.png
 ---
