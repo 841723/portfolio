@@ -3,7 +3,7 @@ name: Artificial
 difficulty: easy
 os: linux
 platform: htb
-date: 2025/07/01
+date: 2025/07/28
 releasedDate: 2099-12-31
 userFlag: true
 rootFlag: true
