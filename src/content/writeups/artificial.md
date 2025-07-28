@@ -244,3 +244,4 @@ root flag value
 
 ## Conclusion
 
+In this write-up, we have demonstrated how to exploit a backup service to gain unauthorized access to sensitive files. By leveraging the backrest service and creating a local restic repository, we were able to copy the contents of the `/root` directory to our local machine. This allowed us to retrieve the root flag and gain a deeper understanding of the system's security posture.
