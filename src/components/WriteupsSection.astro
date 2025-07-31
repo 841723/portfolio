@@ -5,40 +5,44 @@ import { getCollection } from 'astro:content';
 import Section from './Section.astro';
 const allWriteups = await getCollection('writeups');
 
-// order the writeups by 
-// 1. releasedDate is not undefined and is less than current date
-// 2. difficulty (easy, medium, hard, insane)
-// 3. date alfabtically
 allWriteups.sort((a, b) => {
 
-    // Check if releasedDate is defined and less than current date
-    if (a.data.releasedDate && new Date(a.data.releasedDate) >= new Date()) return 1;
-    if (b.data.releasedDate && new Date(b.data.releasedDate) >= new Date()) return -1;
-    // If both releasedDate are valid, sort by difficulty
-    if (!a.data.releasedDate && !b.data.releasedDate) return 0
-    if (!a.data.releasedDate) return 1; // If a's releasedDate is undefined, it comes after b
-    if (!b.data.releasedDate) return -1; // If b's releasedDate is undefined, a comes before b
+    const today = new Date();
 
-    // If both releasedDate are valid, sort by difficulty
+    const dateA = a.data.releasedDate ? new Date(a.data.releasedDate) : null;
+    const dateB = b.data.releasedDate ? new Date(b.data.releasedDate) : null;
+
+    const isPastA = dateA && dateA < today;
+    const isPastB = dateB && dateB < today;
+
+    // Ordenar primero por releasedDate: pasado < futuro o undefined
+    if (isPastA && !isPastB) return -1;
+    if (!isPastA && isPastB) return 1;
+
+    // releasedDate en el mismo grupo: ordenar por dificultad
     const difficultyOrder = {
-        easy: 1,
-        medium: 2,
-        hard: 3,
-        insane: 4
+        easy: 4,
+        medium: 3,
+        hard: 2,
+        insane: 1
     };
-    
+
     const difficultyA = difficultyOrder[a.data.difficulty] || 0;
     const difficultyB = difficultyOrder[b.data.difficulty] || 0;
+
     if (difficultyA !== difficultyB) {
-        return difficultyB - difficultyA;
+        return difficultyA - difficultyB;
     }
-    // If difficulties are the same, sort by date
-    
-    if (!a.data.date && !b.data.date) return 0; // If both dates are undefined, consider them equal
-    if (!a.data.date) return 1; // If a's date is undefined, it comes after b
-    if (!b.data.date) return -1; // If b's date is undefined,
-    // a comes before b
-    return new Date(b.data.date).getTime() - new Date(a.data.date).getTime(); // Sort by date, most recent first
+
+    // Si la dificultad es la misma, ordenar por fecha descendente
+    const hasDateA = !!a.data.date;
+    const hasDateB = !!b.data.date;
+
+    if (!hasDateA && !hasDateB) return 0;
+    if (!hasDateA) return 1;
+    if (!hasDateB) return -1;
+
+    return new Date(b.data.date || '').getTime() - new Date(a.data.date || '').getTime();
 });
 ---
 <Section
@@ -64,7 +68,7 @@ allWriteups.sort((a, b) => {
                     class="relative flex flex-col items-center justify-between bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-colors"
                 >
                     {
-                        !writeup.data.releasedDate || !(new Date(writeup.data.releasedDate) < new Date()) && (
+                        (!writeup.data.releasedDate || !(new Date(writeup.data.releasedDate) < new Date())) && (
                         <picture class="absolute top-2 right-2 opacity-50" >
                             <LockIcon/>
                         </picture>)
