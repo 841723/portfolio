@@ -2,6 +2,9 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from "@tailwindcss/vite";
 
+import sitemap from "@astrojs/sitemap";
+
+
 const site = 'https://841723.github.io';
 const base = '/portfolio';
 
@@ -9,7 +12,9 @@ const base = '/portfolio';
 export default defineConfig({
     site,
     base,
-    integrations: [],
+    integrations: [
+        sitemap()
+    ],
     vite: { plugins: [tailwindcss()] },
     markdown: {
         shikiConfig: {
