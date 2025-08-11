@@ -6,9 +6,8 @@ import Section from '@/components/Section.astro';
 import { BASE_URL } from '@/consts';
 import DirectionsIcon from "@/components/icons/Directions.astro";
 import LeftArrowIcon from "@/components/icons/LeftArrow.astro";
-import type { d } from "node_modules/tailwindcss/dist/types-B254mqw1.d.mts";
-import type { z } from "astro:content";
 import Lock from "@/components/icons/Lock.astro";
+import WriteupsSection from "@/components/WriteupsSection.astro";
 
 const { slug } = Astro.params;
 const entry = await getEntry('writeups', slug);
@@ -62,7 +61,7 @@ export const getStaticPaths = async () => {
 
 <Layout title={title} description={description} doGradient={false}>
   <main class="flex flex-col items-center w-full max-w-[740px] mx-auto">
-    <Section title="Writeups" id="writeups">
+    <Section title="Write Ups - Hack The Box" id="writeups">
       <DirectionsIcon slot="icon" />
       <p class="text-lg">
         Here you can find some writeups of Hack The Box machines that I have solved. These writeups are meant to help others learn and understand the process of solving these machines.
@@ -99,7 +98,7 @@ export const getStaticPaths = async () => {
                     style={`view-transition-name: writeup-diff-${slug}`}
                   >
                     Difficulty: 
-                    <span class={`font-semibold p-1 rounded-lg ${difficulty === 'easy' ? 'bg-green-500' : difficulty === 'medium' ? 'bg-yellow-500' : difficulty === 'hard' ? 'bg-red-500' : 'bg-purple-500'}`}>
+                    <span class={`font-semibold p-1 rounded-lg ${difficulty === 'easy' ? 'bg-green-500' : difficulty === 'medium' ? 'bg-yellow-700' : difficulty === 'hard' ? 'bg-red-500' : 'bg-purple-500'}`}>
                         {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
                     </span>
                   </p>                     
@@ -160,6 +159,9 @@ export const getStaticPaths = async () => {
             </p>
           )
         }
+        <hr class="border-gray-400 border mt-20 opacity-75" />
+        <!-- see other writeups -->
+        <WriteupsSection onlyButtons={true}/>
     </Section>
     </main>
 </Layout> 

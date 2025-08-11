@@ -5,6 +5,8 @@ import { getCollection } from 'astro:content';
 import Section from './Section.astro';
 const allWriteups = await getCollection('writeups');
 
+const onlyButtons = Astro.props.onlyButtons || false;
+
 allWriteups.sort((a, b) => {
 
     const today = new Date();
@@ -45,18 +47,18 @@ allWriteups.sort((a, b) => {
     return new Date(b.data.date || '').getTime() - new Date(a.data.date || '').getTime();
 });
 ---
+
 <Section
-    title="Write Ups"
+    title={onlyButtons ? "Check out other write ups" : "Write Ups - Hack The Box"}
     id="writeups"
 >
-    <DirectionsIcon slot="icon" />
-    <p class="text-lg">
-        Here you can find some writeups of Hack The Box machines that I have solved. These writeups are meant to help others learn and understand the process of solving these machines.
-    </p>
-    <p class="text-lg">
-        Feel free to reach out if you have any questions or suggestions for future writeups.
-    </p>
-    <hr class="border-gray-400 border-2 my-8" />
+    {!onlyButtons && <DirectionsIcon slot="icon" />}
+    {!onlyButtons && <p class="text-lg">
+        Here you can find some writeups of Hack The Box machines that I have solved. Open them to see the details of each machine, including the steps I took to solve them, the tools I used, and any challenges I faced along the way.
+    </p>}
+    {onlyButtons && <p class="text-lg">
+        Here you can find some of my writeups. Click on the buttons below to see the details of each machine, including the steps I took to solve them, the tools I used, and any challenges I faced along the way.
+    </p>}
     { allWriteups.length === 0 ? (
         <p class="text-md italic">No writeups available at the moment.</p>
     ) : (
@@ -65,42 +67,47 @@ allWriteups.sort((a, b) => {
             {allWriteups.map((writeup) => (
                 <a
                     href={`/portfolio/writeups/${writeup.id}`}
-                    class="relative flex flex-col items-center justify-between bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-colors"
+                    class={`relative flex flex-col items-center justify-between bg-gray-800 rounded-lg pt-4 ${!writeup.data.releasedDate || !(new Date(writeup.data.releasedDate) < new Date()) ? 'opacity-50' : 'hover:bg-gray-700 transition-colors'}`}
                 >
                     {
                         (!writeup.data.releasedDate || !(new Date(writeup.data.releasedDate) < new Date())) && (
-                        <picture class="absolute top-2 right-2 opacity-50" >
+                        <picture class="absolute top-2 right-2 opacity-100" >
                             <LockIcon/>
                         </picture>)
                     }
-                    <picture class="h-32 md:h-40 aspect-square flex items-center justify-center">
+                    <picture class="relative h-32 md:h-40 aspect-square flex items-center justify-center">
                         <img 
                             class="rounded-lg h-32 md:h-40 object-cover"
                             src={writeup.data.img}
                             alt={writeup.data.name}
-                            style={`view-transition-name: writeup-image-${writeup.id}`}
+                            style={`view-transition-name: writeup-image-${writeup.id}${onlyButtons ? '-button' : ''}`}
                         />
+                        {writeup.data.os === 'linux' && (
+                            <picture class="absolute w-10 h-10 bottom-0 right-0 p-1 bg-gray-800 border-gray-500 rounded-full">
+                                <img src="/portfolio/public/ic-linux.svg" alt="" class="w-8 h-8"/>
+                            </picture>
+                        )}
                     </picture>
                     <h2 
-                        class="text-2xl font-bold my-4 text-center"
-                        style={`view-transition-name: writeup-name-${writeup.id}`}
+                        class="text-2xl font-bold mt-4 text-center"
+                        style={`view-transition-name: writeup-name-${writeup.id}${onlyButtons ? '-button' : ''}`}
                     >{writeup.data.name}</h2>
                     <p 
-                        class="text-sm font-normal"
-                        style={`view-transition-name: writeup-diff-${writeup.id}`}
+                        class="text-sm font-normal mb-2"
+                        style={`view-transition-name: writeup-diff-${writeup.id}${onlyButtons ? '-button' : ''}`}
                     >
-                        Difficulty: 
-                        <span class={`font-semibold ${writeup.data.difficulty === 'easy' ? 'text-green-500' : writeup.data.difficulty === 'medium' ? 'text-yellow-500' : writeup.data.difficulty === 'hard' ? 'text-red-500' : 'text-purple-500'}`}>
-                            {writeup.data.difficulty.charAt(0).toUpperCase() + writeup.data.difficulty.slice(1)}
+                        <span class={`opacity-75 uppercase`}>
+                            {writeup.data.difficulty}
                         </span>
                     </p>
-                    <p 
+                    
+                    {/* <p 
                         class="text-sm font-normal"
                         style={`view-transition-name: writeup-os-${writeup.id}`}
                     >
                         OS: 
                         <span class="font-semibold">{writeup.data.os.charAt(0).toUpperCase() + writeup.data.os.slice(1)}</span>
-                    </p>
+                    </p> */}
                 </a>
             ))}
         </div>
