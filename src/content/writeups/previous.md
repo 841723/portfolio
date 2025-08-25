@@ -3,11 +3,11 @@ name: Previous
 difficulty: medium
 os: linux
 platform: htb
-date: 9999
-userFlag: false
-rootFlag: false
+date: 2025/08/24
+userFlag: true
+rootFlag: true
 
-img: image_url
+img: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/f34c6756e7c75b48ec112831eb27940a.png
 ---
 
 ## Enumeration
