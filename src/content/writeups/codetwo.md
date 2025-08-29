@@ -30,7 +30,7 @@ We can see that port 22 is open, which is the SSH service and port 8000 is open,
 
 Now we will scan the open ports with service version detection and script scanning using `-sC` and `-sV` options
 ```bash
-nmap -p22,8000 -sCV  ssh -o targeted
+nmap -p22,8000 -sCV 10.10.11.82 -o targeted
 ```
 
 ```
