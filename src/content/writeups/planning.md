@@ -4,7 +4,7 @@ difficulty: easy
 os: linux
 platform: htb
 date: 2025/07/02
-# releasedDate: 2099-12-31
+releasedDate: 2025-09-13
 userFlag: true
 rootFlag: true
 
