@@ -2,8 +2,6 @@
 import "src/styles/markdown.css";
 import Layout from '@/layouts/Layout.astro';
 import Section from '@/components/Section.astro';
-import { BASE_URL } from '@/consts';
-import LeftArrowIcon from "@/components/icons/LeftArrow.astro";
 import WriteupList from "@/components/WriteupList.astro";
 
 const title = `Writeups - Diego Roldan`;
@@ -100,9 +98,9 @@ const buttonsFilter = [
                 const filterText = input?.value.toLowerCase();
 
                 writeups.forEach((writeup) => {
-                    const name = writeup.querySelector('.writeup-item-name')?.textContent.toLowerCase() || '';
-                    var tags = writeup.querySelector('.writeup-item-tags')?.textContent.toLowerCase() || '';
-                    const difficulty = writeup.querySelector('.writeup-item-difficulty')?.textContent.toLowerCase() || '';
+                    const name = writeup.querySelector('.writeup-item-name')?.textContent?.toLowerCase() || '';
+                    const tags = writeup.querySelector('.writeup-item-tags')?.textContent?.toLowerCase() || '';
+                    const difficulty = writeup.querySelector('.writeup-item-difficulty')?.textContent?.toLowerCase() || '';
   
                     if (
                         (difficulty && filtersObj[difficulty].state) &&
