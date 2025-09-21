@@ -18,7 +18,7 @@ if (!entry) {
 }
 const { Content } = await render(entry);
 
-const back_url = BASE_URL+"#writeups";
+const back_url = BASE_URL+"/writeups";
 
 const { name, difficulty, os, img, platform, date, releasedDate  }: {
   name: string;
@@ -39,7 +39,7 @@ const platformAllInfo ={
     vulnhub: 'https://www.vulnhub.com/',
   },
   logo: {
-    htb: `${BASE_URL}/htb/logo.png`,
+    htb: `${BASE_URL}/htb/logo.svg`,
     vulnhub: `${BASE_URL}/vulnhub/logo.png`,
   }
 }
@@ -61,7 +61,7 @@ export const getStaticPaths = async () => {
 
 <Layout title={title} description={description} doGradient={false}>
   <main class="flex flex-col items-center w-full max-w-[740px] mx-auto">
-    <Section title="Write Ups - Hack The Box" id="writeups">
+    <Section title="Write Ups" id="writeups">
       <DirectionsIcon slot="icon" />
       <p class="text-lg">
         Here you can find some writeups of Hack The Box machines that I have solved. These writeups are meant to help others learn and understand the process of solving these machines.
@@ -116,7 +116,7 @@ export const getStaticPaths = async () => {
                   {platformInfo !== 'none' && (
                     <a 
                       href={machineURL}
-                      class="bg-white rounded-lg p-2 w-fit h-10"
+                      class="rounded-lg p-2 w-fit h-11 hover:bg-gray-700 transition-colors flex items-center justify-center"
                       target="_blank"
                     >
                       <img 
@@ -161,7 +161,7 @@ export const getStaticPaths = async () => {
         }
         <hr class="border-gray-400 border mt-20 opacity-75" />
         <!-- see other writeups -->
-        <WriteupsSection onlyButtons={true}/>
+        <WriteupsSection onlyButtons={true} showAll={false} showLocked={false} />
     </Section>
     </main>
 </Layout> 

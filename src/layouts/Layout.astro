@@ -39,7 +39,9 @@ const { title, description, doGradient=true } = Astro.props;
 		`}
 	>
 		<Header />
-		<slot />
+		<main class="min-h-[100vh]">	
+			<slot />
+		</main>
 		<Footer />
 	</body>
 

@@ -1,55 +1,18 @@
 ---
 import DirectionsIcon from './icons/Directions.astro';
-import LockIcon from './icons/Lock.astro';
-import { getCollection } from 'astro:content';
 import Section from './Section.astro';
-const allWriteups = await getCollection('writeups');
+import WriteupList from './WriteupList.astro';
+import { BASE_URL } from '@/consts';
 
 const onlyButtons = Astro.props.onlyButtons || false;
+const showAll = Astro.props.showAll || false;
+const showLocked = Astro.props.showLocked || false;
 
-allWriteups.sort((a, b) => {
 
-    const today = new Date();
-
-    const dateA = a.data.releasedDate ? new Date(a.data.releasedDate) : null;
-    const dateB = b.data.releasedDate ? new Date(b.data.releasedDate) : null;
-
-    const isPastA = dateA && dateA < today;
-    const isPastB = dateB && dateB < today;
-
-    // Ordenar primero por releasedDate: pasado < futuro o undefined
-    if (isPastA && !isPastB) return -1;
-    if (!isPastA && isPastB) return 1;
-
-    // releasedDate en el mismo grupo: ordenar por dificultad
-    const difficultyOrder = {
-        easy: 4,
-        medium: 3,
-        hard: 2,
-        insane: 1
-    };
-
-    const difficultyA = difficultyOrder[a.data.difficulty] || 0;
-    const difficultyB = difficultyOrder[b.data.difficulty] || 0;
-
-    if (difficultyA !== difficultyB) {
-        return difficultyA - difficultyB;
-    }
-
-    // Si la dificultad es la misma, ordenar por fecha descendente
-    const hasDateA = !!a.data.date;
-    const hasDateB = !!b.data.date;
-
-    if (!hasDateA && !hasDateB) return 0;
-    if (!hasDateA) return 1;
-    if (!hasDateB) return -1;
-
-    return new Date(b.data.date || '').getTime() - new Date(a.data.date || '').getTime();
-});
 ---
 
 <Section
-    title={onlyButtons ? "Check out other write ups" : "Write Ups - Hack The Box"}
+    title={onlyButtons ? "Check out other write ups" : "Write Ups"}
     id="writeups"
 >
     {!onlyButtons && <DirectionsIcon slot="icon" />}
@@ -59,57 +22,5 @@ allWriteups.sort((a, b) => {
     {onlyButtons && <p class="text-lg">
         Here you can find some of my writeups. Click on the buttons below to see the details of each machine, including the steps I took to solve them, the tools I used, and any challenges I faced along the way.
     </p>}
-    { allWriteups.length === 0 ? (
-        <p class="text-md italic">No writeups available at the moment.</p>
-    ) : (
-        
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-8 px-2 md:px-0">
-            {allWriteups.map((writeup) => (
-                <a
-                    href={`/portfolio/writeups/${writeup.id}`}
-                    class={`relative flex flex-col items-center justify-between bg-gray-800 rounded-lg pt-4 ${!writeup.data.releasedDate || !(new Date(writeup.data.releasedDate) < new Date()) ? 'opacity-50' : 'hover:bg-gray-700 transition-colors'}`}
-                >
-                    {
-                        (!writeup.data.releasedDate || !(new Date(writeup.data.releasedDate) < new Date())) && (
-                        <picture class="absolute top-2 right-2 opacity-100" >
-                            <LockIcon/>
-                        </picture>)
-                    }
-                    <picture class="relative h-32 md:h-40 aspect-square flex items-center justify-center">
-                        <img 
-                            class="rounded-lg h-32 md:h-40 object-cover"
-                            src={writeup.data.img}
-                            alt={writeup.data.name}
-                            style={`view-transition-name: writeup-image-${writeup.id}${onlyButtons ? '-button' : ''}`}
-                        />
-                        {writeup.data.os === 'linux' && (
-                            <picture class="absolute w-10 h-10 bottom-0 right-0 p-1 bg-gray-800 border-gray-500 rounded-full">
-                                <img src="/portfolio/ic-linux.svg" alt="" class="w-8 h-8"/>
-                            </picture>
-                        )}
-                    </picture>
-                    <h2 
-                        class="text-2xl font-bold mt-4 text-center"
-                        style={`view-transition-name: writeup-name-${writeup.id}${onlyButtons ? '-button' : ''}`}
-                    >{writeup.data.name}</h2>
-                    <p 
-                        class="text-sm font-normal mb-2"
-                        style={`view-transition-name: writeup-diff-${writeup.id}${onlyButtons ? '-button' : ''}`}
-                    >
-                        <span class={`opacity-75 uppercase`}>
-                            {writeup.data.difficulty}
-                        </span>
-                    </p>
-                    
-                    {/* <p 
-                        class="text-sm font-normal"
-                        style={`view-transition-name: writeup-os-${writeup.id}`}
-                    >
-                        OS: 
-                        <span class="font-semibold">{writeup.data.os.charAt(0).toUpperCase() + writeup.data.os.slice(1)}</span>
-                    </p> */}
-                </a>
-            ))}
-        </div>
-    )}
+    <WriteupList onlyButtons={onlyButtons} showAll={showAll} showLocked={showLocked} />
 </Section>

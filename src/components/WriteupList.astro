@@ -1,0 +1,158 @@
+---
+import LockIcon from './icons/Lock.astro';
+import { BASE_URL } from '@/consts';
+import { getCollection } from 'astro:content';
+
+
+const allWriteups = await getCollection('writeups');
+
+allWriteups.sort((a, b) => {
+
+    const today = new Date();
+
+    const dateA = a.data.releasedDate ? new Date(a.data.releasedDate) : null;
+    const dateB = b.data.releasedDate ? new Date(b.data.releasedDate) : null;
+
+    const isPastA = dateA && dateA < today;
+    const isPastB = dateB && dateB < today;
+
+    // Ordenar primero por releasedDate: pasado < futuro o undefined
+    if (isPastA && !isPastB) return -1;
+    if (!isPastA && isPastB) return 1;
+
+    // releasedDate en el mismo grupo: ordenar por dificultad
+    const difficultyOrder = {
+        easy: 4,
+        medium: 3,
+        hard: 2,
+        insane: 1
+    };
+
+    const difficultyA = difficultyOrder[a.data.difficulty] || 0;
+    const difficultyB = difficultyOrder[b.data.difficulty] || 0;
+
+    if (difficultyA !== difficultyB) {
+        return difficultyA - difficultyB;
+    }
+
+    // Si la dificultad es la misma, ordenar por fecha descendente
+    const hasDateA = !!a.data.date;
+    const hasDateB = !!b.data.date;
+
+    if (!hasDateA && !hasDateB) return 0;
+    if (!hasDateA) return 1;
+    if (!hasDateB) return -1;
+
+    return new Date(b.data.date || '').getTime() - new Date(a.data.date || '').getTime();
+});
+
+const onlyButtons = Astro.props.onlyButtons || false;
+const showAll = Astro.props.showAll || false;
+const showLocked = Astro.props.showLocked || false;
+
+---
+
+{ (allWriteups.length === 0) ? (
+    <p class="text-md italic">No writeups available at the moment.</p>
+) : (
+    <>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-8 px-2 md:px-0" id="writeupList">
+        {allWriteups
+            // max 6 writeups
+            .filter((writeup) => showLocked || (writeup.data.releasedDate && (new Date(writeup.data.releasedDate) < new Date())))
+            .slice(0, showAll ? allWriteups.length : 6)
+            .map((writeup) => (
+            <a
+                href={`/portfolio/writeups/${writeup.id}`}
+                class={`relative flex flex-col items-center justify-between bg-gray-800 rounded-lg pt-4 ${!writeup.data.releasedDate || !(new Date(writeup.data.releasedDate) < new Date()) ? 'opacity-50' : 'hover:bg-gray-700 transition-colors'} group`}
+            >
+                {
+                    (!writeup.data.releasedDate || !(new Date(writeup.data.releasedDate) < new Date())) && (
+                    <picture class="absolute top-2 right-2 opacity-100" >
+                        <LockIcon/>
+                    </picture>)
+                }
+                <picture class="writeup-item-picture relative h-32 md:h-40 aspect-square flex items-center justify-center">
+                    <img
+                        class="writeup-item-img rounded-lg h-32 md:h-40 object-cover group-hover:scale-[105%] transition-all duration-500"
+                        src={writeup.data.img}
+                        alt={writeup.data.name}
+                        style={`view-transition-name: writeup-image-${writeup.id}${onlyButtons ? '-button' : ''}`}
+                    />
+                    {writeup.data.os === 'linux' && (
+                        <picture class="absolute w-10 h-10 bottom-0 right-0 p-1 bg-gray-800 border-gray-500 rounded-full">
+                            <img src="/portfolio/ic-linux.svg" alt="" class="w-8 h-8"/>
+                        </picture>
+                    )}
+                </picture>
+                <h2 
+                    class="writeup-item-name text-2xl font-bold mt-4 text-center"
+                    style={`view-transition-name: writeup-name-${writeup.id}${onlyButtons ? '-button' : ''}`}
+                >{writeup.data.name}</h2>
+                <picture
+                    class="text-md mb-5 p-1 rounded-lg h-7 flex items-center justify-center"
+                >
+                    {
+                        writeup.data.platform === 'htb' ? (
+                            <>
+                                <img 
+                                    class="h-full object-contain"
+                                    src={`${BASE_URL}/htb/logo.svg`}
+                                    alt={`Hack The Box logo`}
+                                />
+                                <span class="writeup-item-platform hidden">Hack The Box</span>
+                            </>
+                        ) :
+                        writeup.data.platform === 'vulnhub' ? 'Vuln Hub' :
+                        writeup.data.platform === 'other' ? 'Other Platform' :
+                        'Unknown Platform'
+                    }
+                </picture>
+                {
+                    !writeup.data.releasedDate || !(new Date(writeup.data.releasedDate) < new Date()) ? (
+                        
+                        <p 
+                            class="writeup-item-coming text-sm font-normal mb-2 opacity-75 uppercase"
+                        >
+                            Coming Soon
+                        </p>
+                    ) : (
+                        <p 
+                            class="writeup-item-difficulty text-sm font-normal mb-2 opacity-75 uppercase"
+                            style={`view-transition-name: writeup-diff-${writeup.id}${onlyButtons ? '-button' : ''}`}
+                        >
+                            {writeup.data.difficulty.toLowerCase()}
+                        </p>
+                    )
+                }       
+                <p 
+                    class="writeup-item-difficulty hidden"
+                >
+                    {writeup.data.difficulty.toLowerCase()}
+                </p>
+
+                {/* <p 
+                    class="text-sm font-normal"
+                    style={`view-transition-name: writeup-os-${writeup.id}`}
+                >
+                    OS: 
+                    <span class="font-semibold">{writeup.data.os.charAt(0).toUpperCase() + writeup.data.os.slice(1)}</span>
+                </p> */}
+            </a>
+        ))}
+        {
+            !showAll && (
+                <a
+                    href="/portfolio/writeups"
+                    class="col-span-full flex items-center justify-center bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-colors"
+                >
+                    <span class="text-lg font-semibold">See All Writeups</span>
+                </a>
+            )
+        }
+        </div>
+        <span class="text-md italic mt-4">
+            Please note that some writeups may be locked or hidden and will be available soon.
+        </span>
+    </>
+)}

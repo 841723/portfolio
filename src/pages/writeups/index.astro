@@ -1,0 +1,140 @@
+---
+import "src/styles/markdown.css";
+import Layout from '@/layouts/Layout.astro';
+import Section from '@/components/Section.astro';
+import { BASE_URL } from '@/consts';
+import LeftArrowIcon from "@/components/icons/LeftArrow.astro";
+import WriteupList from "@/components/WriteupList.astro";
+
+const title = `Writeups - Diego Roldan`;
+const description = `All Writeups for machines on Hack The Box.`;
+
+const buttonsFilter = [
+    {
+        label: 'Easy',
+        color: 'bg-green-600',
+        colorHover: 'hover:bg-green-700'
+    },
+    {
+        label: 'Medium',
+        color: 'bg-yellow-600',
+        colorHover: 'hover:bg-yellow-700'
+    },
+    {
+        label: 'Hard',
+        color: 'bg-red-600',
+        colorHover: 'hover:bg-red-700'
+    },
+    {
+        label: 'Insane',
+        color: 'bg-purple-600',
+        colorHover: 'hover:bg-purple-700'
+    }
+];
+
+---
+
+<Layout title={title} description={description} doGradient={false}>
+  <main class="flex flex-col items-center w-full max-w-[740px] mx-auto">
+    <Section title="All Write Ups">
+        <p class="text-lg">
+            Here you can find some writeups of machines that I have solved. These writeups are meant to help others learn and understand the process of solving these machines. 
+        </p>
+
+        <p class="text-lg">
+            Feel free to reach out if you have any questions or suggestions for future writeups.
+        </p>
+
+        <p class="text-lg mt-10">
+            You can search by <span class="font-bold">name</span> or filter by <span class="font-bold">difficulty</span> using the buttons below.
+        </p>
+
+        <input id="searchInput" placeholder="Search writeups..." class="my-2 p-2 w-full border-2 border-gray-400 rounded-lg" />
+        <div
+            class="mb-6 flex flex-wrap gap-2 justify-center">
+            {buttonsFilter.map((label) => (
+                <button 
+                    data-filter={label.label}
+                    class={`filterButton py-1 rounded-full font-bold border-2 w-28 items-center transition-colors ${label.color} ${label.colorHover}`}
+                >
+                    {label.label}
+                </button>
+            ))}
+        </div>
+        <script>
+            const input = document.getElementById('searchInput') as HTMLInputElement;
+            const writeups = document.querySelectorAll('#writeupList a') as NodeListOf<HTMLAnchorElement>;
+            const filterButtons = document.querySelectorAll('.filterButton') as NodeListOf<HTMLButtonElement>;
+            const buttonsFilter = [
+                {
+                    label: 'Easy',
+                    color: 'bg-green-600',
+                    colorHover: 'hover:bg-green-700'
+                },
+                {
+                    label: 'Medium',
+                    color: 'bg-yellow-600',
+                    colorHover: 'hover:bg-yellow-700'
+                },
+                {
+                    label: 'Hard',
+                    color: 'bg-red-600',
+                    colorHover: 'hover:bg-red-700'
+                },
+                {
+                    label: 'Insane',
+                    color: 'bg-purple-600',
+                    colorHover: 'hover:bg-purple-700'
+                }
+            ];
+            const filtersObj = buttonsFilter.reduce((acc: Record<string, { state: boolean; color: string, colorHover: string }>, key: { label: string; color: string, colorHover: string }) => {
+                acc[key.label.toLowerCase()] = {
+                    state: true,
+                    color: key.color,
+                    colorHover: key.colorHover
+                };
+                return acc;
+            }, {});
+            
+            function filterWriteups() {
+                const filterText = input?.value.toLowerCase();
+
+                writeups.forEach((writeup) => {
+                    const name = writeup.querySelector('.writeup-item-name')?.textContent.toLowerCase() || '';
+                    var tags = writeup.querySelector('.writeup-item-tags')?.textContent.toLowerCase() || '';
+                    const difficulty = writeup.querySelector('.writeup-item-difficulty')?.textContent.toLowerCase() || '';
+  
+                    if (
+                        (difficulty && filtersObj[difficulty].state) &&
+                        (name.includes(filterText) || tags.includes(filterText))
+                    ) {
+                        writeup.style.display = '';
+                    } else {
+                        writeup.style.display = 'none';
+                    }
+                });
+            }
+
+            input.addEventListener('keyup', filterWriteups);
+            filterButtons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    const filter = button.getAttribute('data-filter')?.toLowerCase();
+
+                    if (filter && filtersObj.hasOwnProperty(filter)) {
+                        console.log('Toggling filter:', filter);
+                        filtersObj[filter].state = !filtersObj[filter].state;
+                        button.classList.toggle(filtersObj[filter].color);
+                        button.classList.toggle(filtersObj[filter].colorHover);
+                        button.classList.toggle('bg-gray-700');
+                        button.classList.toggle('hover:bg-gray-800');
+                    }
+
+                    filterWriteups();
+                });
+            });
+
+        </script>
+        <WriteupList onlyButtons={false} showAll={true} showLocked={true} />
+    </Section>
+    </main>
+</Layout> 
