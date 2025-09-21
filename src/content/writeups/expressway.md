@@ -3,12 +3,12 @@ name: Expressway
 difficulty: easy
 os: linux
 platform: htb
-date: 9999
+date: 2025/09/21
 releasedDate: 2099-12-31
-userFlag: false
-rootFlag: false
+userFlag: true
+rootFlag: true
 
-img: image_url
+img: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/75c168f01f04e5f256838733b77f13ec.png
 ---
 
 ## Enumeration
