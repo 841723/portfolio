@@ -61,7 +61,7 @@ const t = tcommons(locale);
                     data-filter={label.label}
                     class={`filterButton py-1 rounded-full font-bold border-2 w-28 items-center transition-colors ${label.color} ${label.colorHover}`}
                 >
-                    {(translatedLabel.at(0) as string)?.toUpperCase() + translatedLabel.slice(1)}
+                    {translatedLabel.charAt(0).toUpperCase() + translatedLabel.slice(1)}
                 </button>
                 );
             })}
