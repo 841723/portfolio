@@ -55,13 +55,13 @@ const t = tcommons(locale);
         <div
             class="mb-6 flex flex-wrap gap-2 justify-center">
              {buttonsFilter.map((label) => {
-                const translatedLabel = t(`writeups-${label.label.toLowerCase()}`);
+                const translatedLabel = t(`writeups-${label.label.toLowerCase()}`) ?? "Search...";
                 return (
                 <button 
                     data-filter={label.label}
                     class={`filterButton py-1 rounded-full font-bold border-2 w-28 items-center transition-colors ${label.color} ${label.colorHover}`}
                 >
-                    {translatedLabel.charAt(0).toUpperCase() + translatedLabel.slice(1)}
+                    {(translatedLabel.at(0) as string).toUpperCase() + translatedLabel.slice(1)}
                 </button>
                 );
             })}
