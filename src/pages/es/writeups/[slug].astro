@@ -11,9 +11,8 @@ export const getStaticPaths = async () => {
   }));  
 };
 
-const { slug } = Astro.params;
-const locale = "en"
+const locale = "es"
 
 ---
 
-<ItemWriteups />
+<ItemWriteups locale={locale} />

@@ -30,8 +30,12 @@ import AWSIcon from "./components/icons/AWS.astro";
 import AzureIcon from "./components/icons/Azure.astro";
 import GoogleCloudIcon from "./components/icons/GoogleCloud.astro";
 
-
-export type TAGInfo = { name: string, style: string, icon: ((_props: Record<string, any>) => any), link: string | null };
+export type TAGInfo = {
+    name: string;
+    style: string;
+    icon: ((_props: Record<string, any>) => any) | undefined;
+    link: string | null;
+};
 
 export const TAGS = {
     React: {
@@ -125,7 +129,7 @@ export const TAGS = {
         link: "https://developer.android.com/studio",
     },
     Golang: {
-        name: "Go",
+        name: "Golang",
         style: "text-blue-100 bg-blue-400/60",
         icon: GolangIcon,
         link: "https://go.dev/",
@@ -232,4 +236,24 @@ export const TAGS = {
         icon: GoogleCloudIcon,
         link: "https://cloud.google.com/",
     },
+};
+
+export const getTechInfo = (key: string): TAGInfo => {
+    // look for item which name matches key ignoring case and special characters
+    const keyNormalized = String(key)
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "");
+
+    const tech = Object.values(TAGS).find(
+        (t) => t.name.toLowerCase().replace(/[^a-z0-9]/g, "") === keyNormalized
+    );
+    if (!tech) {
+        return {
+            name: key,
+            style: "text-gray-100 bg-gray-600/60",
+            icon: undefined,
+            link: null,
+        };
+    }
+    return tech;
 };

@@ -1,8 +1,9 @@
 ---
 import { type TAGInfo } from "@/tags";
+import { TAGS, getTechInfo } from "@/tags";
 
 interface Props {
-    tech: TAGInfo;
+    tech: string;
     size?: "sm" | "md" | "lg" | "xl";
 }
 
@@ -16,14 +17,17 @@ const sizes = {
 
 if (!Astro.props.size) Astro.props.size = "md";
 const { size, tech } = Astro.props;
+
+const techInfo = getTechInfo(tech);
+
 ---
 
 <a
-    class=`flex flex-row items-center gap-x-1 px-2 py-1 ${size ? sizes[size]:"text-sm"} font-semibold rounded-md ${tech.style} hover:opacity-70 transition-all duration-200 ease-in-out`
-    href={tech.link}
+    class=`flex flex-row items-center gap-x-1 px-2 py-1 ${size ? sizes[size]:"text-sm"} font-semibold rounded-md ${techInfo.style} hover:opacity-70 transition-all duration-200 ease-in-out`
+    href={techInfo.link}
     target="_blank"
     rel="noopener noreferrer"
 >
-    {tech.icon && <tech.icon />}
-    {tech.name}
+    {techInfo.icon && <techInfo.icon />}
+    {techInfo.name}
 </a>

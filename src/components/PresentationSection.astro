@@ -4,6 +4,11 @@ import SocialPill from "@/components/SocialPill.astro";
 
 import LinkedinIcon from "@/components/icons/Linkedin.astro";
 import GithubIcon from "@/components/icons/Github.astro";
+import { tcommons } from "@/i18n";
+
+const currentLocale = Astro.props.locale || "en";
+const t = tcommons(currentLocale);
+
 ---
 
 <section
@@ -41,26 +46,21 @@ import GithubIcon from "@/components/icons/Github.astro";
       <h1
         class="inline-block text-white text-5xl font-bold items-center gap-x-4 leading-tight"
       >
-        Hi, I'm
+        {t("presentation-greeting")}
         <span
           class="animated-gradient font-extrabold
           bg-gradient-to-r from-yellow-300 via-amber-400 to-pink-400
             bg-clip-text text-transparent"
         >
-          Diego Roldán
+          {t("presentation-name")}
         </span>
       </h1>
       
-      
+    
     <h2 class="text-xl opacity-90 mb-4 text-pretty">
-        <span class="text-yellow-300">Computer Science Engineer</span> from
-        Zaragoza, Spain. Great passion for <span class="text-yellow-300 opacity-100">
-            Cybersecurity
-        </span>
-        and <span
-            class="text-yellow-300 opacity-100">Full Stack</span
-        > Development.
-        Focused on building secure, innovative, and efficient digital solutions.
+        {(t("presentation-description") as { text: string; highlight: boolean }[]).map(part =>
+            part.highlight ? <span class="text-yellow-300 opacity-100">{part.text}</span> : part.text
+        )}
     </h2>
 
     <ul class="flex flex-wrap items-center justify-start gap-3">
@@ -71,7 +71,7 @@ import GithubIcon from "@/components/icons/Github.astro";
                 rel="noopener"
                 class="flex justify-center items-center"
             >
-                <Badge>Available for hire</Badge></a
+                <Badge>{t("presentation-availableforhire")}</Badge></a
             >
         </li>
         <li>

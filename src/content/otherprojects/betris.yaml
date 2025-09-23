@@ -10,4 +10,6 @@ img: "/betris/logo.png"
 gh_link: "https://github.com/841723/betris"
 preview_link: "https://www.onlinegdb.com/FR-2BJYjj"
 used_tech:
-  - Cplusplus
+  - C++
+
+order: 4

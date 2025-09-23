@@ -9,5 +9,7 @@ description:
 img: "/las-canteras/logo.jpg"
 used_tech:
   - Astro
-  - Typescript
+  - TypeScript
   - TailwindCSS
+
+order: 3

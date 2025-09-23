@@ -12,6 +12,8 @@ used_tech:
   - HTML
   - CSS
   - JavaScript
-  - NodeJs
+  - Node.js
   - PostgreSQL
   - AWS
+
+order: 4

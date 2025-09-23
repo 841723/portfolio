@@ -2,14 +2,18 @@ import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders"; // Not available with legacy API
 
 import { TAGS } from "./tags";
-const TECH_KEYS = Object.keys(TAGS) as [keyof typeof TAGS, ...string[]];
+// recupera todas las propiedades "name" de TAGS
+type TagNames = (typeof TAGS)[keyof typeof TAGS]["name"];
+// "react" | "vue" | "svelte"
+
+const TECH_KEYS = Object.values(TAGS).map((t) => t.name) as TagNames[];
 
 
 const writeups = defineCollection({
     loader: glob({
         pattern: ["**/*.md", "!dev-*"]
-//        ,
-//        base: "src/content/writeups",
+       ,
+       base: "src/content/writeups",
     }),
     schema: z.object({
         name: z.string(),
@@ -26,6 +30,10 @@ const writeups = defineCollection({
 });
 
 const workexperiences = defineCollection({
+    loader: glob({
+        pattern: ["**/*.yaml", "!dev-*"],
+        base: "src/content/workexperiences",
+    }),
     schema: z.object({
         position: z.object({
             en: z.string(),
@@ -38,48 +46,55 @@ const workexperiences = defineCollection({
         }),
         img: z.string(),
         date: z.string(),
-        height: z.number(),
+        height: z.object({
+            en: z.string(),
+            es: z.string(),
+        }),
         description: z.object({
             en: z.string(),
             es: z.string(),
-        }),        
-    })
+        }),
+        order: z.number().optional(),
+    }),
 });
 
 const webprojects = defineCollection({
-  type: "content",
-  schema: z.object({
-    title: z.object({
-      en: z.string(),
-      es: z.string(),
+    type: "data",
+    schema: z.object({
+        title: z.object({
+            en: z.string(),
+            es: z.string(),
+        }),
+        description: z.object({
+            en: z.string(),
+            es: z.string(),
+        }),
+        img: z.string(),
+        gh_link: z.string().optional(),
+        preview_link: z.string().optional(),
+        used_tech: z.array(z.enum(Object.values(TAGS).map(t => t.name) as [TagNames, ...TagNames[]])),
+        order: z.number().optional(),
     }),
-    description: z.object({
-      en: z.string(),
-      es: z.string(),
-    }),
-    img: z.string(),
-    gh_link: z.string().optional(),
-    preview_link: z.string().optional(),
-    used_tech: z.array(z.enum(TECH_KEYS)),
-  }),
 });
 
 const otherprojects = defineCollection({
-  type: "data",
-  schema: z.object({
-    title: z.object({
-      en: z.string(),
-      es: z.string(),
+    type: "data",
+    schema: z.object({
+        title: z.object({
+            en: z.string(),
+            es: z.string(),
+        }),
+        description: z.object({
+            en: z.string(),
+            es: z.string(),
+        }),
+        img: z.string(),
+        gh_link: z.string().optional(),
+        preview_link: z.string().optional(),
+        used_tech: z.array(z.enum(Object.values(TAGS).map(t => t.name) as [TagNames, ...TagNames[]])),
+        order: z.number().optional(),
     }),
-    description: z.object({
-      en: z.string(),
-      es: z.string(),
-    }),
-    img: z.string(),
-    gh_link: z.string().optional(),
-    preview_link: z.string().optional(),
-    used_tech: z.array(z.enum(TECH_KEYS)),
-  }),
+
 });
 
 

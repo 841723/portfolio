@@ -1,18 +1,18 @@
 ---
 import { BASE_URL } from "@/consts";
-import type { TAGInfo } from "@/tags";
 import TechPill from "@/components/TechPill.astro";
 import GithubIcon from "@/components/icons/Github.astro";
 import LinkIcon from "@/components/icons/Link.astro";
 
-import { tobj } from "@/i18n";
+import { tcommons, tobj } from "@/i18n";
+import type { Locale } from "@/types";
 
 interface Props {
     title: {
         en: string,
         es: string
     },
-    subtitle?: string,
+    // subtitle?: string,
     description: {
         en: string,
         es: string
@@ -20,15 +20,17 @@ interface Props {
     img: string,
     gh_link?: string,
     preview_link?: string,
-    used_tech: TAGInfo[],
-    locale: "en" | "es"
+    used_tech: string[],
+    locale: Locale
 }
 
-const { title, subtitle, description, img, gh_link, preview_link, used_tech, locale } =
+const { title, description, img, gh_link, preview_link, used_tech, locale } =
     Astro.props;
 
 // create a function to translate to locale languaje the objects: {en: "value", es: "valor"}
 const t = tobj(locale);
+const tcommon = tcommons(locale);
+
 ---
 
 <article
@@ -50,11 +52,11 @@ const t = tobj(locale);
                 <h5 class="text-2xl font-bold tracking-tight text-white">
                     {t(title)}
                 </h5>
-                {subtitle && 
+                <!-- {subtitle && 
                     <h6 class="text-sm m-0 italic opacity-80"> 
                         {subtitle}
                     </h6>
-                }
+                } -->
             </div>
             <ul class="flex flex-row justify-end gap-x-2">
                 <li>
@@ -63,10 +65,9 @@ const t = tobj(locale);
                             <a
                                 href={preview_link}
                                 target="_blank"
-                                class="flex flex-row gap-x-1 items-center rounded-xl py-1 px-2 border border-1 hover:bg-gray-800  transition-all duration-100"
+                                class="flex flex-row gap-x-1 items-center rounded-xl py-1 px-2 border-1 hover:bg-gray-800  transition-all duration-100"
                             >
-                                <!-- TODO: make this translatable with tcommon -->
-                                <LinkIcon /> Preview
+                                <LinkIcon /> {tcommon("projects-preview")}
                             </a>
                         )
                     }
@@ -78,9 +79,9 @@ const t = tobj(locale);
                             <a
                                 href={gh_link}
                                 target="_blank"
-                                class="flex flex-row gap-x-1 items-center rounded-xl py-1 px-2 border border-1 hover:bg-gray-800  transition-all duration-100"
+                                class="flex flex-row gap-x-1 items-center rounded-xl py-1 px-2 border hover:bg-gray-800  transition-all duration-100"
                             >
-                                <GithubIcon /> Code
+                                <GithubIcon /> {tcommon("projects-code")}
                             </a>
                         )
                     }

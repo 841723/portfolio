@@ -12,13 +12,13 @@
   "presentation-name": "Diego Roldan",
   "presentation-description": [
     { "text": "Computer Science Engineer", "highlight": true },
-    { "text": " from Zaragoza, Spain. Great passion for " },
+    { "text": " from Zaragoza, Spain. Great passion for ", "highlight": false },
     { "text": "Cybersecurity", "highlight": true },
-    { "text": " and " },
+    { "text": " and ", "highlight": false },
     { "text": "Full Stack", "highlight": true },
-    { "text": " Development. Focused on building secure, innovative, and efficient digital solutions." }
+    { "text": " Development. Focused on building secure, innovative, and efficient digital solutions.", "highlight": false }
   ],
-  "presentation-availableforhire": "available for hire",
+  "presentation-availableforhire": "Available for hire",
   "presentation-linkedin": "Linkedin",
   "presentation-github": "Github",
 
@@ -40,14 +40,17 @@
 
 
 
+  "writeups-noavailable": "No writeups available at the moment.",
+  "writeups-seeother": "Check out other write ups",
   "writeups-description": "Here you can find some writeups of Hack The Box machines that I have solved. Open them to see the details of each machine, including the steps I took to solve them, the tools I used, and any challenges I faced along the way.",
   "writeups-easy": "easy",
   "writeups-medium": "medium",
   "writeups-hard": "hard",
   "writeups-insane": "insane",
-  "writeups-comingsoom": "comingsoom",
+  "writeups-comingsoon": "coming soon",
   "writeups-seeall": "See All Writeups",
   "writeups-note": "Please note that some writeups may be locked or hidden and will be available soon.",
   "writeups-search": "You can search by name or filter by difficulty using the buttons below.",
-  "writeups-inputplaceholder": "Search writeups..."
+  "writeups-inputplaceholder": "Search writeups...",
+  "writeups-feelfree": "Feel free to reach out if you have any questions or want to discuss anything related to cybersecurity or web development."
 }

@@ -10,9 +10,11 @@ img: "/asesin-ada/logo.png"
 gh_link: "https://github.com/841723/asesin-ada"
 used_tech:
   - React
-  - NodeJs
-  - SocketIo
+  - Node.js
+  - Socket.io
   - CSS
   - Python
   - PostgreSQL
   - AWS
+
+order: 2
