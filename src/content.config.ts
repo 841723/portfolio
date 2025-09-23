@@ -6,9 +6,6 @@ import { TAGS } from "./tags";
 type TagNames = (typeof TAGS)[keyof typeof TAGS]["name"];
 // "react" | "vue" | "svelte"
 
-const TECH_KEYS = Object.values(TAGS).map((t) => t.name) as TagNames[];
-
-
 const writeups = defineCollection({
     loader: glob({
         pattern: ["**/*.md", "!dev-*"]
