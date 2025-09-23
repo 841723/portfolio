@@ -103,12 +103,12 @@ const t = tcommons(locale);
 
                 writeups.forEach((writeup) => {
                     const name = writeup.querySelector('.writeup-item-name')?.textContent?.toLowerCase() || '';
-                    const tags = writeup.querySelector('.writeup-item-tags')?.textContent?.toLowerCase() || '';
-                    const difficulty = writeup.querySelector('.writeup-item-difficulty')?.textContent?.toLowerCase() || '';
-  
+                    // const tags = writeup.querySelector('.writeup-item-tags')?.textContent?.toLowerCase() || '';
+                    const difficulty = writeup.querySelector('.writeup-item-difficulty')?.getAttribute('data-difficulty')?.toLowerCase() || '';
+                    
                     if (
                         (difficulty && filtersObj[difficulty].state) &&
-                        (name.includes(filterText) || tags.includes(filterText))
+                        (name.includes(filterText) /* || tags.includes(filterText) */)
                     ) {
                         writeup.style.display = '';
                     } else {

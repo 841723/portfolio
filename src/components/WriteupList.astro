@@ -123,6 +123,7 @@ const t = tcommons(currentLocale);
                         <p 
                             class="writeup-item-difficulty text-sm font-normal mb-2 opacity-75 uppercase"
                             style={`view-transition-name: writeup-diff-${writeup.id}${onlyButtons ? '-button' : ''}`}
+                             data-difficulty={writeup.data.difficulty.toLowerCase()}
                         >
                             {t(`writeups-${writeup.data.difficulty.toLowerCase()}`)}
                         </p>
@@ -130,6 +131,7 @@ const t = tcommons(currentLocale);
                 }       
                 <p 
                     class="writeup-item-difficulty hidden"
+                    data-difficulty={writeup.data.difficulty.toLowerCase()}
                 >
                     {writeup.data.difficulty.toLowerCase()}
                 </p>
@@ -146,7 +148,7 @@ const t = tcommons(currentLocale);
         {
             !showAll ? (
                 <a
-                    href="/portfolio/writeups"
+                    href={`/portfolio${getLocaleUrlPrefix(currentLocale)}/writeups`}
                     class="col-span-full flex items-center justify-center bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-colors"
                 >
                     <span class="text-lg font-semibold">{t("writeups-seeall")}</span>
