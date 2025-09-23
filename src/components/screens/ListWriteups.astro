@@ -54,14 +54,17 @@ const t = tcommons(locale);
         <input id="searchInput" placeholder={t("writeups-inputplaceholder") as string} class="my-2 p-2 w-full border-2 border-gray-400 rounded-lg" />
         <div
             class="mb-6 flex flex-wrap gap-2 justify-center">
-            {buttonsFilter.map((label) => (
+             {buttonsFilter.map((label) => {
+                const translatedLabel = t(`writeups-${label.label.toLowerCase()}`);
+                return (
                 <button 
                     data-filter={label.label}
                     class={`filterButton py-1 rounded-full font-bold border-2 w-28 items-center transition-colors ${label.color} ${label.colorHover}`}
                 >
-                    {(t(`writeups-${label.label.toLowerCase()}`).at(0) as string)?. toUpperCase() + t(`writeups-${label.label.toLowerCase()}`).slice(1)}
+                    {(translatedLabel.at(0) as string)?.toUpperCase() + translatedLabel.slice(1)}
                 </button>
-            ))}
+                );
+            })}
         </div>
         <script>
             const input = document.getElementById('searchInput') as HTMLInputElement;

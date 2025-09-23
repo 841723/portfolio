@@ -61,12 +61,4 @@ const { title, description, locale, doGradient=true } = Astro.props;
 			overscroll-behavior: none;
 		}
 	</style>
-	<script>
-		const path = window.location.pathname;
-		console.log(path);
-		if (path.startsWith("/portfolio/en")) {
-			const clean = path.replace(/^\/en/, "") || "/";
-			window.location.replace(clean);
-		}
-	</script>
 </html>
