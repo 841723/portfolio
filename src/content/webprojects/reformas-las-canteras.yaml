@@ -1,0 +1,15 @@
+title:
+  en: "REFORMAS LAS CANTERAS"
+  es: "REFORMAS LAS CANTERAS"
+
+description:
+  en: "Website page for a small kitchen and bathroom reform company. Check their services, projects, and contact them."
+  es: "Página web para una pequeña empresa de reformas de cocinas y baños. Consulta sus servicios, proyectos y contáctalos."
+
+img: "/las-canteras/logo.jpg"
+used_tech:
+  - Astro
+  - TypeScript
+  - TailwindCSS
+
+order: 3

@@ -1,14 +1,19 @@
 ---
 import { BASE_URL } from "@/consts";
+import { tcommons } from "@/i18n";
+import { getLocaleUrlPrefix, supportedLocales } from "@/i18n";
 
 const nav = [
-    { name: "Me", label: "#me" },
-    { name: "Work Experience", label: "#work" },
-    { name: "Write Ups", label: "/writeups" },
-    { name: "Tech Stack", label: "#techstack"},
-    { name: "Web Projects", label: "#web" },
-    { name: "Other Projects", label: "#other" },
+    { name: "nav-me", label: "#me" },
+    { name: "nav-workexperience", label: "#work" },
+    { name: "nav-writeups", label: "/writeups" },
+    { name: "nav-techstack", label: "#techstack"},
+    { name: "nav-webprojects", label: "#web" },
+    { name: "nav-otherprojects", label: "#other" },
 ];
+
+const currentLocale = Astro.props.locale || "en";
+const t = tcommons(currentLocale);
 ---
 
 <header class="fixed flex md:hidden flex-row-reverse justify-start w-full z-10">
@@ -27,14 +32,27 @@ const nav = [
         {
             nav.map((navElem) => (
                 <a
-                    href={BASE_URL+navElem.label}
+                    href={BASE_URL+getLocaleUrlPrefix(currentLocale)+navElem.label}
                     class="text-center text-2xl opacity-95 hover:opacity-100 px-2 rounded-full hover:scale-105 transform transition duration-200 ease-in-out"
                     aria-label={navElem.label}
                 >
-                    {navElem.name}
+                    {t(navElem.name)}
                 </a>
             ))
         }
+        <ul class="text-2xl text-center">
+            {
+                supportedLocales.map((locale) => (
+                    <li class="inline">
+                        <a
+                            href={BASE_URL+getLocaleUrlPrefix(locale)}
+                            class={`text-center opacity-95 hover:opacity-100 px-2 rounded-full hover:scale-105 transform transition duration-200 ease-in-out ${locale === currentLocale ? "underline underline-offset-4" : ""}`}
+                            aria-label={locale}
+                        >
+                            {locale.toUpperCase()}</a>
+                    </li>
+                ))
+            }
 </header>
 
 <header class="hidden fixed md:flex justify-center w-full z-10 mt-4 px-2">
@@ -44,14 +62,29 @@ const nav = [
         {
             nav.map((navElem) => (
                 <a
-                    href={BASE_URL+navElem.label}
+                    href={BASE_URL+getLocaleUrlPrefix(currentLocale)+navElem.label}
                     class="text-center opacity-95 hover:opacity-100 px-2 rounded-full hover:scale-105 transform transition duration-200 ease-in-out"
                     aria-label={navElem.label}
                 >
-                    {navElem.name}
+                    {t(navElem.name)}
                 </a>
             ))
         }
+
+        <ul>
+            {
+                supportedLocales.map((locale) => (
+                    <li class="inline">
+                        <a
+                            href={BASE_URL+getLocaleUrlPrefix(locale)}
+                            class={`text-center opacity-95 hover:opacity-100 px-2 rounded-full hover:scale-105 transform transition duration-200 ease-in-out ${locale === currentLocale ? "underline underline-offset-4" : ""}`}
+                            aria-label={locale}
+                        >
+                            {locale.toUpperCase()}</a>
+                    </li>
+                ))
+            }
+        </ul>
     </nav>
 </header>
 

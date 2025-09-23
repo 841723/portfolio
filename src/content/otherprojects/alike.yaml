@@ -1,0 +1,14 @@
+title:
+  en: "ALIKE COMPILER"
+  es: "COMPILADOR ALIKE"
+
+description:
+  en: "Alike is a programming language similar to Ada. This project compiles Alike language and transforms into intermediate code which can be executed by P-machine."
+  es: "Alike es un lenguaje de programación similar a Ada. Este proyecto compila Alike y lo transforma en código intermedio que puede ser ejecutado por la P-machine."
+
+img: "/alike/logo.jpg"
+gh_link: "https://github.com/841723/alike"
+used_tech:
+  - JavaCC
+
+order: 3

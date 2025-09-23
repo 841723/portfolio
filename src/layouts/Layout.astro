@@ -11,14 +11,15 @@ import "@fontsource-variable/onest";
 interface Props {
 	title: string;
 	description: string;
+	locale: string;
 	doGradient?: boolean;
 }
 
-const { title, description, doGradient=true } = Astro.props;
+const { title, description, locale, doGradient=true } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" style="dark">
+<html lang={locale} style="dark">
 	<head>
 		<meta name="google-site-verification" content="haZOKIxShWEkdbqSv6dQVHibDEnTArU_FbH45rTJPOI" />
 		<link rel="sitemap" href="/portfolio/sitemap-index.xml" />
@@ -38,11 +39,11 @@ const { title, description, doGradient=true } = Astro.props;
 			}
 		`}
 	>
-		<Header />
+		<Header locale={locale} />
 		<main class="min-h-[100vh]">	
 			<slot />
 		</main>
-		<Footer />
+		<Footer locale={locale} />
 	</body>
 
 	<style is:global>

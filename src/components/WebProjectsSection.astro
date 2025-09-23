@@ -2,19 +2,23 @@
 import Card from "@/components/Card.astro";
 import Section from "@/components/Section.astro";
 import Web from "@/components/icons/Web.astro";
+import { webprojects } from "@/collection";
 
-import { WEB_PROJECTS } from "@/web_projects";
+const currentLocale = Astro.props.locale || "en";
+
 ---
 
-<Section title="Web Projects" id="web">
+<Section title="nav-webprojects" id="web" locale={currentLocale}>
     <Web slot="icon" />
     <ol class="flex flex-col gap-y-6">
         {
-            WEB_PROJECTS.map((proj) => (
+            webprojects.map((proj) => (
                 <li>
-                    <Card {...proj} />
+                    <Card {...proj.data} locale={currentLocale} />
                 </li>
             ))
         }
     </ol>
 </Section>
+
+

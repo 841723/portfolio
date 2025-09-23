@@ -1,0 +1,16 @@
+title:
+  en: "FLEET-FEAST"
+  es: "FLEET-FEAST"
+
+description:
+  en: "An android app that helps a restaurant owner to manage their restaurant. Orders and plates can be added, updated and deleted."
+  es: "Aplicación Android que ayuda a un dueño de restaurante a gestionar su negocio. Se pueden añadir, actualizar y eliminar pedidos y platos."
+
+img: "/fleet-feast/logo.jpg"
+gh_link: "https://github.com/841723/fleet-feast"
+used_tech:
+  - Java
+  - Android
+  - SQLite
+
+order: 5

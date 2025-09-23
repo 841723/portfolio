@@ -1,0 +1,14 @@
+title:
+  en: "CAR GAME ASSEMBLY"
+  es: "JUEGO DE COCHES ASSEMBLY"
+
+description:
+  en: "A car game developed using assembly language. The user-controlled car must avoid touching the moving walls. It also supports 2 players simultaneously."
+  es: "Juego de coches desarrollado en lenguaje ensamblador. El coche controlado por el usuario debe evitar tocar las paredes en movimiento. También soporta 2 jugadores simultáneamente."
+
+img: "/car-assembly/logo.jpg"
+gh_link: "https://github.com/841723/car-assembly"
+used_tech:
+  - ARM Assembly
+
+order: 2

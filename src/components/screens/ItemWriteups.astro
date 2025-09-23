@@ -1,0 +1,255 @@
+---
+import "src/styles/markdown.css";
+import { getCollection, getEntry, render } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import Section from '@/components/Section.astro';
+import { BASE_URL } from '@/consts';
+import DirectionsIcon from "@/components/icons/Directions.astro";
+import LeftArrowIcon from "@/components/icons/LeftArrow.astro";
+import Lock from "@/components/icons/Lock.astro";
+import WriteupsSection from "@/components/WriteupsSection.astro";
+import { tcommons } from "@/i18n";
+
+const { slug } = Astro.params;
+const entry = await getEntry('writeups', slug);
+if (!entry) {
+  Astro.redirect(BASE_URL + 'writeups', 404, {
+    statusText: 'Writeup not found',
+  });
+}
+const { Content } = await render(entry);
+
+const back_url = BASE_URL+"/writeups";
+
+const { name, difficulty, os, img, platform, date, releasedDate  }: {
+  name: string;
+  difficulty: string;
+  os: string;
+  img: string;
+  platform: 'htb' | 'vulnhub',
+  date?: string;
+  releasedDate?: Date;
+}
+ = entry.data;
+
+const title = `${name} Writeup - Diego Roldan`;
+const description = `Writeup for the ${name} machine on Hack The Box. Difficulty: ${difficulty}, OS: ${os}.`;
+const platformAllInfo ={
+  url: {
+    htb: 'https://www.hackthebox.com/',
+    vulnhub: 'https://www.vulnhub.com/',
+  },
+  logo: {
+    htb: `${BASE_URL}/htb/logo.svg`,
+    vulnhub: `${BASE_URL}/vulnhub/logo.png`,
+  }
+}
+const platformInfo = platformAllInfo.url[platform] || 'none';
+const platformLogo = platformAllInfo.logo[platform] || 'none';
+const machineURL =
+  platform === 'htb' ? `https://www.hackthebox.com/machines/${name}` : '#'
+
+
+// This function generates the static paths for the dynamic pages based on the slugs of the writeups
+// It will be used by Astro to generate the static pages at build time.
+export const getStaticPaths = async () => {
+  const allWriteups = await getCollection('writeups');
+  return allWriteups.map((writeup) => ({
+    params: { slug: writeup.id },
+  }));  
+};
+
+const locale = Astro.props.locale || "en"
+const t = tcommons(locale);
+---
+
+<Layout title={title} description={description} doGradient={false} locale={locale}>
+  <main class="flex flex-col items-center w-full max-w-[740px] mx-auto">
+    <Section title="nav-writeups" id="writeups" locale={locale}>
+      <DirectionsIcon slot="icon" />
+      <p class="text-lg">
+        {t("writeups-description")}
+      </p>
+
+        <p class="text-lg">
+          {t("writeups-feelfree")}
+        </p>
+
+        <a href={back_url} class="flex items-center w-fit hover:opacity-100 hover:underline opacity-80 transition-opacity duration-500 ease-in-out">
+          <LeftArrowIcon class="inline-block mr-2" />
+            {t("writeups-seeother")}
+        </a>
+        <hr class="border-gray-400 border-2 my-8" />
+        <header 
+          class="flex flex-col rounded-lg border-gray-700 bg-gray-800 p-4 mb-8"
+        >
+            <h1 
+              class="text-3xl font-bold mb-4 text-center" 
+              style={`view-transition-name: writeup-name-${slug}`}
+            >
+                {name}
+            </h1>
+            <div class="flex justify-center gap-4 h-40">
+                <img 
+                  src={img} 
+                  alt={`${name} icon`} 
+                  class="aspect-square h-full object-cover rounded-lg"
+                  style={`view-transition-name: writeup-image-${slug}`}
+                />
+                <div class="flex flex-col items-center justify-center w-fit gap-2">
+                  <p 
+                    class="text-md font-normal"
+                    style={`view-transition-name: writeup-diff-${slug}`}
+                  >
+                    Difficulty: 
+                    <span class={`font-semibold p-1 rounded-lg ${difficulty === 'easy' ? 'bg-green-500' : difficulty === 'medium' ? 'bg-yellow-700' : difficulty === 'hard' ? 'bg-red-500' : 'bg-purple-500'}`}>
+                        {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
+                    </span>
+                  </p>                     
+                  <p 
+                    class="text-md font-normal"
+                    style={`view-transition-name: writeup-os-${slug}`}
+                  >
+                    OS: 
+                    <span class="font-semibold">{os.charAt(0).toUpperCase() + os.slice(1)}</span>
+                  </p>
+                  <p class="text-sm font-normal">
+                    Solved on: 
+                    <span class="font-semibold">{date}</span>
+                </p>
+                  {platformInfo !== 'none' && (
+                    <a 
+                      href={machineURL}
+                      class="rounded-lg p-2 w-fit h-11 hover:bg-gray-700 transition-colors flex items-center justify-center"
+                      target="_blank"
+                    >
+                      <img 
+                        class="h-full object-contain"
+                        src={platformLogo}
+                        alt={`${platform} logo`}
+                      />
+                    </a>
+                  )}
+                </div>
+            </div>
+        </header>
+        {
+          releasedDate && (new Date(releasedDate) < new Date()) ? (
+          <article class="markdown">
+            <Content />
+          </article>) : (
+            <p class="mt-10 text-2xl font-semibold flex justify-center items-start gap-x-2">
+              This post is currently locked <span class="inline-block"><Lock /></span>
+            </p>
+            <p class="text-gray-300 text-center mt-12 text-lg">
+              <span class="text-yellow-300 font-bold">
+                {name}
+              </span>
+              {' '} is still active on 
+              <span class="font-bold">
+                Hack The Box
+              </span>
+            </p>
+            <p class="text-gray-300 text-center text-lg mb-10">
+              Due to 
+              <a
+                href="https://help.hackthebox.com/en/articles/5188925-streaming-writeups-walkthrough-guidelines" 
+                class="m-0 font-bold hover:underline text-green-300"
+                target="_blank"
+                rel="noopener noreferrer"
+              >platform policies</a>,
+              <br />
+              this writeup will be available once the machine is retired.
+            </p>
+          )
+        }
+        <hr class="border-gray-400 border mt-20 opacity-75" />
+        <!-- see other writeups -->
+        <WriteupsSection onlyButtons={true} showAll={false} showLocked={false} locale={locale} />
+    </Section>
+    </main>
+</Layout> 
+
+<script>
+  const transitionDuration = 200; 
+  const COPY_SVG = `
+    <div class="p-1 hover:border-gray-600 hover:bg-gray-700 rounded">
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" />
+        <path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" />
+      </svg>
+    </div>
+      `;
+  const CHECK_SVG = `
+    <div class="flex items-center gap-1 p-1">
+      <span class="text-xs">Copied!</span>
+      <svg width="18" height="18" fill="none"
+        viewBox="0 0 24 24" stroke="lightgreen" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
+    `;
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre').forEach((pre) => {
+      // Crear el botón
+      const button = document.createElement('button');
+      button.innerHTML = COPY_SVG
+      button.className = `
+        absolute top-2 right-2 text-xs rounded 
+        bg-gray-800 text-white opacity-70
+        transition-opacity duration-${transitionDuration}
+        ease-in-out
+      `;
+
+      // Crear wrapper relativo
+      const wrapper = document.createElement('div');
+      wrapper.className = 'relative';
+
+      // Insertar el wrapper antes del pre
+
+      pre.parentNode?.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+      wrapper.appendChild(button);
+
+      // Funcionalidad de copiar
+      button.addEventListener('click', async () => {
+        const code = pre.innerText;
+        try {
+          await navigator.clipboard.writeText(code);
+
+          // Fade out
+          button.classList.remove('opacity-70');
+          button.classList.add('opacity-0');
+          setTimeout(() => {
+            // Cambiar contenido
+            button.innerHTML = CHECK_SVG
+            // Fade in
+            button.classList.remove('opacity-0');
+          }, transitionDuration);
+
+          // Volver al estado original tras 2 segundos
+          setTimeout(() => {
+            button.classList.add('opacity-0');
+            setTimeout(() => {
+              button.innerHTML = COPY_SVG;
+              button.classList.toggle('opacity-70');
+              button.classList.toggle('opacity-0');
+            }, transitionDuration);
+          }, 3000);
+        } catch (err) {
+          console.error('Failed to copy!', err);
+        }
+      });
+    });
+  });
+</script>

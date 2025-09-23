@@ -1,0 +1,15 @@
+title:
+  en: "BETRIS"
+  es: "BETRIS"
+
+description:
+  en: "Given a list of pieces, betris solves the problem of finding a way to fill a given number of rows. Shows visualization of the process."
+  es: "Dada una lista de piezas, betris resuelve el problema de encontrar la manera de llenar un número dado de filas. Muestra la visualización del proceso."
+
+img: "/betris/logo.png"
+gh_link: "https://github.com/841723/betris"
+preview_link: "https://www.onlinegdb.com/FR-2BJYjj"
+used_tech:
+  - C++
+
+order: 4

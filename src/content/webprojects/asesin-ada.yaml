@@ -1,0 +1,20 @@
+title:
+  en: "ASESIN-ADA"
+  es: "ASESIN-ADA"
+
+description:
+  en: "Online game to play Cluedo with bots or your friends. Chat with them, find the killer, the weapon, and the room, and win the game."
+  es: "Juego en línea para jugar al Cluedo con bots o amigos. Chatea con ellos, encuentra al asesino, el arma y la habitación, y gana la partida."
+
+img: "/asesin-ada/logo.png"
+gh_link: "https://github.com/841723/asesin-ada"
+used_tech:
+  - React
+  - Node.js
+  - Socket.io
+  - CSS
+  - Python
+  - PostgreSQL
+  - AWS
+
+order: 2

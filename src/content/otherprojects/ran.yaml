@@ -1,0 +1,14 @@
+title:
+  en: "RAN - TRAVEL APP"
+  es: "RAN - APP DE VIAJES"
+
+description:
+  en: "A travel app designed to assist older travelers. Users can book activities, tours, and more. Guides can create new activities and chat with users."
+  es: "Aplicación de viajes diseñada para asistir a viajeros mayores. Los usuarios pueden reservar actividades, tours y más. Los guías pueden crear nuevas actividades y chatear con los usuarios."
+
+img: "/ran/logo.jpg"
+gh_link: "https://github.com/841723/ran"
+used_tech:
+  - Axure RP
+
+order: 6

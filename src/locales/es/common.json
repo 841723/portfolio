@@ -1,0 +1,52 @@
+{
+    "nav-me": "Sobre mí",
+    "nav-workexperience": "Experiencia laboral",
+    "nav-writeups": "Writeups",
+    "nav-techstack": "Tecnologías",
+    "nav-webprojects": "Proyectos web",
+    "nav-otherprojects": "Otros proyectos",
+
+    "presentation-greeting": "Hola, soy ",
+    "presentation-name": "Diego Roldán",
+    "presentation-description": [
+        { "text": "Ingeniero Informático", "highlight": true },
+        {
+            "text": " de Zaragoza, España. Gran pasión por la ",
+            "highlight": false
+        },
+        { "text": "Ciberseguridad", "highlight": true },
+        { "text": " y el ", "highlight": false },
+        { "text": "Desarrollo Full Stack", "highlight": true },
+        {
+            "text": ". Enfocado en construir soluciones digitales seguras, innovadoras y eficientes.",
+            "highlight": false
+        }
+    ],
+    "presentation-availableforhire": "Disponible para trabajar",
+    "presentation-linkedin": "LinkedIn",
+    "presentation-github": "GitHub",
+
+    "projects-code": "Código",
+    "projects-preview": "Vista previa",
+
+    "techstack-frontend": "Frontend",
+    "techstack-backend": "Backend",
+    "techstack-cloud": "Cloud",
+    "techstack-others": "Otros",
+
+    "workexperience-at": "en",
+
+    "writeups-noavailable": "No hay writeups disponibles en este momento.",
+    "writeups-seeother": "Ver otros writeups",
+    "writeups-description": "Aquí puedes encontrar algunos writeups de máquinas de Hack The Box que he resuelto. Ábrelos para ver los detalles de cada máquina, incluyendo los pasos que seguí para resolverlas, las herramientas que utilicé y los retos a los que me enfrenté.",
+    "writeups-easy": "fácil",
+    "writeups-medium": "medio",
+    "writeups-hard": "difícil",
+    "writeups-insane": "extremo",
+    "writeups-comingsoon": "próximamente",
+    "writeups-seeall": "Ver todos",
+    "writeups-note": "Ten en cuenta que algunos writeups pueden estar bloqueados u ocultos y estarán disponibles pronto.",
+    "writeups-search": "Puedes buscar por nombre o filtrar por dificultad usando los botones de abajo.",
+    "writeups-inputplaceholder": "Buscar writeups...",
+    "writeups-feelfree": "No dudes en ponerte en contacto si tienes alguna pregunta o quieres discutir cualquier cosa relacionada con la ciberseguridad o el desarrollo web."
+}

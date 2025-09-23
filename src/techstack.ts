@@ -2,7 +2,7 @@ import { TAGS } from "./tags";
 
 export const TECH_STACK = [
     {
-        title: "Frontend",
+        title: "techstack-frontend",
         used_tech: [
             TAGS.HTML,
             TAGS.CSS,
@@ -17,7 +17,7 @@ export const TECH_STACK = [
         ],
     },
     {
-        title: "Backend",
+        title: "techstack-backend",
         used_tech: [
             TAGS.NodeJs,
             TAGS.Java,
@@ -27,7 +27,7 @@ export const TECH_STACK = [
         ],
     },
     {
-        title: "Cloud",
+        title: "techstack-cloud",
         used_tech: [
             TAGS.AWS,
             TAGS.GoogleCloud,
@@ -42,7 +42,7 @@ export const TECH_STACK = [
         double: true,
     },
     {
-        title: "Others",
+        title: "techstack-others",
         used_tech: [
             TAGS.Cplusplus,
             TAGS.Python,

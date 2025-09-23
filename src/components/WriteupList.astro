@@ -1,6 +1,7 @@
 ---
 import LockIcon from './icons/Lock.astro';
 import { BASE_URL } from '@/consts';
+import { tcommons, getLocaleUrlPrefix } from '@/i18n';
 import { getCollection } from 'astro:content';
 
 
@@ -49,11 +50,13 @@ allWriteups.sort((a, b) => {
 const onlyButtons = Astro.props.onlyButtons || false;
 const showAll = Astro.props.showAll || false;
 const showLocked = Astro.props.showLocked || false;
+const currentLocale = Astro.props.locale || "en";
 
+const t = tcommons(currentLocale);
 ---
 
 { (allWriteups.length === 0) ? (
-    <p class="text-md italic">No writeups available at the moment.</p>
+    <p class="text-md italic">{t("writeups-noavailable")}</p>
 ) : (
     <>
         <div class="grid grid-cols-2 md:grid-cols-3 gap-8 px-2 md:px-0" id="writeupList">
@@ -63,7 +66,7 @@ const showLocked = Astro.props.showLocked || false;
             .slice(0, showAll ? allWriteups.length : 6)
             .map((writeup) => (
             <a
-                href={`/portfolio/writeups/${writeup.id}`}
+                href={`/portfolio${getLocaleUrlPrefix(currentLocale)}/writeups/${writeup.id}`}
                 class={`relative flex flex-col items-center justify-between bg-gray-800 rounded-lg pt-4 ${!writeup.data.releasedDate || !(new Date(writeup.data.releasedDate) < new Date()) ? 'opacity-50' : 'hover:bg-gray-700 transition-colors'} group`}
             >
                 {
@@ -114,19 +117,21 @@ const showLocked = Astro.props.showLocked || false;
                         <p 
                             class="writeup-item-coming text-sm font-normal mb-2 opacity-75 uppercase"
                         >
-                            Coming Soon
+                            {t("writeups-comingsoon")}
                         </p>
                     ) : (
                         <p 
                             class="writeup-item-difficulty text-sm font-normal mb-2 opacity-75 uppercase"
                             style={`view-transition-name: writeup-diff-${writeup.id}${onlyButtons ? '-button' : ''}`}
+                             data-difficulty={writeup.data.difficulty.toLowerCase()}
                         >
-                            {writeup.data.difficulty.toLowerCase()}
+                            {t(`writeups-${writeup.data.difficulty.toLowerCase()}`)}
                         </p>
                     )
                 }       
                 <p 
                     class="writeup-item-difficulty hidden"
+                    data-difficulty={writeup.data.difficulty.toLowerCase()}
                 >
                     {writeup.data.difficulty.toLowerCase()}
                 </p>
@@ -141,18 +146,19 @@ const showLocked = Astro.props.showLocked || false;
             </a>
         ))}
         {
-            !showAll && (
+            !showAll ? (
                 <a
-                    href="/portfolio/writeups"
+                    href={`/portfolio${getLocaleUrlPrefix(currentLocale)}/writeups`}
                     class="col-span-full flex items-center justify-center bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-colors"
                 >
-                    <span class="text-lg font-semibold">See All Writeups</span>
+                    <span class="text-lg font-semibold">{t("writeups-seeall")}</span>
                 </a>
+            ) : (
+            <span class="text-md italic mt-4 col-span-full">
+                {t("writeups-note")}
+            </span>
             )
         }
         </div>
-        <span class="text-md italic mt-4">
-            Please note that some writeups may be locked or hidden and will be available soon.
-        </span>
     </>
 )}

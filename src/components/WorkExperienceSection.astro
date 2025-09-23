@@ -4,38 +4,18 @@ import Section from "@/components/Section.astro";
 
 import CardWork from "@/components/CardWork.astro";
 
-import type { WorkExperienceItem } from "@/types";
-const experienceList: WorkExperienceItem[] = [
-    // {
-    //     date: "2024",
-    //     title: "Web Developer.",
-    //     company: "La Banda AC",
-    //     description:
-    //         "I worked using WordPress developing a site for a Spanish business.",
-    // },
-    {
-        date: "2025",
-        title: "DIGITALIZATION PRODUCTION SYSTEMS",
-        company: {
-            name: "BSH",
-            href: "https://www.bsh-group.com/",
-            color: "text-[#FF6840]",
-        },
-        img: "/bsh/logo.png",
-        height: "280",
-        description:
-            "I supported the digitalization of production systems by developing corporative Power Apps and automating Power Automate workflows. I also optimized the efficiency by creating Power Bi dashboards. I collaborated with cross-functional teams to improve process monitoring and data-driven decision-making. ",
-    },
-];
+import { workexperiences } from "@/collection";
+
+const currentLocale = Astro.props.locale || "en"
 ---
 
-<Section title="Work Experience" id="work">
+<Section title="nav-workexperience" id="work" locale={currentLocale}>
     <Work slot="icon" />
-    <ol>
+    <ol class="flex flex-col gap-y-6">
         {
-            experienceList.map((exp) => (
+            workexperiences.map((exp) => (
                 <li class="">
-                    <CardWork {...exp} />
+                    <CardWork {...exp.data} locale={currentLocale} />
                 </li>
             ))
         }

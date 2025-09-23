@@ -1,16 +1,22 @@
 ---
+import { tcommons } from '@/i18n';
+import type { Locale } from '@/types';
+
 interface Props {
     title: string;
     id?: string;
+    locale: Locale;
 }
-const { title, id } = Astro.props;
+const { title, id, locale } = Astro.props;
+
+const t = tcommons(locale);
 ---
 
 <section id={id} class="flex flex-col gap-y-4 w-full max-w-[740px] mx-auto pt-20 px-2">
     <h2
         class="flex items-center gap-x-2 text-white text-3xl font-semibold"
     >
-        <slot name="icon" />{title}
+        <slot name="icon" />{t(title)}
     </h2>
     <slot />
 </section>

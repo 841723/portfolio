@@ -1,0 +1,22 @@
+position:
+  en: "SOFTWARE DIGITALIZATION ENGINEER"
+  es: "INGENIERO DIGITALIZACIÓN DE SOFTWARE"
+
+company:
+    name: "BSH Electodomésticos España"
+    color: "text-[#FF6840]"
+    href: "https://www.bsh-group.com/"
+
+date: "02.2025 - present"
+img: "/bsh/logo.png"
+
+height: 
+    en: "280"
+    es: "292"
+
+
+description:
+    en: "I supported the digitalization of production systems by developing corporative Power Apps and automating Power Automate workflows. I also optimized the efficiency by creating Power Bi dashboards. I collaborated with cross-functional teams to improve process monitoring and data-driven decision-making."
+    es: "Apoyé la digitalización de los sistemas de producción desarrollando Power Apps corporativas y automatizando flujos de trabajo con Power Automate. También optimicé la eficiencia creando dashboards con Power Bi. Colaboré con equipos multifuncionales para mejorar el monitoreo de procesos y la toma de decisiones basada en datos."
+
+order: 2

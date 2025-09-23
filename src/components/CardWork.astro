@@ -1,22 +1,46 @@
 ---
 import { BASE_URL } from "@/consts";
 
-import type { WorkExperienceItem } from "@/types";
+import type { Locale } from "@/types";
 
-interface Props extends WorkExperienceItem {}
+interface Props {
+    position: {
+        en: string,
+        es: string
+    };
+    company: {
+        name: string;
+        href: string;
+        color: string;
+    };
+    img: string;
+    date: string;
+    height: {
+        en: string,
+        es: string
+    };
+     description: {
+        en: string,
+        es: string
+    };
+    locale: Locale;
+}
 
-const { date, title, company, description, img, height=232 } =
+const { position, company, img, date, height, description, locale } =
     Astro.props;
+
+import { tobj } from "@/i18n";
+const t = tobj(locale);
 ---
 
 <article
-    class="flex flex-col items-center border rounded-lg shadow md:flex-row w-full border-gray-700 bg-gray-800 hover:scale-105 hover:bg-gray-700 transition-all duration-500"
+    class="flex flex-col items-center border rounded-lg shadow md:flex-row w-full border-gray-700 bg-gray-800 group hover:bg-gray-700 transition-all duration-500"
 >
-    <div class="min-w-48 w-full md:w-48" style=`height: ${height}px;`>
+    <div class="min-w-48 w-full md:w-48 overflow-hidden md:rounded-lg" style=`height: ${t(height)}px;`>
         <img
-            class="object-cover rounded-t-lg w-full md:w-auto h-full md:aspect-square md:rounded-none md:rounded-s-lg"
+            class="object-cover rounded-t-lg w-full md:w-auto h-full md:aspect-square md:rounded-none md:rounded-s-lg group-hover:scale-105 transform transition-all duration-500"
             src={BASE_URL + img}
-            alt=`${title} icon`
+            alt=`${t(position)} icon`
         />
     </div>
 
@@ -27,7 +51,7 @@ const { date, title, company, description, img, height=232 } =
             <div class="mb-2">
                 <h5 class="text-2xl font-bold tracking-tight text-white">
                     <span class="uppercase">
-                        {title} 
+                        {t(position)}
                     </span>
                     <br />
                     <span class="text-gray-400 font-normal">
@@ -41,13 +65,13 @@ const { date, title, company, description, img, height=232 } =
                         {company.name}
                     </a>
                 </h5>
-                <h6 class="text-sm m-0 opacity-80"> 
+                <h6 class="text-sm m-0 opacity-80 uppercase"> 
                     {date}
                 </h6>
             </div>
         </div>
         <p class="my-3 font-normal text-gray-400 text-pretty">
-            {description}
+            {t(description)}
         </p>
     </div>
 </article>

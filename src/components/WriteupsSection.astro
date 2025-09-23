@@ -1,4 +1,5 @@
 ---
+import { tcommons } from '@/i18n';
 import DirectionsIcon from './icons/Directions.astro';
 import Section from './Section.astro';
 import WriteupList from './WriteupList.astro';
@@ -7,19 +8,19 @@ const onlyButtons = Astro.props.onlyButtons || false;
 const showAll = Astro.props.showAll || false;
 const showLocked = Astro.props.showLocked || false;
 
+const currentLocale = Astro.props.locale || "en";
 
+const t = tcommons(currentLocale);
 ---
 
 <Section
-    title={onlyButtons ? "Check out other write ups" : "Write Ups"}
+    title={onlyButtons ? "writeups-seeother" : "nav-writeups"}
     id="writeups"
+    locale={currentLocale}
 >
     {!onlyButtons && <DirectionsIcon slot="icon" />}
-    {!onlyButtons && <p class="text-lg">
-        Here you can find some writeups of Hack The Box machines that I have solved. Open them to see the details of each machine, including the steps I took to solve them, the tools I used, and any challenges I faced along the way.
-    </p>}
-    {onlyButtons && <p class="text-lg">
-        Here you can find some of my writeups. Click on the buttons below to see the details of each machine, including the steps I took to solve them, the tools I used, and any challenges I faced along the way.
-    </p>}
-    <WriteupList onlyButtons={onlyButtons} showAll={showAll} showLocked={showLocked} />
+    <p class="text-lg">
+        {t("writeups-description")}
+    </p>
+    <WriteupList onlyButtons={onlyButtons} showAll={showAll} showLocked={showLocked} locale={currentLocale} />
 </Section>
