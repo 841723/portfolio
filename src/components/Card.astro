@@ -5,18 +5,30 @@ import TechPill from "@/components/TechPill.astro";
 import GithubIcon from "@/components/icons/Github.astro";
 import LinkIcon from "@/components/icons/Link.astro";
 
+import { tobj } from "@/i18n";
+
 interface Props {
-    title: string;
-    subtitle?: string;
-    description: string;
-    img: string;
-    gh_link?: string;
-    preview_link?: string;
-    used_tech: TAGInfo[];
+    title: {
+        en: string,
+        es: string
+    },
+    subtitle?: string,
+    description: {
+        en: string,
+        es: string
+    },
+    img: string,
+    gh_link?: string,
+    preview_link?: string,
+    used_tech: TAGInfo[],
+    locale: "en" | "es"
 }
 
-const { title, subtitle, description, img, gh_link, preview_link, used_tech } =
+const { title, subtitle, description, img, gh_link, preview_link, used_tech, locale } =
     Astro.props;
+
+// create a function to translate to locale languaje the objects: {en: "value", es: "valor"}
+const t = tobj(locale);
 ---
 
 <article
@@ -36,7 +48,7 @@ const { title, subtitle, description, img, gh_link, preview_link, used_tech } =
         <div class="flex flex-row justify-between">
             <div class="mb-2">
                 <h5 class="text-2xl font-bold tracking-tight text-white">
-                    {title}
+                    {t(title)}
                 </h5>
                 {subtitle && 
                     <h6 class="text-sm m-0 italic opacity-80"> 
@@ -53,6 +65,7 @@ const { title, subtitle, description, img, gh_link, preview_link, used_tech } =
                                 target="_blank"
                                 class="flex flex-row gap-x-1 items-center rounded-xl py-1 px-2 border border-1 hover:bg-gray-800  transition-all duration-100"
                             >
+                                <!-- TODO: make this translatable with tcommon -->
                                 <LinkIcon /> Preview
                             </a>
                         )
@@ -75,7 +88,7 @@ const { title, subtitle, description, img, gh_link, preview_link, used_tech } =
             </ul>
         </div>
         <p class="my-3 font-normal text-gray-400 text-pretty">
-            {description}
+            {t(description)}
         </p>
         <div class="flex flex-wrap gap-2">
             {used_tech?.map((tech) => <TechPill tech={tech} />)}

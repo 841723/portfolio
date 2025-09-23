@@ -2,17 +2,20 @@
 import Card from "@/components/Card.astro";
 import Section from "@/components/Section.astro";
 import Web from "@/components/icons/Web.astro";
+import { getCollection } from "astro:content";
 
-import { WEB_PROJECTS } from "@/web_projects";
+const otherprojects = await getCollection("otherprojects");
+
+const { currentLocale } = Astro;
 ---
 
 <Section title="Web Projects" id="web">
     <Web slot="icon" />
     <ol class="flex flex-col gap-y-6">
         {
-            WEB_PROJECTS.map((proj) => (
+            otherprojects.map((proj) => (
                 <li>
-                    <Card {...proj} />
+                    <Card {...proj.data} locale={currentLocale} />
                 </li>
             ))
         }

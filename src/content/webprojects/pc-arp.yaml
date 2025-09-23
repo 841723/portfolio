@@ -1,0 +1,17 @@
+title:
+  en: "PC ARP"
+  es: "PC ARP"
+
+description:
+  en: "Ecommerce website inspired by PcComponentes. Search for products, filter, sort and add them to your cart. Purchase the ones you like."
+  es: "Sitio de ecommerce inspirado en PcComponentes. Busca productos, filtra, ordénalos y añádelos a tu carrito. Compra los que más te gusten."
+
+img: "/pc-arp/logo_square.png"
+gh_link: "https://github.com/841723/pcarp"
+used_tech:
+  - HTML
+  - CSS
+  - JavaScript
+  - NodeJs
+  - PostgreSQL
+  - AWS
