@@ -357,7 +357,7 @@ username=admin_ef01cab31aa&new_answer1=test&new_answer2=test&new_answer3=test
 We can check php configuration `php8.1_conf` directory from ftp server. There we can see some `.so` files which are PHP extensions.
 We can see that the `ssh2` extension is installed. This extension allows us to execute commands on a remote server using SSH.
 ```bash
-ls php8.1_conf                
+ls php8.1_conf
 ```
 ```
 build        exif.so      gettext.so  pdo_sqlite.so  shmop.so      ssh2.so     tokenizer.so  xsl.so

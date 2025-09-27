@@ -76,10 +76,7 @@ We try directory brute forcing using `dirsearch` to find hidden directories on t
 ```bash
 python3 dirsearch.py -u http://furni.htb/ -x 400 
 ```
-```
-  _|. _ _  _  _  _ _|_    v0.4.3                                                             
- (_||| _) (/_(_|| (_| )                                                                      
-                                                                                             
+```              
 Extensions: php, asp, aspx, jsp, html, htm | HTTP method: GET | Threads: 25
 Wordlist size: 12292
 
