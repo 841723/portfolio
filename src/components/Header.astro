@@ -20,6 +20,9 @@ const getURLLocale = (locale: Locale):string => {
     }
     const getPath  = (url: string):string => {
         const no_base = url.slice(BASE_URL.length)
+        // TODO: improve this logic. allow different languages 
+        //    call a i18n funcion which detects if letters 
+        //    2-3 are a locale
         return no_base.startsWith("/es") ? no_base.slice(3) : no_base
     }
     
