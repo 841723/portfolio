@@ -119,6 +119,7 @@ initiating IKE_SA ikev1[1] to 10.10.11.87
 generating IKE_AUTH request 1 [ IDi N(INITIAL_CONTACT) N(AUTH) N(ADDR) N(MOBIKE_SUP) ]
 sending packet: from
 <your_ip_address>[500] to
+```
 
 We can now try connecting via SSH using the `ike` user and the PSK as password:
 ```bash
