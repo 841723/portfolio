@@ -94,7 +94,9 @@
 - Upload the image file to the web server
 - Access the uploaded image file and execute commands `http://TARGET_IP[:PORT]/path/to/uploaded/image.php?cmd=COMMAND`
 
-#### Actuator
+#### Spring Boot
+
+##### Actuator
 This is a Spring Boot feature that provides endpoints for monitoring and managing applications.
 
 ### FTP
