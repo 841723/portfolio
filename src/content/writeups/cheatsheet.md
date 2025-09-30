@@ -46,8 +46,6 @@ Insert SQL payloads in input fields to extract data from the database.
     - To write a web shell to the server (requires FILE privilege and writable directory).
 
 
-![](2025-09-30-18-17-53.png)![](content/2025-09-30-18-18-46.png)![](content/cheatsheet/2025-09-30-18-20-10.png)
-
 #### Directory Listing
 
 ##### gobuster
