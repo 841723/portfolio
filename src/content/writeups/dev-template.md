@@ -13,6 +13,32 @@ img: image_url
 
 ## Enumeration
 
+We start by scanning the target machine for open ports using Nmap. We will use the `-p-` option to scan all ports and the `--open` option to filter out closed ports:
+
+```bash
+nmap -p- --open -sS --min-rate 5000 -n -Pn -vvv <ip> -o allPorts
+```
+
+```
+
+```
+
+We will add `<dns>.htb` to our `/etc/hosts` file for easier access:
+
+```bash
+echo "<ip> <dns>.htb" | sudo tee -a /etc/hosts
+```
+
+Now we will scan the open ports with service version detection and script scanning using `-sC` and `-sV` options
+
+```bash
+nmap -p <ports> -sCV <dns>.htb -o targeted
+```
+
+```
+
+```
+
 ## User Exploitation
 
 ## Root Exploitation
