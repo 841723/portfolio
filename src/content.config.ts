@@ -8,7 +8,7 @@ type TagNames = (typeof TAGS)[keyof typeof TAGS]["name"];
 
 const writeups = defineCollection({
     loader: glob({
-        pattern: ["**/*.md", "!dev-*", "!cheatsheet.md"]
+        pattern: ["**/*.md", "!**/*.dev.md", "!cheatsheet.md"]
        ,
        base: "src/content/writeups",
     }),
