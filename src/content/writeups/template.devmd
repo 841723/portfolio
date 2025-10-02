@@ -32,7 +32,7 @@ echo "<ip> <dns>.htb" | sudo tee -a /etc/hosts
 Now we will scan the open ports with service version detection and script scanning using `-sC` and `-sV` options
 
 ```bash
-nmap -p <ports> -sCV <dns>.htb -o targeted
+nmap -p <ports> -sCV <ip> -o targeted
 ```
 
 ```
