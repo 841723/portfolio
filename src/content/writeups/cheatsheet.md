@@ -1,6 +1,6 @@
 # Linux Pentesting Cheat Sheet
 
-##  User Access
+## User Access
 
 ### Port Scanning
 
@@ -286,12 +286,47 @@ This is a protocol used for setting up VPNs.
 - Check bash history `cat ~/.bash_history`
 - Kernel information `uname -a`
 
-### GPG Files
-- Copy GPG files to a temporary directory `cp -r /home/USER/.gnupg /tmp/.gnupg` and `cp /home/USER/FILE.gpg /tmp/FILE.gpg`
-- Set correct permissions `chmod 700 /tmp/.gnupg` and `chmod
-    600 /tmp/.gnupg/*`
-- Decrypt the GPG file `gpg --homedir /tmp/.gnupg --decrypt /tmp/FILE.gpg > /tmp/decrypted.txt`
-- View the decrypted file `cat /tmp/decrypted.txt`
+### GPG
+Encrypt and decrypt files using asymmetric encryption.
+    - One key crypts ->  public key
+    - One key decrypts -> private key
+
+#### Files
+- GPG saves keys and configuration in `~/.gnupg/`
+- GPG encrypted files have `.gpg` or `.asc` extension
+- `pubring.gpg`: Public keys
+- `private-keys-v1.d`: Private keys
+- `trustdb.gpg`: Trust database
+
+#### Key Management
+- Create a new key pair `gpg --full-generate-key`
+- List keys `gpg --list-keys` and `gpg --list-secret-keys`
+- Import a key `gpg --import KEY_FILE`
+- Export a public key `gpg --export -a "USER_NAME" > public.key`
+- Export a private key `gpg --export-secret-keys -a "USER_NAME" > private.key`
+- Delete a key `gpg --delete-key "USER_NAME"` and `gpg --delete-secret-key "USER_NAME"`
+
+#### Encryption
+- Encrypt a file `gpg --encrypt -r "USER_NAME" FILE`
+    - USER_NAME: The name or email associated with the public key to use for encryption
+
+#### Decryption
+- Decrypt a file `gpg --decrypt FILE.gpg > decrypted.txt`
+    - If the private key is password protected, you will be prompted to enter the passphrase
+
+- `$GNUPGHOME/` should have `700` permissions
+- `$GNUPGHOME/*` files inside should have `600` permissions
+
+- if $GNUPGHOME is not set, it defaults to `~/.gnupg/`
+
+##### Brute forcing GPG passphrase
+If passphrase is needed to decrypt the file, use this tools to brute force it:
+- `gpg2john` `gpg2john FILE.gpg > gpg.hash` then `john --wordlist=WORDLIST gpg.hash`
+- `gpg-brute` `gpg-brute -f FILE.gpg -w WORDLIST`
+- `gpgcrack` `gpgcrack -f FILE.gpg -w WORDLIST`
+- `gpg-pwcrack` `gpg-pwcrack -f FILE.gpg -w WORDLIST`
+- `john` `john --wordlist=WORDLIST --format=gpg FILE.gpg`
+- `hashcat` `hashcat -m 15700 FILE.gpg WORDLIST`
 
 ### Sudo
 - Check sudo privileges `sudo -l`
