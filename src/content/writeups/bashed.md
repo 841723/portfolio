@@ -57,6 +57,8 @@ We find a directory named `dev`. If we visit it, we see a directory listing page
 
 We find in `phpbash.php` a bash web shell. We can use it to execute commands on the target machine.
 
+## User Exploitation
+
 We can use this on our advantage to get a reverse shell. We will use a simple bash reverse shell payload.
 
 First, we will set up a listener on our machine using netcat:
@@ -77,8 +79,6 @@ www-data
 
 Now we can see the user flag in `/home/arrexel/user.txt`.
 
-
-## User Exploitation
 
 ## Root Exploitation
 
