@@ -3,12 +3,12 @@ name: LinkVortex
 difficulty: easy
 os: linux
 platform: htb
-date: 2025/10/04
+date: 2025/10/05
 releasedDate: 2024-12-07
-userFlag: false
-rootFlag: false
+userFlag: true
+rootFlag: true
 
-img:https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/97f12db8fafed028448e29e30be7efac.png
+img: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/97f12db8fafed028448e29e30be7efac.png
 ---
 
 ## Enumeration
@@ -107,7 +107,7 @@ We try to login to the Ghost admin panel on `http://linkvortex.htb/ghost` with t
 As this user does not exist, we try with other common emails like:
 - `ghost@linkvortex.htb`
 - `admin@linkvortex.htb`
-- `user@linkvortex.htb`
+- `test@linkvortex.htb`
 
 We are able to login with `admin@linkvortex.htb:OctopiFociPilfer45`. 
 
