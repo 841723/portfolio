@@ -269,6 +269,85 @@ This is a protocol used for setting up VPNs.
 
 ## Privilege Escalation
 
+### SSH
+
+#### Keys
+
+- Create a new pair of SSH keys `ssh-keygen -t rsa -b 4096 -f /path/to/key -C "COMMENT"`
+    - To create a key without a passphrase `-N ""`
+    - To create a key with a specific comment `-C "COMMENT"`
+    - To create a key with a specific key type `-t rsa|dsa|ecdsa|ed25519`
+    - To create a key with a specific key size `-b SIZE`
+
+This generates two files:
+- `/path/to/key`: Private key (keep this secret)
+- `/path/to/key.pub`: Public key (can be shared)
+
+##### Passphrase
+If the private key is protected with a passphrase, you can use these tools to brute force it:
+- `ssh2john` `ssh2john /path/to/key > ssh.hash` then `john --wordlist=WORDLIST ssh.hash`
+
+##### Private
+
+- Check for private keys in the home directory `find /home/ -name "*.ssh" -type d 2>/dev/null`
+    - To check for private keys `find /home/ -name "id_rsa" -o -name "id_dsa" -o -name "id_ecdsa" -o -name "id_ed25519" 2>/dev/null`
+
+- Connect using the private key `ssh -i /path/to/private_key USERNAME@TARGET_IP -p PORT`
+
+##### Public
+
+If a server has in its `~/.ssh/authorized_keys` file a public key for which you have the corresponding private key, you can use it to authenticate without needing a password.
+
+- Check for public keys in the home directory `find /home/ -name "*.ssh" -type d 2>/dev/null`
+    - To check for public keys `find /home/ -name "id_rsa.pub" -o -name "id_dsa.pub" -o -name "id_ecdsa.pub" -o -name "id_ed25519.pub" 2>/dev/null`
+
+- Add your public key to the target user's `~/.ssh/authorized_keys` file `echo "YOUR_PUBLIC_KEY" >> /home/USERNAME/.ssh/authorized_keys`
+    - To set the correct permissions `chmod 700 /home/USERNAME/.ssh` and `chmod 600 /home/USERNAME/.ssh/authorized_keys`
+
+#### Port Forwarding
+
+- Forward a local port to a remote address and port `ssh -L LOCAL_PORT:REMOTE_ADDRESS:REMOTE_PORT USERNAME@TARGET_IP -p PORT`
+    - Access REMOTE_PORT on localhost:LOCAL_PORT
+    
+- Forward a remote port to a local address and port `ssh -R REMOTE_PORT:LOCAL_ADDRESS:LOCAL_PORT USERNAME@TARGET_IP -p PORT`
+    - Access LOCAL_PORT on TARGET_IP:REMOTE_PORT
+
+#### Brute Force
+- Use `hydra` to brute force SSH credentials `hydra -L USERNAME_LIST -P PASSWORD_LIST -f -o hydra_results.txt -t 4 ssh://TARGET_IP`
+    - To specify a single username `-l USERNAME`
+    - To specify a single password `-p PASSWORD`
+    - To stop after the first valid credential is found `-f`
+    - To specify the number of parallel tasks `-t TASKS`
+    - To specify a different port `-s PORT`
+    
+
+#### Pivoting
+- Connect to a jump host and then to a target host through the jump host
+    - Use `ssh -J JUMP_USER@JUMP_IP JUMP_PORT TARGET_USER@TARGET_IP -p TARGET_PORT`
+    - Note: LOCAL_MACHINE -> JUMP_HOST -> TARGET_HOST
+        - Local machine connects to jump host
+        - Jump host connects to target host
+        - Local machine does not have direct access to target host
+
+- Forward a local port to a remote address and port through a jump host `ssh -J JUMP_USER@JUMP_IP JUMP_PORT -L LOCAL_PORT:REMOTE_ADDRESS:REMOTE_PORT TARGET_USER@TARGET_IP -p TARGET_PORT`
+    - Access REMOTE_PORT on localhost:LOCAL_PORT
+    - Note: LOCAL_MACHINE -> JUMP_HOST -> TARGET_HOST
+        - Local machine connects to jump host
+        - Jump host connects to target host
+        - Local machine does not have direct access to target host
+
+
+    - To create a dynamic SOCKS proxy `ssh -D LOCAL_PORT USERNAME@TARGET_IP -p PORT`
+    - To enable verbose mode for debugging `-v`, `-vv`, or `-vvv`
+    - To use a private key for authentication `-i /path/to/private_key`
+    - To exit the SSH session `exit` or `logout`
+
+<!-- - Check for SSH keys in the home directory `find /home/ -name "*.ssh" -type d 2>/dev/null`
+    - To check for private keys `find /home/ -name "id_rsa" -o -name "id_dsa" -o -name "id_ecdsa" -o -name "id_ed25519" 2>/dev/null`
+    - To check for config files `find /home/ -name "config" 2>/dev/null` -->
+
+-
+
 ### To check
 - Current user `whoami`
 - Home directory `echo $HOME`
@@ -339,6 +418,8 @@ If passphrase is needed to decrypt the file, use this tools to brute force it:
 #### Creation
 - Create a self-signed certificate `openssl cms -sign -in FILE -signer CERT.pem -inkey KEY.pem -outform PEM -out FILE.signed -binary -nosmimecap -nodetach -nocerts -noattr`
 - Combine signature with binary `objcopy --add-section .text_sig=monitor.sig monitor monitor.signed`
+
+
 
 ## Tools
 
