@@ -6,7 +6,7 @@ company:
     name: "BSH"
     color: "text-[#FF6840]"
     href: "https://www.bsh-group.com/"
-    bgcolor: "[#FF6840]"
+    bgcolor: "#FF6840"
 
 date: "FEB 2025 - OCT 2025"
 img: "/bsh/logo.png"
