@@ -1,0 +1,24 @@
+position:
+  en: "CYBERSECURITY ANALYST"
+  es: "ANALISTA EN CIBERSEGURIDAD"
+
+company:
+    name: "nologin"
+    color: "text-[#f36510]"
+    href: "https://www.nologin.es/"
+    bgcolor: "white"
+
+date: "OCT 2025 - present"
+img: "/nologin/logo.gif"
+
+height: 
+    en: "388"
+    es: "388"
+
+
+description:
+    en: "Management and enhancement of the organization’s cybersecurity infrastructure, ensuring the protection of production environments. Configuration and administration of firewalls, VPNs, proxies, and SIEM systems for threat detection, analysis, and incident response. Continuous security monitoring, log correlation, and development of advanced alert mechanisms. Participation in internal audits and forensic analysis to mitigate security threats. Implementation of security policies, network segmentation, and process automation through scripting and monitoring tools."
+
+    es: "Gestión y fortalecimiento de la infraestructura de ciberseguridad de la organización, garantizando la protección de los entornos productivos. Configuración y administración de firewalls, VPNs, proxys y sistemas SIEM para la detección, análisis y respuesta ante incidentes. Monitorización continua de eventos de seguridad, correlación de logs y desarrollo de alertas avanzadas. Participación en auditorías y análisis forense para la mitigación de amenazas. Implementación de políticas de seguridad, segmentación de redes y automatización de procesos mediante scripting y herramientas de monitorización."
+
+order: 1

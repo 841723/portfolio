@@ -3,20 +3,21 @@ position:
   es: "INGENIERO DIGITALIZACIÓN DE SOFTWARE"
 
 company:
-    name: "BSH Electodomésticos España"
+    name: "BSH"
     color: "text-[#FF6840]"
     href: "https://www.bsh-group.com/"
+    bgcolor: "[#FF6840]"
 
-date: "02.2025 - present"
+date: "FEB 2025 - OCT 2025"
 img: "/bsh/logo.png"
 
 height: 
-    en: "280"
-    es: "292"
+    en: "364"
+    es: "364"
 
 
 description:
-    en: "I supported the digitalization of production systems by developing corporative Power Apps and automating Power Automate workflows. I also optimized the efficiency by creating Power Bi dashboards. I collaborated with cross-functional teams to improve process monitoring and data-driven decision-making."
-    es: "Apoyé la digitalización de los sistemas de producción desarrollando Power Apps corporativas y automatizando flujos de trabajo con Power Automate. También optimicé la eficiencia creando dashboards con Power Bi. Colaboré con equipos multifuncionales para mejorar el monitoreo de procesos y la toma de decisiones basada en datos."
+    en: "Developed end-to-end software solutions using Power Platform (Power Apps, Power Automate, SQL, and Power BI) to drive the digitalization of production processes. Led the internal app development initiatives, collaborating directly with plant teams to design tailored solutions for their operational needs. Implemented automated workflows and data dashboards to enhance efficiency and enable data-driven decision-making. Additionally, conducted training sessions to upskill new users and developers in Power Platform."
+    es: "Desarrollo completo de soluciones de software en Power Platform (Power Apps, Power Automate, SQL y Power BI) para la digitalización de procesos de producción. Lideré el desarrollo de aplicaciones internas, trabajando directamente con los equipos de planta para diseñar soluciones adaptadas a sus necesidades operativas. Implementé flujos automatizados y paneles de control para optimizar la eficiencia y facilitar la toma de decisiones basada en datos. Además, formé a nuevos usuarios y desarrolladores en el uso de Power Platform."
 
 order: 2
