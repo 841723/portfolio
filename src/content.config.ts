@@ -40,6 +40,7 @@ const workexperiences = defineCollection({
             name: z.string(),
             color: z.string(),
             href: z.string(),
+            bgcolor: z.string(),
         }),
         img: z.string(),
         date: z.string(),
