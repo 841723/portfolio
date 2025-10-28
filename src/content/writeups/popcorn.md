@@ -3,7 +3,7 @@ name: Popcorn
 difficulty: medium
 os: linux
 platform: htb
-date: 9999
+date: 2025/10/22
 releasedDate: 2099-12-31
 userFlag: false
 rootFlag: false
