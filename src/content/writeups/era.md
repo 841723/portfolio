@@ -4,7 +4,7 @@ difficulty: medium
 os: linux
 platform: htb
 date: 2025/07/31
-# releasedDate: 2025-08-04
+releasedDate: 2026-01-01
 userFlag: true
 rootFlag: true
 

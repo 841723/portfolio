@@ -5,8 +5,8 @@ os: linux
 platform: htb
 date: 2025/10/22
 releasedDate: 2017-03-15
-userFlag: false
-rootFlag: false
+userFlag: true
+rootFlag: true
 
 img: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/06ffcd9635c701b4b6667ae4c97cc7e5.png
 ---
