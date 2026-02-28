@@ -66,7 +66,7 @@ const t = tcommons(currentLocale);
             .slice(0, showAll ? allWriteups.length : 6)
             .map((writeup) => (
             <a
-                href={`/portfolio${getLocaleUrlPrefix(currentLocale)}/writeups/${writeup.id}`}
+                href={`${getLocaleUrlPrefix(currentLocale)}/writeups/${writeup.id}`}
                 class={`relative flex flex-col items-center justify-between bg-gray-800 rounded-lg pt-4 ${!writeup.data.releasedDate || !(new Date(writeup.data.releasedDate) < new Date()) ? 'opacity-50' : 'hover:bg-gray-700 transition-colors'} group`}
             >
                 {
@@ -84,7 +84,7 @@ const t = tcommons(currentLocale);
                     />
                     {writeup.data.os === 'linux' && (
                         <picture class="absolute w-10 h-10 bottom-0 right-0 p-1 bg-gray-800 border-gray-500 rounded-full">
-                            <img src="/portfolio/ic-linux.svg" alt="" class="w-8 h-8"/>
+                            <img src="/ic-linux.svg" alt="" class="w-8 h-8"/>
                         </picture>
                     )}
                 </picture>
@@ -148,7 +148,7 @@ const t = tcommons(currentLocale);
         {
             !showAll ? (
                 <a
-                    href={`/portfolio${getLocaleUrlPrefix(currentLocale)}/writeups`}
+                    href={`${getLocaleUrlPrefix(currentLocale)}/writeups`}
                     class="col-span-full flex items-center justify-center bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-colors"
                 >
                     <span class="text-lg font-semibold">{t("writeups-seeall")}</span>
