@@ -5,8 +5,8 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 
 
-const site = 'https://841723.github.io/portfolio/';
-const base = '/portfolio';
+const site = 'https://diego.roldanu.es';
+const base = '/';
 
 // https://astro.build/config
 export default defineConfig({
