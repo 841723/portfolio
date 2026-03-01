@@ -3,9 +3,10 @@ import SocialPill from "@/components/SocialPill.astro";
 
 import LinkedinIcon from "@/components/icons/Linkedin.astro";
 import GithubIcon from "@/components/icons/Github.astro";
-import { tcommons } from "@/i18n";
+import { defaultlocale, tcommons } from "@/i18n";
+import type { Locale } from "@/types";
 
-const currentLocale = Astro.props.locale || "en";
+const currentLocale = Astro.currentLocale as Locale || defaultlocale;
 const t = tcommons(currentLocale);
 
 ---

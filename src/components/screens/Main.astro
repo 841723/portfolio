@@ -6,21 +6,18 @@ import OtherProjectsSection from "@/components/OtherProjectsSection.astro";
 import WorkExperienceSection from "@/components/WorkExperienceSection.astro";
 import TechStackSection from "@/components/TechStackSection.astro";
 import WriteupsSection from "@/components/WriteupsSection.astro";
-
-const locale = Astro.props.locale || "en"
 ---
 
 <Layout
 	title="Portfolio - Diego Roldan"
 	description="Diego Roldan's Portfolio. Computer Science Engineering Student"
-	locale={locale}
 >
 	<main class="flex flex-col items-center w-full">
-		<PresentationSection locale={locale} />
-		<WorkExperienceSection locale={locale} />
-		<WriteupsSection locale={locale} />
-		<TechStackSection locale={locale} />
-		<WebProjectsSection locale={locale} />
-		<OtherProjectsSection locale={locale} />
+		<PresentationSection />
+		<WorkExperienceSection />
+		<WriteupsSection />
+		<TechStackSection />
+		<WebProjectsSection />
+		<OtherProjectsSection />
 	</main>
 </Layout>

@@ -2,16 +2,17 @@
 import Section from "@/components/Section.astro";
 import TechPill from "@/components/TechPill.astro";
 import TechStack from "@/components/icons/TechStack.astro";
-import { tcommons } from "@/i18n";
+import { defaultlocale, tcommons } from "@/i18n";
 
 import { TECH_STACK } from "@/techstack";
+import type { Locale } from "@/types";
 
-const locale = Astro.props.locale || "en"
+const locale = (Astro.currentLocale || defaultlocale) as Locale;
 
 const t = tcommons(locale);
 ---
 
-<Section title="nav-techstack" id="techstack" locale={locale}>
+<Section title="nav-techstack" id="techstack">
     <TechStack slot="icon"/> 
     <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-8">
         {

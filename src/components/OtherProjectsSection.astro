@@ -4,17 +4,15 @@ import Card from "@/components/Card.astro";
 import Section from "@/components/Section.astro";   
 
 import { otherprojects } from "@/collection";
-
-const currentLocale = Astro.props.locale || "en";
 ---
 
-<Section title="nav-otherprojects" id="other" locale={currentLocale}>
+<Section title="nav-otherprojects" id="other" >
     <ProjectIcon slot="icon" />
     <ol class="flex flex-col gap-y-6">
         {
             otherprojects.map((proj) => (
                 <li>
-                     <Card {...proj.data} locale={currentLocale} />
+                     <Card {...proj.data} />
                 </li>
             ))
         }

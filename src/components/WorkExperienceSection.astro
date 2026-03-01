@@ -6,16 +6,15 @@ import CardWork from "@/components/CardWork.astro";
 
 import { workexperiences } from "@/collection";
 
-const currentLocale = Astro.props.locale || "en"
 ---
 
-<Section title="nav-workexperience" id="work" locale={currentLocale}>
+<Section title="nav-workexperience" id="work">
     <Work slot="icon" />
     <ol class="flex flex-col gap-y-6">
         {
             workexperiences.map((exp) => (
                 <li class="">
-                    <CardWork {...exp.data} locale={currentLocale} />
+                    <CardWork {...exp.data} />
                 </li>
             ))
         }

@@ -1,5 +1,5 @@
 ---
-import { tcommons, supportedLocales } from "@/i18n";
+import { tcommons, supportedLocales, defaultlocale } from "@/i18n";
 import { getFullUrl, removeLocale } from "@/uri";
 import type { Locale } from "@/types";
 // import Spain from '@/components/icons/flags/Spain.astro'
@@ -15,9 +15,8 @@ const nav = [
 ];
 
 
-const currentLocale = (Astro.currentLocale || "en") as Locale;
+const currentLocale = (Astro.currentLocale || defaultlocale) as Locale;
 const currentPath = removeLocale(Astro.url.pathname);
-console.log("Current path:", currentPath);
 
 const t = tcommons(currentLocale);
 ---

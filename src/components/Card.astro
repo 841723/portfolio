@@ -4,7 +4,7 @@ import TechPill from "@/components/TechPill.astro";
 import GithubIcon from "@/components/icons/Github.astro";
 import LinkIcon from "@/components/icons/Link.astro";
 
-import { tcommons, tobj } from "@/i18n";
+import { defaultlocale, tcommons, tobj } from "@/i18n";
 import type { Locale } from "@/types";
 
 interface Props {
@@ -21,11 +21,12 @@ interface Props {
     gh_link?: string,
     preview_link?: string,
     used_tech: string[],
-    locale: Locale
 }
 
-const { title, description, img, gh_link, preview_link, used_tech, locale } =
+const { title, description, img, gh_link, preview_link, used_tech } =
     Astro.props;
+
+const locale = Astro.currentLocale as Locale || defaultlocale
 
 // create a function to translate to locale languaje the objects: {en: "value", es: "valor"}
 const t = tobj(locale);

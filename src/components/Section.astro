@@ -1,15 +1,15 @@
 ---
-import { tcommons } from '@/i18n';
+import { defaultlocale, tcommons } from '@/i18n';
 import type { Locale } from '@/types';
 
 interface Props {
     title: string;
     id?: string;
-    locale: Locale;
 }
-const { title, id, locale } = Astro.props;
+const { title, id } = Astro.props;
 
-const t = tcommons(locale);
+const currentLocale = (Astro.currentLocale || defaultlocale) as Locale;
+const t = tcommons(currentLocale);
 ---
 
 <section id={id} class="flex flex-col gap-y-4 w-full max-w-[740px] mx-auto pt-20 px-2">

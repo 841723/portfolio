@@ -1,5 +1,6 @@
 ---
 import { getImgUrl } from "@/uri";
+import { defaultlocale, tobj } from "@/i18n";
 
 import type { Locale } from "@/types";
 
@@ -24,13 +25,12 @@ interface Props {
         en: string,
         es: string
     };
-    locale: Locale;
 }
 
-const { position, company, img, date, height, description, locale } =
+const { position, company, img, date, height, description } =
     Astro.props;
 
-import { tobj } from "@/i18n";
+const locale = Astro.currentLocale as Locale || defaultlocale;
 const t = tobj(locale);
 ---
 

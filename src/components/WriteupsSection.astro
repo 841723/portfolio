@@ -1,26 +1,25 @@
 ---
-import { tcommons } from '@/i18n';
+import { defaultlocale, tcommons } from '@/i18n';
 import DirectionsIcon from './icons/Directions.astro';
 import Section from './Section.astro';
 import WriteupList from './WriteupList.astro';
+import type { Locale } from '@/types';
 
 const onlyButtons = Astro.props.onlyButtons || false;
 const showAll = Astro.props.showAll || false;
 const showLocked = Astro.props.showLocked || false;
 
-const currentLocale = Astro.props.locale || "en";
-
+const currentLocale = (Astro.currentLocale || defaultlocale) as Locale;
 const t = tcommons(currentLocale);
 ---
 
 <Section
     title={onlyButtons ? "writeups-seeother" : "nav-writeups"}
     id="writeups"
-    locale={currentLocale}
 >
     {!onlyButtons && <DirectionsIcon slot="icon" />}
     <p class="text-lg">
         {t("writeups-description")}
     </p>
-    <WriteupList onlyButtons={onlyButtons} showAll={showAll} showLocked={showLocked} locale={currentLocale} />
+    <WriteupList onlyButtons={onlyButtons} showAll={showAll} showLocked={showLocked} />
 </Section>

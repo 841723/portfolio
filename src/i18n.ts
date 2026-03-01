@@ -51,13 +51,5 @@ export const tobj = (locale: Locale) =>
     }) => locales[locale]
 
 
-/*
-    get the URL prefix for a given locale
-        "en" -> ""
-        "es" -> "/es"
-*/
-export const getLocaleUrlPrefix = (locale: Locale) => `/${locale}`;
-
-
 // export list of supported locales
 export const supportedLocales: Locale[] = ["en", "es"];

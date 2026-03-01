@@ -3,7 +3,8 @@ import "src/styles/markdown.css";
 import Layout from '@/layouts/Layout.astro';
 import Section from '@/components/Section.astro';
 import WriteupList from "@/components/WriteupList.astro";
-import { tcommons } from "@/i18n";
+import { defaultlocale, tcommons } from "@/i18n";
+import type { Locale } from "@/types";
 
 const title = `Writeups - Diego Roldan`;
 const description = `All Writeups for machines on Hack The Box.`;
@@ -31,14 +32,14 @@ const buttonsFilter = [
     }
 ];
 
-const locale = Astro.props.locale || "en"
+const locale = (Astro.currentLocale || defaultlocale) as Locale;
 const t = tcommons(locale);
 
 ---
 
-<Layout title={title} description={description} doGradient={false} locale={locale}>
+<Layout title={title} description={description} doGradient={false} >
   <main class="flex flex-col items-center w-full max-w-[740px] mx-auto">
-    <Section title="nav-writeups" id="writeups" locale={locale}>
+    <Section title="nav-writeups" id="writeups">
         <p class="text-lg">
             {t("writeups-description")}
         </p>
@@ -139,7 +140,7 @@ const t = tcommons(locale);
             });
 
         </script>
-        <WriteupList onlyButtons={false} showAll={true} showLocked={true} locale={locale} />
+        <WriteupList onlyButtons={false} showAll={true} showLocked={true} />
     </Section>
     </main>
 </Layout> 

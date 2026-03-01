@@ -1,0 +1,16 @@
+---
+import { defaultlocale } from "@/i18n";
+import { removeLocale } from "@/uri";
+
+
+const currentPath = removeLocale(Astro.url.pathname || '');
+const currentLocale  = Astro.currentLocale || defaultlocale as string;
+---
+
+{
+    currentPath.startsWith('/writeups') ? (
+        <meta http-equiv="refresh" content={`0;url=/${currentLocale}/writeups`} />
+    ) : (
+        <meta http-equiv="refresh" content={`0;url=/${currentLocale}/`} />
+    )
+}

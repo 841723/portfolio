@@ -1,5 +1,5 @@
 import { BASE_URL } from "./consts";
-import { defaultlocale, getLocaleUrlPrefix, supportedLocales } from "./i18n";
+import { defaultlocale, supportedLocales } from "./i18n";
 import type { Locale } from "./types";
 
 const formatPath = (path: string) => {
@@ -14,7 +14,7 @@ export const getFullUrl = (path: string, locale: Locale = defaultlocale) => {
         return path; // Return the path as is if it's already a full URL
     }
     const pathWithSlashes = formatPath(path);
-    const localePrefix = formatPath(getLocaleUrlPrefix(locale));
+    const localePrefix = formatPath(`/${locale}`);
     const baseURL = formatPath(BASE_URL);
 
     return `${baseURL}${localePrefix}${pathWithSlashes}`
