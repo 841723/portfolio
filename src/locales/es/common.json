@@ -48,5 +48,9 @@
     "writeups-note": "Ten en cuenta que algunos writeups pueden estar bloqueados u ocultos y estarán disponibles pronto.",
     "writeups-search": "Puedes buscar por nombre o filtrar por dificultad usando los botones de abajo.",
     "writeups-inputplaceholder": "Buscar writeups...",
-    "writeups-feelfree": "No dudes en ponerte en contacto si tienes alguna pregunta o quieres discutir cualquier cosa relacionada con la ciberseguridad o el desarrollo web."
+    "writeups-feelfree": "No dudes en ponerte en contacto si tienes alguna pregunta o quieres discutir cualquier cosa relacionada con la ciberseguridad o el desarrollo web.",
+
+    "writeups-difficulty": "Dificultad",
+    "writeups-os": "SO",
+    "writeups-solved-on": "Resuelto"
 }

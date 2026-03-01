@@ -1,6 +1,6 @@
 ---
 import LockIcon from './icons/Lock.astro';
-import { BASE_URL } from '@/consts';
+import { getFullUrl, getImgUrl } from '@/uri';
 import { tcommons, getLocaleUrlPrefix } from '@/i18n';
 import { getCollection } from 'astro:content';
 
@@ -66,7 +66,7 @@ const t = tcommons(currentLocale);
             .slice(0, showAll ? allWriteups.length : 6)
             .map((writeup) => (
             <a
-                href={`${getLocaleUrlPrefix(currentLocale)}/writeups/${writeup.id}`}
+                href={getFullUrl(`/writeups/${writeup.id}`, currentLocale)}
                 class={`relative flex flex-col items-center justify-between bg-gray-800 rounded-lg pt-4 ${!writeup.data.releasedDate || !(new Date(writeup.data.releasedDate) < new Date()) ? 'opacity-50' : 'hover:bg-gray-700 transition-colors'} group`}
             >
                 {
@@ -78,13 +78,13 @@ const t = tcommons(currentLocale);
                 <picture class="writeup-item-picture relative h-32 md:h-40 aspect-square flex items-center justify-center">
                     <img
                         class="writeup-item-img rounded-lg h-32 md:h-40 object-cover group-hover:scale-[105%] transition-all duration-500"
-                        src={writeup.data.img}
+                        src={getImgUrl(writeup.data.img ?? "/writeups/default.png")}
                         alt={writeup.data.name}
                         style={`view-transition-name: writeup-image-${writeup.id}${onlyButtons ? '-button' : ''}`}
                     />
                     {writeup.data.os === 'linux' && (
                         <picture class="absolute w-10 h-10 bottom-0 right-0 p-1 bg-gray-800 border-gray-500 rounded-full">
-                            <img src="/ic-linux.svg" alt="" class="w-8 h-8"/>
+                            <img src={getImgUrl("/ic-linux.svg")}  alt="" class="w-8 h-8"/>
                         </picture>
                     )}
                 </picture>
@@ -100,7 +100,7 @@ const t = tcommons(currentLocale);
                             <>
                                 <img 
                                     class="h-full object-contain"
-                                    src={`${BASE_URL}/htb/logo.svg`}
+                                    src={getImgUrl("/htb/logo.svg")}
                                     alt={`Hack The Box logo`}
                                 />
                                 <span class="writeup-item-platform hidden">Hack The Box</span>

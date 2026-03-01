@@ -6,7 +6,7 @@ import sitemap from "@astrojs/sitemap";
 
 
 const site = 'https://diego.roldanu.es';
-const base = '';
+const base = '/';
 
 // https://astro.build/config
 export default defineConfig({
@@ -51,4 +51,8 @@ export default defineConfig({
             ],
         },
     },
+    i18n: {
+        defaultLocale: 'en',
+        locales: ['en', 'es']
+    }
 });

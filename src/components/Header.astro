@@ -1,6 +1,6 @@
 ---
-import { BASE_URL } from "@/consts";
-import { tcommons, getLocaleUrlPrefix, supportedLocales } from "@/i18n";
+import { tcommons, supportedLocales } from "@/i18n";
+import { getFullUrl, removeLocale } from "@/uri";
 import type { Locale } from "@/types";
 // import Spain from '@/components/icons/flags/Spain.astro'
 // import UK from '@/components/icons/flags/UK.astro'
@@ -14,23 +14,11 @@ const nav = [
     { name: "nav-otherprojects", label: "#other" },
 ];
 
-const getURLLocale = (locale: Locale):string => {
-    const addLocale = (locale: Locale, path: string):string => {
-        return BASE_URL + getLocaleUrlPrefix(locale) + path
-    }
-    const getPath  = (url: string):string => {
-        const no_base = url.slice(BASE_URL.length)
-        // TODO: improve this logic. allow different languages 
-        //    call a i18n funcion which detects if letters 
-        //    2-3 are a locale
-        return no_base.startsWith("/es") ? no_base.slice(3) : no_base
-    }
-    
-    const currentPath = Astro.url.pathname;
-    return addLocale(locale, getPath(currentPath))        
-}
 
-const currentLocale = Astro.props.locale || "en";
+const currentLocale = (Astro.currentLocale || "en") as Locale;
+const currentPath = removeLocale(Astro.url.pathname);
+console.log("Current path:", currentPath);
+
 const t = tcommons(currentLocale);
 ---
 
@@ -50,7 +38,7 @@ const t = tcommons(currentLocale);
         {
             nav.map((navElem) => (
                 <a
-                    href={BASE_URL+getLocaleUrlPrefix(currentLocale)+navElem.label}
+                    href={getFullUrl(navElem.label, currentLocale)}
                     class="text-center text-2xl opacity-95 hover:opacity-100 px-2 rounded-full hover:scale-105 transform transition duration-200 ease-in-out"
                     aria-label={navElem.label}
                 >
@@ -63,7 +51,7 @@ const t = tcommons(currentLocale);
                 supportedLocales.map((locale) => (
                     <li class="inline">
                         <a
-                            href={getURLLocale(locale)}
+                            href={getFullUrl("", locale)}
                             class={`text-center opacity-95 hover:opacity-100 px-2 rounded-full hover:scale-105 transform transition duration-200 ease-in-out ${locale === currentLocale ? "underline underline-offset-4" : ""}`}
                             aria-label={locale}
                         >
@@ -80,11 +68,10 @@ const t = tcommons(currentLocale);
         {
             nav.map((navElem) => (
                 <a
-                    href={BASE_URL+getLocaleUrlPrefix(currentLocale)+navElem.label}
+                    href={getFullUrl(navElem.label, currentLocale)}
                     class="text-center opacity-95 hover:opacity-100 px-2 rounded-full hover:scale-105 transform transition duration-200 ease-in-out"
                     aria-label={navElem.label}
-                >
-                    {t(navElem.name)}
+                >{t(navElem.name)}
                 </a>
             ))
         }
@@ -94,7 +81,7 @@ const t = tcommons(currentLocale);
                 supportedLocales.map((locale) => (
                     <li class="inline">
                         <a
-                            href={getURLLocale(locale)}
+                            href={getFullUrl(currentPath, locale)}
                             class={`text-center opacity-85 hover:opacity-100 px-2 rounded-full hover:scale-105 transform transition duration-200 ease-in-out ${locale === currentLocale ? "underline underline-offset-4" : ""}`}
                             aria-label={locale}
                         >

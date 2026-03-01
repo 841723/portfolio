@@ -9,6 +9,7 @@ import LeftArrowIcon from "@/components/icons/LeftArrow.astro";
 import Lock from "@/components/icons/Lock.astro";
 import WriteupsSection from "@/components/WriteupsSection.astro";
 import { tcommons } from "@/i18n";
+import { getFullUrl,getImgUrl } from "@/uri";
 
 const { slug } = Astro.params;
 const entry = await getEntry('writeups', slug);
@@ -18,8 +19,6 @@ if (!entry) {
   });
 }
 const { Content } = await render(entry);
-
-const back_url = BASE_URL+"/writeups";
 
 const { name, difficulty, os, img, platform, date, releasedDate  }: {
   name: string;
@@ -40,8 +39,8 @@ const platformAllInfo ={
     vulnhub: 'https://www.vulnhub.com/',
   },
   logo: {
-    htb: `${BASE_URL}/htb/logo.svg`,
-    vulnhub: `${BASE_URL}/vulnhub/logo.png`,
+    htb: getImgUrl("/htb/logo.svg"),
+    vulnhub: getImgUrl("/vulnhub/logo.png"),
   }
 }
 const platformInfo = platformAllInfo.url[platform] || 'none';
@@ -60,6 +59,8 @@ export const getStaticPaths = async () => {
 };
 
 const locale = Astro.props.locale || "en"
+const back_url = getFullUrl("/writeups", locale);
+
 const t = tcommons(locale);
 ---
 
@@ -89,7 +90,7 @@ const t = tcommons(locale);
             >
                 {name}
             </h1>
-            <div class="flex justify-center gap-4 h-40">
+            <div class="flex justify-center gap-4 h-32">
                 <img 
                   src={img} 
                   alt={`${name} icon`} 
@@ -101,22 +102,22 @@ const t = tcommons(locale);
                     class="text-md font-normal"
                     style={`view-transition-name: writeup-diff-${slug}`}
                   >
-                    Difficulty: 
+                    {t("writeups-difficulty")}: 
                     <span class={`font-semibold p-1 rounded-lg ${difficulty === 'easy' ? 'bg-green-500' : difficulty === 'medium' ? 'bg-yellow-700' : difficulty === 'hard' ? 'bg-red-500' : 'bg-purple-500'}`}>
-                        {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
+                        {(t(`writeups-${difficulty}`).slice(0,1) as string).toUpperCase() + t(`writeups-${difficulty}`).slice(1)}
                     </span>
                   </p>                     
                   <p 
                     class="text-md font-normal"
                     style={`view-transition-name: writeup-os-${slug}`}
                   >
-                    OS: 
+                    {t("writeups-os")}: 
                     <span class="font-semibold">{os.charAt(0).toUpperCase() + os.slice(1)}</span>
                   </p>
-                  <p class="text-sm font-normal">
-                    Solved on: 
+                  <!-- <p class="text-sm font-normal">
+                    {t("writeups-solved-on")}: 
                     <span class="font-semibold">{date}</span>
-                </p>
+                  </p> -->
                   {platformInfo !== 'none' && (
                     <a 
                       href={machineURL}

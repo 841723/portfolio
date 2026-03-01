@@ -52,5 +52,9 @@
   "writeups-note": "Please note that some writeups may be locked or hidden and will be available soon.",
   "writeups-search": "You can search by name or filter by difficulty using the buttons below.",
   "writeups-inputplaceholder": "Search writeups...",
-  "writeups-feelfree": "Feel free to reach out if you have any questions or want to discuss anything related to cybersecurity or web development."
+  "writeups-feelfree": "Feel free to reach out if you have any questions or want to discuss anything related to cybersecurity or web development.",
+
+    "writeups-difficulty": "Difficulty",
+    "writeups-os": "OS",
+    "writeups-solved-on": "Solved on"
 }
