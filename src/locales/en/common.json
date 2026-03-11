@@ -5,6 +5,7 @@
   "nav-techstack": "Tech Stack",
   "nav-webprojects": "Web Projects",
   "nav-otherprojects": "Other Projects",
+  "nav-certs": "Certifications",
 
 
 
@@ -56,5 +57,7 @@
 
     "writeups-difficulty": "Difficulty",
     "writeups-os": "OS",
-    "writeups-solved-on": "Solved on"
+    "writeups-solved-on": "Solved on",
+
+    "certs-link": "View Certificate"
 }

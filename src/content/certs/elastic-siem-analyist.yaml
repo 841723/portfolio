@@ -1,0 +1,38 @@
+# fill some certs 
+# const certs = defineCollection({
+#     type: "data",
+#     schema: z.object({
+#         title: z.object({
+#             en: z.string(),
+#             es: z.string(),
+#         }),
+#         description: z.object({
+#             en: z.string(),
+#             es: z.string(),
+#         }),
+#         img: z.string(),
+#         date: z.string(),
+#         link: z.string().optional(),
+#         order: z.number().optional(),
+#     }),
+# });
+
+title:
+  en: "Elastic SIEM Analyst"
+  es: "Analista de SIEM de Elastic"
+
+description:
+  en: >
+    I am proficient in using Elastic SIEM for security monitoring, threat detection,
+    and incident investigation. I analyze security data, create alerts and dashboards,
+    and leverage Elastic tools to protect organizational infrastructure.
+  es: >
+    Soy competente en el uso de Elastic SIEM para la monitorización de seguridad,
+    detección de amenazas e investigación de incidentes. Analizo datos de seguridad,
+    creo alertas y dashboards, y utilizo las herramientas de Elastic para proteger
+    la infraestructura de la organización.
+img: "https://templates.images.credential.net/17363044335833111771106241425275.png"
+# img: "/certs/elastic-siem-analyst.webp"
+link: "https://www.elastic.co/training/certification/elastic-siem-analyst"
+date: "NOV 2025"
+order: 1

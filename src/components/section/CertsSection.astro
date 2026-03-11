@@ -1,0 +1,22 @@
+---
+import CardCert from "@/components/CardCert.astro";
+import Section from "@/components/section/Section.astro";
+import Medal from "@/components/icons/Medal.astro";
+import { certs } from "@/collection";
+
+---
+
+<Section title="nav-certs" id="certs">
+    <Medal slot="icon" />
+    <ol class="flex flex-col gap-y-6">
+        {
+            certs.map((cert) => (
+                <li>
+                    <CardCert {...cert.data} />
+                </li>
+            ))
+        }
+    </ol>
+</Section>
+
+

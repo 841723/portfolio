@@ -1,11 +1,12 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import PresentationSection from "@/components/PresentationSection.astro";
-import WebProjectsSection from "@/components/WebProjectsSection.astro";
-import OtherProjectsSection from "@/components/OtherProjectsSection.astro";
-import WorkExperienceSection from "@/components/WorkExperienceSection.astro";
-import TechStackSection from "@/components/TechStackSection.astro";
-import WriteupsSection from "@/components/WriteupsSection.astro";
+import PresentationSection from "@/components/section/PresentationSection.astro";
+import WebProjectsSection from "@/components/section/WebProjectsSection.astro";
+import OtherProjectsSection from "@/components/section/OtherProjectsSection.astro";
+import WorkExperienceSection from "@/components/section/WorkExperienceSection.astro";
+import TechStackSection from "@/components/section/TechStackSection.astro";
+import WriteupsSection from "@/components/section/WriteupsSection.astro";
+import CertsSection from "@/components/section/CertsSection.astro";
 ---
 
 <Layout
@@ -15,6 +16,7 @@ import WriteupsSection from "@/components/WriteupsSection.astro";
 	<main class="flex flex-col items-center w-full">
 		<PresentationSection />
 		<WorkExperienceSection />
+		<CertsSection />
 		<WriteupsSection />
 		<TechStackSection />
 		<WebProjectsSection />

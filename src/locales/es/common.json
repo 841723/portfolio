@@ -5,6 +5,7 @@
     "nav-techstack": "Tecnologías",
     "nav-webprojects": "Proyectos web",
     "nav-otherprojects": "Otros proyectos",
+  "nav-certs": "Certificaciones",
 
     "presentation-greeting": "Hola, soy ",
     "presentation-name": "Diego Roldán",
@@ -52,5 +53,7 @@
 
     "writeups-difficulty": "Dificultad",
     "writeups-os": "SO",
-    "writeups-solved-on": "Resuelto"
+    "writeups-solved-on": "Resuelto",
+
+    "certs-link": "Ver certificado"
 }

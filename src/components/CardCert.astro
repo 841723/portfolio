@@ -1,0 +1,75 @@
+---
+import { getImgUrl } from "@/uri";
+import { defaultlocale, tcommons, tobj } from "@/i18n";
+import type { Locale } from "@/types";
+
+interface Props {
+    title: {
+        en: string,
+        es: string
+    },
+    description: {
+        en: string,
+        es: string
+    },
+    img: string,
+    date: string,
+    link?: string,
+    order?: number,
+}
+
+const { title, description, img, date, link } =
+    Astro.props;
+
+const locale = Astro.currentLocale as Locale || defaultlocale
+
+// create a function to translate to locale languaje the objects: {en: "value", es: "valor"}
+const t = tobj(locale);
+const tcommon = tcommons(locale);
+
+---
+<article
+    class="group relative overflow-hidden w-full
+           flex flex-col md:flex-row items-center
+           rounded-lg border border-gray-700 bg-gray-800 shadow
+           transition-all duration-500 hover:bg-gray-700"
+>
+    {/* haz de luz contenido */}
+    <div
+        class="pointer-events-none absolute inset-0 z-10 overflow-hidden"
+    >
+        <div
+            class="absolute -left-1/2 top-0 h-full w-1/2 rotate-12 opacity-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-all duration-1000 group-hover:left-full group-hover:opacity-100"
+        ></div>
+    </div>
+
+    {/* imagen */}
+    <div class="relative w-full md:w-48 min-w-48 aspect-square overflow-hidden">
+        <img
+            src={getImgUrl(img)}
+            alt={`${t(title)} icon`}
+            class="h-full w-full object-cover
+                   rounded-t-lg md:rounded-t-none md:rounded-l-lg
+                   transition-transform duration-500"
+        />
+    </div>
+
+    {/* contenido */}
+    <div class="flex flex-col justify-between w-full min-h-44 md:h-[232px] p-4">
+        <div class="flex justify-between">
+            <div class="relative">
+                <h5 class="text-2xl font-bold tracking-tight text-white uppercase">
+                    {t(title)}
+                </h5>
+
+                <p class="text-sm uppercase opacity-80 mt-1">
+                    {date}
+                </p>
+            </div>
+        </div>
+
+        <p class="font-normal text-gray-400">
+            {t(description)}
+        </p>
+    </div>
+</article>

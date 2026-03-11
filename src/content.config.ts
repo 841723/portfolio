@@ -2,6 +2,7 @@ import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders"; // Not available with legacy API
 
 import { TAGS } from "./tags";
+import { date } from "astro:schema";
 // recupera todas las propiedades "name" de TAGS
 type TagNames = (typeof TAGS)[keyof typeof TAGS]["name"];
 // "react" | "vue" | "svelte"
@@ -95,10 +96,32 @@ const otherprojects = defineCollection({
 
 });
 
+const certs = defineCollection({
+    loader: glob({
+        pattern: ["**/*.yaml", "!dev-*"],
+        base: "src/content/certs",
+    }),
+    schema: z.object({
+        title: z.object({
+            en: z.string(),
+            es: z.string(),
+        }),
+        description: z.object({
+            en: z.string(),
+            es: z.string(),
+        }),
+        img: z.string(),
+        date: z.string(),
+        link: z.string().optional(),
+        order: z.number().optional(),
+    }),
+});
+
 
 export const collections = { 
   writeups,
   workexperiences, 
   webprojects, 
-  otherprojects
+  otherprojects,
+  certs
 } as const;
