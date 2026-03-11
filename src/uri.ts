@@ -32,7 +32,6 @@ export const getImgUrl = (path: string) => {
 
 export const removeLocale = (path: string) => {
     const supportedLocalePrefixes = Object.values(supportedLocales).map(formatPath);
-    console.log("Supported locale prefixes:", supportedLocalePrefixes);
     const normalizedPath = formatPath(path);
 
     for (const prefix of supportedLocalePrefixes) {
