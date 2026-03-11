@@ -2,12 +2,12 @@
 import "src/styles/markdown.css";
 import { getCollection, getEntry, render } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
-import Section from '@/components/Section.astro';
+import Section from '@/components/section/Section.astro';
 import { BASE_URL } from '@/consts';
 import DirectionsIcon from "@/components/icons/Directions.astro";
 import LeftArrowIcon from "@/components/icons/LeftArrow.astro";
 import Lock from "@/components/icons/Lock.astro";
-import WriteupsSection from "@/components/WriteupsSection.astro";
+import WriteupsSection from "@/components/section/WriteupsSection.astro";
 import { defaultlocale, tcommons } from "@/i18n";
 import { getFullUrl,getImgUrl } from "@/uri";
 
