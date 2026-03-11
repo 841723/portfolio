@@ -18,8 +18,8 @@
 # });
 
 title:
-  en: "Elastic SIEM Analyst"
-  es: "Analista de SIEM de Elastic"
+  en: "Elastic Certified SIEM Analyst"
+  es: "Elastic Certified SIEM Analyst"
 
 description:
   en: >
@@ -32,7 +32,6 @@ description:
     creo alertas y dashboards, y utilizo las herramientas de Elastic para proteger
     la infraestructura de la organización.
 img: "https://templates.images.credential.net/17363044335833111771106241425275.png"
-# img: "/certs/elastic-siem-analyst.webp"
-link: "https://www.elastic.co/training/certification/elastic-siem-analyst"
+link: "https://www.elastic.co/training/elastic-certified-siem-analyst-exam"
 date: "NOV 2025"
 order: 1
