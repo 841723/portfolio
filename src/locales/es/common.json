@@ -55,5 +55,7 @@
     "writeups-os": "SO",
     "writeups-solved-on": "Resuelto",
 
-    "certs-link": "Ver certificado"
+    "certs-link": "Ver certificado",
+    "certs-in-progress": "Certificaciones en curso",
+    "certs-coming-soon": "Próximamente"
 }

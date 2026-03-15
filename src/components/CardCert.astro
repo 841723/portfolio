@@ -16,9 +16,10 @@ interface Props {
     date: string,
     link?: string,
     order?: number,
+    blocked?: boolean
 }
 
-const { title, description, img, date, link } =
+const { title, description, img, date, link, blocked=false } =
     Astro.props;
 
 const locale = Astro.currentLocale as Locale || defaultlocale
@@ -28,48 +29,65 @@ const t = tobj(locale);
 const tcommon = tcommons(locale);
 
 ---
-<article
-    class="group relative overflow-hidden w-full
-           flex flex-col md:flex-row items-center
-           rounded-lg border border-gray-700 bg-gray-800 shadow
-           transition-all duration-500 hover:bg-gray-700"
+<a 
+    href={link}
+    target="_blank"
+    referrerpolicy="no-referrer"    
+    class={`relative block ${
+    blocked ? '' : 'group'
+  }`}
+
 >
-    {/* haz de luz contenido */}
-    <div
-        class="pointer-events-none absolute inset-0 z-10 overflow-hidden"
+    {blocked && (
+        <div class="absolute inset-0 flex items-center justify-center bg-gray-900/70 z-10 rounded-lg">
+            <svg 
+                class="w-12 h-12 text-white opacity-90"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+            >
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M16 11V7a4 4 0 10-8 0v4M5 11h14v9H5z" />
+            </svg>
+        </div>
+    )}
+
+  <div class="transition-all">
+    <article
+        class="group relative overflow-hidden w-full
+            flex flex-row items-center
+            rounded-lg border border-gray-700 bg-gray-800 shadow
+            transition-all duration-500 hover:bg-gray-700"
     >
-        <div
-            class="absolute -left-1/2 top-0 h-full w-1/2 rotate-12 opacity-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-all duration-1000 group-hover:left-full group-hover:opacity-100"
-        ></div>
-    </div>
+        {/* imagen */}
+        <div class="relative w-32 sm:w-40 md:w-48 aspect-square overflow-hidden flex-shrink-0">
+            <img
+                src={getImgUrl(img)}
+                alt={`${t(title)} icon`}
+                class="h-full w-full object-cover
+                    rounded-l-lg
+                    transition-transform duration-500 group-hover:scale-105"
+            />
+        </div>
 
-    {/* imagen */}
-    <div class="relative w-full md:w-48 min-w-48 aspect-square overflow-hidden">
-        <img
-            src={getImgUrl(img)}
-            alt={`${t(title)} icon`}
-            class="h-full w-full object-cover
-                   rounded-t-lg md:rounded-t-none md:rounded-l-lg
-                   transition-transform duration-500"
-        />
-    </div>
-
-    {/* contenido */}
-    <div class="flex flex-col justify-between w-full min-h-44 md:h-[232px] p-4">
-        <div class="flex justify-between">
+        {/* contenido */}
+        <div class="flex flex-col justify-between w-full min-h-32 md:h-[232px] p-4">
             <div class="relative">
-                <h5 class="text-2xl font-bold tracking-tight text-white uppercase">
+                <h5 class="text-xl sm:text-2xl font-bold tracking-tight text-white decoration-2 decoration-transparent underline-offset-4 group-hover:decoration-white transition-all duration-1000">
                     {t(title)}
                 </h5>
 
                 <p class="text-sm uppercase opacity-80 mt-1">
-                    {date}
+                    {blocked ? tcommon("certs-coming-soon") : date}
                 </p>
             </div>
-        </div>
 
-        <p class="font-normal text-gray-400">
-            {t(description)}
-        </p>
-    </div>
-</article>
+            <p class="mt-4 md:mt-0 font-normal text-gray-400 text-sm sm:text-base text-justify">
+                {t(description)}
+            </p>
+        </div>
+    </article>
+  </div>
+
+</a>

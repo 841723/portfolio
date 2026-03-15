@@ -3,6 +3,14 @@ import CardCert from "@/components/CardCert.astro";
 import Section from "@/components/section/Section.astro";
 import Medal from "@/components/icons/Medal.astro";
 import { certs } from "@/collection";
+import type { Locale } from "@/types";
+import { defaultlocale, tcommons, tobj } from "@/i18n";
+
+const locale = Astro.currentLocale as Locale || defaultlocale
+
+// create a function to translate to locale languaje the objects: {en: "value", es: "valor"}
+const t = tobj(locale);
+const tcommon = tcommons(locale);
 
 ---
 
@@ -10,7 +18,17 @@ import { certs } from "@/collection";
     <Medal slot="icon" />
     <ol class="flex flex-col gap-y-6">
         {
-            certs.map((cert) => (
+            certs.filter((cert) => !cert.data.blocked).map((cert) => (
+                <li>
+                    <CardCert {...cert.data} />
+                </li>
+            ))
+        }
+        <span class="mt-12 text-gray-300 uppercase text-center">
+           {tcommon("certs-in-progress")}
+        </span>
+        {
+            certs.filter((cert) => cert.data.blocked).map((cert) => (
                 <li>
                     <CardCert {...cert.data} />
                 </li>

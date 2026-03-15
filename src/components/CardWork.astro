@@ -1,6 +1,6 @@
 ---
 import { getImgUrl } from "@/uri";
-import { defaultlocale, tobj } from "@/i18n";
+import { defaultlocale, tcommons, tobj } from "@/i18n";
 
 import type { Locale } from "@/types";
 
@@ -32,7 +32,7 @@ const { position, company, img, date, height, description } =
 
 const locale = Astro.currentLocale as Locale || defaultlocale;
 const t = tobj(locale);
----
+const tcommon = tcommons(locale);---
 
 <article
     class="flex flex-col items-center border rounded-lg shadow md:flex-row w-full border-gray-700 bg-gray-800 group hover:bg-gray-700 transition-all duration-500"
@@ -63,7 +63,7 @@ const t = tobj(locale);
                     </span>
                     <br />
                     <span class="text-gray-400 font-normal text-lg">
-                        at
+                        {tcommon("workexperience-at")}
                     </span>
                     <a
                         class=`${company.color} font-semibold hover:underline`
@@ -78,7 +78,7 @@ const t = tobj(locale);
                 </h6>
             </div>
         </div>
-        <p class="my-3 font-normal text-gray-400">
+        <p class="my-3 font-normal text-gray-400 text-pretty text-justify">
             {t(description).split("**").map((part, index) => 
                 index % 2 === 1 ? <strong class="text-gray-200">{part}</strong> : part
             )}

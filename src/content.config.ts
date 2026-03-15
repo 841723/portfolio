@@ -114,6 +114,7 @@ const certs = defineCollection({
         date: z.string(),
         link: z.string().optional(),
         order: z.number().optional(),
+        blocked: z.boolean().optional(),
     }),
 });
 
