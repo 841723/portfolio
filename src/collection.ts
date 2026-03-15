@@ -17,5 +17,3 @@ export const certs = (await getCollection("certs")).sort((a, b) => {
 });
 
 export const writeups = await getCollection("writeups")
-
-console.log("Certs:", certs);
