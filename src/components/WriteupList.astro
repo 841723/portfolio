@@ -80,6 +80,7 @@ const t = tcommons(currentLocale);
                     <img
                         class="writeup-item-img rounded-lg h-32 md:h-40 object-cover group-hover:scale-[105%] transition-all duration-500"
                         src={getImgUrl(writeup.data.img ?? "/writeups/default.png")}
+                        onerror="this.src='/default.png';"
                         alt={writeup.data.name}
                         style={`view-transition-name: writeup-image-${writeup.id}${onlyButtons ? '-button' : ''}`}
                     />
