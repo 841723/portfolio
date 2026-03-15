@@ -62,7 +62,7 @@ const t = tcommons(locale);
                     data-filter={label.label}
                     class={`filterButton py-1 rounded-full font-bold border-2 w-28 items-center transition-colors ${label.color} ${label.colorHover}`}
                 >
-                    {(translatedLabel.at(0) as string).toUpperCase() + translatedLabel.slice(1)}
+                    {(translatedLabel.at(0) as string).toUpperCase() + translatedLabel.slice(1)}<span class="ml-1 text-sm font-light" data-count>0</span>
                 </button>
                 );
             })}
@@ -107,7 +107,6 @@ const t = tcommons(locale);
 
                 writeups.forEach((writeup) => {
                     const name = writeup.querySelector('.writeup-item-name')?.textContent?.toLowerCase() || '';
-                    // const tags = writeup.querySelector('.writeup-item-tags')?.textContent?.toLowerCase() || '';
                     const difficulty = writeup.querySelector('.writeup-item-difficulty')?.getAttribute('data-difficulty')?.toLowerCase() || '';
                     
                     if (
@@ -119,6 +118,7 @@ const t = tcommons(locale);
                         writeup.style.display = 'none';
                     }
                 });
+                updateCounters();
             }
 
             input.addEventListener('keyup', filterWriteups);
@@ -139,6 +139,37 @@ const t = tcommons(locale);
                 });
             });
 
+            function updateCounters() {
+                const counts: Record<string, number> = {
+                    easy: 0,
+                    medium: 0,
+                    hard: 0,
+                    insane: 0
+                };
+
+                writeups.forEach((writeup) => {
+                    if (writeup.style.display === 'none') return;
+
+                    const difficulty = writeup
+                        .querySelector('.writeup-item-difficulty')
+                        ?.getAttribute('data-difficulty')
+                        ?.toLowerCase();
+
+                    if (difficulty && counts.hasOwnProperty(difficulty)) {
+                        counts[difficulty]++;
+                    }
+                });
+
+                filterButtons.forEach((button) => {
+                    const filter = button.getAttribute('data-filter')?.toLowerCase();
+                    const span = button.querySelector('[data-count]');
+                    if (filter && span) {
+                        span.textContent = "(" + counts[filter].toString() + ")";
+                    }
+                });
+            }
+
+            filterWriteups();
         </script>
         <WriteupList onlyButtons={false} showAll={true} showLocked={true} />
     </Section>
