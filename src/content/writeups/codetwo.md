@@ -1,10 +1,10 @@
 ---
-name: CodeTwo
+name: CodePartTwo
 difficulty: easy
 os: linux
 platform: htb
 date:  2025/08/18
-# releasedDate: 2099-12-31
+releasedDate: 2009-12-31
 userFlag: true
 rootFlag: true
 

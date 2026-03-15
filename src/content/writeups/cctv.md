@@ -3,7 +3,7 @@ name: CCTV
 difficulty: easy
 os: linux
 platform: htb
-date: 2026/03/13
+date: 2026/03/14
 releasedDate: 2009-12-31
 userFlag: true
 rootFlag: true
