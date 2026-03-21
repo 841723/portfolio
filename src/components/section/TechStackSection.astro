@@ -17,7 +17,7 @@ const t = tcommons(locale);
     <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-8">
         {
             TECH_STACK.map((tech, _) => (
-                <article class:list={["grid grid-rows-[auto_1fr] border-gray-700 bg-gray-800 rounded-lg w-full hover:scale-105 hover:bg-gray-700 transition-all duration-500", {"md:col-span-2":(tech.double)}]}>
+                <article class:list={["grid grid-rows-[auto_1fr] border-gray-700 bg-gray-800 rounded-lg w-full hover:bg-gray-700 transition-all duration-1000", {"md:col-span-2":(tech.double)}]}>
                     <h4 class="text-center p-2 bg-slate-300 text-gray-800 rounded-t-lg text-xl font-bold">
                         {t(tech.title)}
                     </h4>
