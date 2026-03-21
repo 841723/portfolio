@@ -29,6 +29,18 @@ import STMIcon from "./components/icons/STM.astro";
 import AWSIcon from "./components/icons/AWS.astro";
 import AzureIcon from "./components/icons/Azure.astro";
 import GoogleCloudIcon from "./components/icons/GoogleCloud.astro";
+import ElasticSearchIcon from "./components/icons/ElasticSearch.astro";
+import QRadarIcon from "./components/icons/IBM.astro";
+import BurpsuiteIcon from "./components/icons/Burpsuite.astro";
+import UbikaWAFIcon from "./components/icons/UbikaWAF.astro";
+import XSOARIcon from "./components/icons/CortexXSOAR.astro";
+import WiresharkIcon from "./components/icons/Wireshark.astro";
+import FalconIcon from "./components/icons/Falcon.astro";
+import NmapIcon from "./components/icons/Eye.astro";
+import MetasploitIcon from "./components/icons/Metasploit.astro";
+import HashcatIcon from "./components/icons/Hashcat.astro";
+import HydraIcon from "./components/icons/Hydra.astro";
+import KaliIcon from "./components/icons/Kali.astro";
 
 export type TAGInfo = {
     name: string;
@@ -236,6 +248,84 @@ export const TAGS = {
         icon: GoogleCloudIcon,
         link: "https://cloud.google.com/",
     },
+    ElasticStack: {
+        name: "Elastic Stack (ELK)",
+        style: "text-gray-100 bg-[#094DAB]",
+        icon: ElasticSearchIcon,
+        link: "https://www.elastic.co/",
+    },
+    QRadar: {
+        name: "QRadar SIEM",
+        style: "text-gray-100 bg-[#0050e6]",
+        icon: QRadarIcon,
+        link: "https://www.ibm.com/es-es/products/qradar-siem",
+    },
+    UbikaWAF: {
+        name: "Ubika WAF",
+        style: "text-[#73e5bd]/90 bg-[#260344]/90",
+        icon: UbikaWAFIcon,
+        link: "https://www.ubikasec.com/en",
+    },
+    XSOAR: {
+        name: "XSOAR",
+        style: "text-black/90 bg-green-500/80",
+        icon: XSOARIcon,
+        link: "https://xsoar.pan.dev/",
+    },
+    Burpsuite: {
+        name: "Burpsuite",
+        style: "text-white bg-[#cc5e39]",
+        icon: BurpsuiteIcon,
+        link: "https://portswigger.net/burp",
+    },
+    Wireshark: {
+        name: "Wireshark",
+        style: "text-gray-100 bg-[#0a6ddf]",
+        icon: WiresharkIcon,
+        link: "https://www.wireshark.org/",
+    },
+    CrowdstrikeFalcon: {
+        name: "Crowdstrike Falcon",
+        style: "text-white bg-[#d30000]",
+        icon: FalconIcon,
+        link: "https://www.crowdstrike.com/products/falcon-endpoint-protection/",
+    },
+    Nmap: {
+        name: "Nmap",
+        style: "text-gray-100 bg-red-700/60",
+        icon: NmapIcon,
+        link: "https://nmap.org/",
+    },
+    Metasploit: {
+        name: "Metasploit",
+        style: "text-gray-100 bg-[#3258e2]",
+        icon: MetasploitIcon,
+        link: "https://www.metasploit.com/",
+    },
+    SQLMap: {
+        name: "SQLMap",
+        style: "text-gray-100 bg-red-500/70",
+        icon: SQLIcon,
+        link: "https://sqlmap.org/",
+    },
+    Hashcat: {
+        name: "Hashcat",
+        style: "text-gray-100 bg-black/80",
+        icon: HashcatIcon,
+        link: "https://hashcat.net/hashcat/",
+    },
+    Hydra: {
+        name: "Hydra",
+        style: "text-black/90 bg-[#158671]",
+        icon: HydraIcon,
+        link: "https://www.kali.org/tools/hydra/",
+    },
+    KaliLinux: {
+        name: "Kali Linux",
+        style: "text-white bg-[#367bf0]",
+        icon: KaliIcon,
+        link: "https://www.kali.org/",
+    }
 };
 
 export const getTechInfo = (key: string): TAGInfo => {

@@ -34,6 +34,8 @@
   "techstack-backend": "Backend",
   "techstack-cloud": "Cloud",
   "techstack-others": "Others",
+  "techstack-soc-blue-team": "Cybersecurity Blue Team",
+  "techstack-soc-red-team": "Cybersecurity Red Team",
 
 
 

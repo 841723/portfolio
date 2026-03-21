@@ -27,6 +27,31 @@ export const TECH_STACK = [
         ],
     },
     {
+        title: "techstack-soc-blue-team",
+        used_tech: [
+            TAGS.ElasticStack,
+            TAGS.Wireshark,
+            TAGS.XSOAR,
+            TAGS.CrowdstrikeFalcon,
+            TAGS.QRadar,
+            TAGS.UbikaWAF,
+        ],
+        double: false,
+    },
+    {
+        title: "techstack-soc-red-team",
+        used_tech: [
+            TAGS.KaliLinux,
+            TAGS.Burpsuite,
+            TAGS.Nmap,
+            TAGS.Hydra,
+            TAGS.SQLMap,
+            TAGS.Metasploit,
+            TAGS.Hashcat,
+        ],
+        double: false,
+    },
+    {
         title: "techstack-cloud",
         used_tech: [
             TAGS.AWS,
