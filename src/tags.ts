@@ -286,13 +286,13 @@ export const TAGS = {
     },
     CrowdstrikeFalcon: {
         name: "Crowdstrike Falcon",
-        style: "text-white bg-[#d30000]",
+        style: "text-white bg-[#d32727]",
         icon: FalconIcon,
         link: "https://www.crowdstrike.com/products/falcon-endpoint-protection/",
     },
     Nmap: {
         name: "Nmap",
-        style: "text-gray-100 bg-red-700/60",
+        style: "text-gray-100 bg-red-500/70",
         icon: NmapIcon,
         link: "https://nmap.org/",
     },
@@ -304,19 +304,19 @@ export const TAGS = {
     },
     SQLMap: {
         name: "SQLMap",
-        style: "text-gray-100 bg-red-500/70",
+        style: "text-gray-100 bg-red-600/70",
         icon: SQLIcon,
         link: "https://sqlmap.org/",
     },
     Hashcat: {
         name: "Hashcat",
-        style: "text-gray-100 bg-black/80",
+        style: "text-white bg-black/50",
         icon: HashcatIcon,
         link: "https://hashcat.net/hashcat/",
     },
     Hydra: {
         name: "Hydra",
-        style: "text-black/90 bg-[#158671]",
+        style: "text-[#f4f8f7] bg-[#158671]",
         icon: HydraIcon,
         link: "https://www.kali.org/tools/hydra/",
     },
