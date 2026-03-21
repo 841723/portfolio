@@ -24,7 +24,7 @@ const t = tcommons(locale);
                     <div class="grid items-center">
                         <ul class="flex flex-wrap justify-center gap-x-4 gap-y-2 p-2 w-full">
                             {tech.used_tech.map((tech, ) => (
-                                <article class:list={['grid items-center', {}]}>
+                                <article class:list={['grid items-center select-none', {}]}>
                                     <TechPill tech={tech.name} size="lg" />
                                 </article>
                             ))}
