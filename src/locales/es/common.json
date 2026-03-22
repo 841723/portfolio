@@ -4,8 +4,9 @@
     "nav-writeups": "Writeups",
     "nav-techstack": "Tecnologías",
     "nav-webprojects": "Proyectos web",
-    "nav-otherprojects": "Otros proyectos",
-  "nav-certs": "Certificaciones",
+    "nav-otherprojects": "Más proyectos",
+    "nav-certs": "Certificaciones",
+    "nav-homelabprojects": "Proyectos Home Lab",
 
     "presentation-greeting": "Hola, soy ",
     "presentation-name": "Diego Roldán",

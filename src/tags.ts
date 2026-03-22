@@ -41,6 +41,8 @@ import MetasploitIcon from "./components/icons/Metasploit.astro";
 import HashcatIcon from "./components/icons/Hashcat.astro";
 import HydraIcon from "./components/icons/Hydra.astro";
 import KaliIcon from "./components/icons/Kali.astro";
+import AppleIcon from "./components/icons/Apple.astro";
+import CloudflareIcon from "./components/icons/Cloudflare.astro";
 
 export type TAGInfo = {
     name: string;
@@ -325,7 +327,19 @@ export const TAGS = {
         style: "text-white bg-[#367bf0]",
         icon: KaliIcon,
         link: "https://www.kali.org/",
-    }
+    },
+    IphoneShortcuts: {
+        name: "iPhone Shortcuts",
+        style: "text-gray-100 bg-pink-400/60",
+        icon: AppleIcon,
+        link: "https://support.apple.com/es-es/guide/shortcuts/welcome/ios",
+    },
+    Cloudflare: {
+        name: "Cloudflare",
+        style: "text-gray-100 bg-orange-500/70",
+        icon: CloudflareIcon,
+        link: "https://www.cloudflare.com/",
+    },
 };
 
 export const getTechInfo = (key: string): TAGInfo => {

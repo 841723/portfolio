@@ -1,0 +1,14 @@
+title:
+  en: "Finances Google Sheets + iPhone Shortcut"
+  es: "Google Sheets de finanzas + Atajo de iPhone"
+
+description:
+  en: " This project provides a simple and efficient way to track personal finances directly from an iPhone using Shortcuts. It connects securely to a home server via SSH (optionally through a VPN) to execute a Python script that logs data into [Google Sheets](https://docs.google.com/spreadsheets/d/1-DjA24rDrpvZSu15PDCt4o1EKj6Ve27yvdrzvtxB6gY/edit?usp=sharing). The system is designed to be fast, private, and fully customizable. It includes built-in error handling that stores failed entries locally on the device to prevent data loss. Users can later retry these entries with automatic field completion. The setup is flexible and can be adapted to other storage systems beyond Google Sheets."
+  es: "Este proyecto permite registrar gastos e ingresos de forma rápida desde un iPhone usando Atajos. Se conecta de forma segura a un servidor doméstico mediante SSH (opcionalmente a través de una VPN) para ejecutar un script en Python que guarda los datos en [Google Sheets](https://docs.google.com/spreadsheets/d/1-DjA24rDrpvZSu15PDCt4o1EKj6Ve27yvdrzvtxB6gY/edit?usp=sharing). El sistema está pensado para ser rápido, privado y totalmente personalizable. Incluye un sistema de gestión de errores que guarda localmente los registros fallidos para evitar pérdida de datos. Posteriormente, estos pueden reenviarse con autocompletado de campos. Además, la solución es flexible y puede adaptarse a otros sistemas de almacenamiento."
+img: "/shortcuts.webp"
+gh_link: "https://github.com/841723/finanzas-from-shortcuts"
+used_tech:
+  - Python
+  - iPhone Shortcuts
+
+order: 4

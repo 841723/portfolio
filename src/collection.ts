@@ -16,4 +16,8 @@ export const certs = (await getCollection("certs")).sort((a, b) => {
   return (a.data.order ?? 99999) - (b.data.order ?? 99999);
 });
 
+export const homelabprojects = (await getCollection("homelabprojects")).sort((a, b) => {
+  return (a.data.order ?? 99999) - (b.data.order ?? 99999);
+});
+
 export const writeups = await getCollection("writeups")

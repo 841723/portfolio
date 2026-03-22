@@ -32,7 +32,9 @@ const { position, company, img, date, height, description } =
 
 const locale = Astro.currentLocale as Locale || defaultlocale;
 const t = tobj(locale);
-const tcommon = tcommons(locale);---
+const tcommon = tcommons(locale);
+
+---
 
 <article
     class="flex flex-col items-center border rounded-lg shadow md:flex-row w-full border-gray-700 bg-gray-800 group hover:bg-gray-700 transition-all duration-500"

@@ -2,7 +2,6 @@ import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders"; // Not available with legacy API
 
 import { TAGS } from "./tags";
-import { date } from "astro:schema";
 // recupera todas las propiedades "name" de TAGS
 type TagNames = (typeof TAGS)[keyof typeof TAGS]["name"];
 // "react" | "vue" | "svelte"
@@ -118,11 +117,30 @@ const certs = defineCollection({
     }),
 });
 
+const homelabprojects = defineCollection({
+    type: "data",
+    schema: z.object({
+        title: z.object({
+            en: z.string(),
+            es: z.string(),
+        }),
+        description: z.object({
+            en: z.string(),
+            es: z.string(),
+        }),
+        img: z.string(),
+        gh_link: z.string().optional(),
+        used_tech: z.array(z.enum(Object.values(TAGS).map(t => t.name) as [TagNames, ...TagNames[]])),
+        order: z.number().optional(),
+    }),
+});
+
 
 export const collections = { 
   writeups,
   workexperiences, 
   webprojects, 
   otherprojects,
-  certs
+  certs,
+  homelabprojects
 } as const;

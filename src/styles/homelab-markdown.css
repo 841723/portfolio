@@ -1,0 +1,14 @@
+/* CSS styles for markdown content in HomeLab projects */
+.homelab-markdown a {
+    color: oklch(0.905 0.182 98.111);
+    text-decoration: underline;
+}
+
+.homelab-markdown a:hover {
+    color : oklch(0.905 0.182 98.111 / 0.8); /* Slightly lighter on hover */
+}
+
+.homelab-markdown strong {
+    font-weight: 400;
+    color: oklch(0.905 0.182 98.111);
+}

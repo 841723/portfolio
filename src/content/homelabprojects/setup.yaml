@@ -1,0 +1,14 @@
+title:
+  en: "Home Lab Setup"
+  es: "Configuración del Home Lab"
+
+# un ubuntu server conectado a la corriente 24/7. 4th gen intel i3, 4 cores 4 GB RAM. pensado para automatizar tareas, alojar servicios personales y experimentar con nuevas tecnologías. uso docker para gestionar mis contenedores. también tengo un sistema de backup automático para proteger mis datos importantes..
+description:
+  en: "I run a personal home lab on an Ubuntu Server that is powered on 24/7, hosted on an old laptop with a 4th generation Intel i3 and 4 GB of RAM. It is designed to automate tasks, host personal services, and experiment with new technologies in a controlled environment. I use Docker to manage and isolate the different services running on the system. Despite the limited hardware, the setup is optimized to be lightweight and efficient. I have also implemented an automatic backup system to protect important data. This environment allows me to continuously learn, build, and test real-world solutions."
+  es: "Tengo un home lab personal basado en un servidor Ubuntu que está encendido 24/7, montado sobre un portátil antiguo con un Intel i3 de 4ª generación y 4 GB de RAM. Está pensado para automatizar tareas, alojar servicios personales y experimentar con nuevas tecnologías en un entorno controlado. Utilizo Docker para gestionar y aislar los distintos servicios que ejecuto en el sistema. A pesar de las limitaciones de hardware, el entorno está optimizado para ser ligero y eficiente. Además, he implementado un sistema de copias de seguridad automáticas para proteger los datos importantes. Este entorno me permite aprender, construir y probar soluciones reales de forma continua."
+img: "/ubuntu.jpg"
+# gh_link: "https://github.com/841723/finanzas-from-shortcuts"
+used_tech:
+  - Bash
+
+order: 1

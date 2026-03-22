@@ -1,0 +1,15 @@
+title:
+  en: "Vaultwarden Password Manager"
+  es: "Gestor de Contraseñas Vaultwarden"
+
+# decir que vaultwarden es un gestor de contraseñas de código abierto, autoalojado y compatible con Bitwarden. hosteado en mi homelab con docker pero con un acceso desde internet a través de un tunnel cloudflare. Añade tambien cosas de generacion de contraseñas seguras, acceso desde cualquier dispositivo, analisis de contraseñas comprometidas y reutilizacion de contraseñas...
+description:
+  en: "Vaultwarden is an open-source, self-hosted password manager compatible with Bitwarden. Hosted on my homelab using Docker, it provides secure access from the internet through a Cloudflare tunnel. Vaultwarden offers features such as secure password generation, access from any device, analysis of compromised passwords, and prevention of password reuse. It ensures that your sensitive information is protected while giving you full control over your data."
+  es: "Vaultwarden es un gestor de contraseñas de código abierto, autoalojado y compatible con Bitwarden. Hosteado en mi homelab con Docker, ofrece acceso seguro desde internet a través de un túnel de Cloudflare. Vaultwarden proporciona características como generación segura de contraseñas, acceso desde cualquier dispositivo, análisis de contraseñas comprometidas y prevención de reutilización de contraseñas. Garantiza que tu información sensible esté protegida mientras te brinda control total sobre tus datos."
+img: "/bitwarden.jpg"
+# gh_link: "https://github.com/841723/finanzas-from-shortcuts"
+used_tech:
+  - Docker
+  - Cloudflare
+
+order: 3

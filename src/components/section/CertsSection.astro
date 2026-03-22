@@ -4,14 +4,12 @@ import Section from "@/components/section/Section.astro";
 import Medal from "@/components/icons/Medal.astro";
 import { certs } from "@/collection";
 import type { Locale } from "@/types";
-import { defaultlocale, tcommons, tobj } from "@/i18n";
+import { defaultlocale, tcommons } from "@/i18n";
 
 const locale = Astro.currentLocale as Locale || defaultlocale
 
 // create a function to translate to locale languaje the objects: {en: "value", es: "valor"}
-const t = tobj(locale);
 const tcommon = tcommons(locale);
-
 ---
 
 <Section title="nav-certs" id="certs">

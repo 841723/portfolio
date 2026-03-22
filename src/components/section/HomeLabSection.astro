@@ -1,0 +1,32 @@
+---
+import { markdownToHtml  } from "@/remark";
+import HomeIcon from "@/components/icons/Home.astro";
+import Section from "@/components/section/Section.astro";   
+import CardHomeProject from "@/components/CardHomeProject.astro";
+
+import { homelabprojects } from "@/collection";
+
+const parsedHomelabprojects = homelabprojects.map(async (project) => ({
+  ...project,
+  data: {
+    ...project.data,
+    descriptionHtml: {
+      en: await markdownToHtml(project.data.description["en"]),
+      es: await markdownToHtml(project.data.description["es"]),
+    }
+  }
+}))
+---
+
+<Section title="nav-homelabprojects" id="homelab" >
+    <HomeIcon slot="icon" />
+    <ol class="flex flex-col gap-y-6">
+        {
+            (await Promise.all(parsedHomelabprojects)).map((proj) => (
+                <li>
+                     <CardHomeProject {...proj.data} />
+                </li>
+            ))
+        }
+    </ol>
+</Section>
