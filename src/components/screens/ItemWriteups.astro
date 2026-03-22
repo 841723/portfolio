@@ -1,5 +1,5 @@
 ---
-import "src/styles/markdown.css";
+import "src/styles/writeup-markdown.css";
 import { getCollection, getEntry, render } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 import Section from '@/components/section/Section.astro';
@@ -20,7 +20,7 @@ if (!entry) {
 }
 const { Content } = await render(entry);
 
-const { name, difficulty, os, img, platform, date, releasedDate  }: {
+const { name, difficulty, os, img, platform, releasedDate  }: {
   name: string;
   difficulty: string;
   os: string;
