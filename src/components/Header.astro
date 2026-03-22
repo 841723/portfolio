@@ -52,12 +52,12 @@ const t = tcommons(currentLocale);
             {
                 supportedLocales.map((locale) => (
                     <li class="inline">
-                        <a
-                            href={getFullUrl("", locale)}
+                        <button
+                            // <!-- href={getFullUrl("", locale)} -->
                             class={`text-center opacity-95 hover:opacity-100 px-2 rounded-full hover:scale-105 transform transition duration-200 ease-in-out ${locale === currentLocale ? "underline underline-offset-4" : ""}`}
                             aria-label={locale}
                         >
-                            {locale.toUpperCase()}</a>
+                            {locale.toUpperCase()}</button>
                     </li>
                 ))
             }
@@ -82,20 +82,39 @@ const t = tcommons(currentLocale);
             {
                 supportedLocales.map((locale) => (
                     <li class="inline">
-                        <a
-                            href={getFullUrl(currentPath, locale)}
-                            class={`text-center opacity-85 hover:opacity-100 px-2 rounded-full hover:scale-105 transform transition duration-200 ease-in-out ${locale === currentLocale ? "underline underline-offset-4" : ""}`}
+                        <button
+                            class={`locale-btn text-center opacity-85 hover:opacity-100 px-2 rounded-full hover:scale-105 transform transition duration-200 ease-in-out ${locale === currentLocale ? "underline underline-offset-4" : ""}`}
                             aria-label={locale}
                         >
                             <!-- {locale == "en" && <UK />} -->
                             <!-- {locale == "es" && <Spain />} -->
-                            {locale.toLocaleUpperCase()}</a>
+                            {locale.toLocaleUpperCase()}</button>
                     </li>
                 ))
             }
         </ul>
     </nav>
 </header>
+
+<script>
+  const btn = document.getElementsByClassName('locale-btn');
+
+  Array.from(btn).forEach(button => {
+    button.addEventListener('click', () => {
+        const path = window.location.pathname;
+
+        const locale_pressed = button.getAttribute('aria-label') || 'en'; // Default to 'en' if aria-label is not set
+
+        // Guardar scroll
+        localStorage.setItem('scrollY', window.scrollY.toString());
+
+        // Cambiar ruta
+        const newPath = path.replace(/^\/(en|es)/, `/${locale_pressed.toLowerCase()}`);
+
+        // Mantener hash (#section)
+        window.location.href = newPath;
+  })});
+</script>
 
 <script>
     const burger = document.getElementById('burger');

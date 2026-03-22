@@ -1,5 +1,6 @@
 ---
 import "@/styles/global.css";
+import { fade, slide } from "astro:transitions";
 
 import { getImgUrl } from "@/uri";
 
@@ -21,9 +22,8 @@ const currentLocale = Astro.currentLocale || defaultlocale;
 ---
 
 <!doctype html>
-<html lang={currentLocale} style="dark">
+<html lang={currentLocale} style="dark" transition:animate="fade">
 	<head>
-		<meta name="google-site-verification" content="haZOKIxShWEkdbqSv6dQVHibDEnTArU_FbH45rTJPOI" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
@@ -31,8 +31,28 @@ const currentLocale = Astro.currentLocale || defaultlocale;
 		<link rel="icon" type="image/svg+xml" href={getImgUrl("/svg.svg")} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<script>
+			const savedScroll = localStorage.getItem('scrollY');
+
+			if (savedScroll) {
+				// Oculta la página antes de renderizar
+				document.documentElement.style.visibility = 'hidden';
+				const y = parseInt(savedScroll);
+
+				// Desactivar smooth scroll temporalmente
+				document.documentElement.style.scrollBehavior = 'auto';
+
+				// Ir directamente al scroll antes de render
+				window.scrollTo(0, y);
+
+				// Limpiar
+				localStorage.removeItem('scrollY');
+				document.documentElement.style.scrollBehavior = 'smooth';
+				document.documentElement.style.visibility = 'visible';
+			}
+		</script>
 	</head>
-	<body 
+	<body transition:persist
 		class={`dark w-full
 			${doGradient ? 
 				"bg-gradient-to-b from-slate-500 to-slate-900" 
@@ -63,4 +83,7 @@ const currentLocale = Astro.currentLocale || defaultlocale;
 			overscroll-behavior: none;
 		}
 	</style>
+	<script>
+		
+    </script>
 </html>
