@@ -10,23 +10,29 @@ const locale = Astro.currentLocale as Locale || defaultlocale
 
 // create a function to translate to locale languaje the objects: {en: "value", es: "valor"}
 const tcommon = tcommons(locale);
+
+const certsNotBlocked = certs.filter((cert) => !cert.data.blocked);
+const certsBlocked = certs.filter((cert) => cert.data.blocked);
 ---
 
 <Section title="nav-certs" id="certs">
     <Medal slot="icon" />
     <ol class="flex flex-col gap-y-6">
         {
-            certs.filter((cert) => !cert.data.blocked).map((cert) => (
+            certsNotBlocked.map((cert) => (
                 <li>
                     <CardCert {...cert.data} />
                 </li>
             ))
         }
-        <span class="mt-6 text-gray-300 uppercase text-center">
-           {tcommon("certs-in-progress")}
-        </span>
+
+        {certsBlocked.length > 0 && (
+            <span class="mt-6 text-gray-300 uppercase text-center">
+                {tcommon("certs-in-progress")}
+            </span>
+        )}
         {
-            certs.filter((cert) => cert.data.blocked).map((cert) => (
+            certsBlocked.map((cert) => (
                 <li>
                     <CardCert {...cert.data} />
                 </li>
