@@ -58,8 +58,15 @@ const t = tcommons(currentLocale);
       
     
     <h2 class="text-xl opacity-90 mb-4 text-pretty">
-        {(t("presentation-description") as { text: string; highlight: boolean }[]).map(part =>
-            part.highlight ? <span class="text-yellow-300 opacity-100">{part.text}</span> : part.text
+        {(t("presentation-description") as { text: string; highlight: boolean, break: boolean }[]).map(part =>
+            <>
+                {part.break && <br />}
+                {part.highlight ? (
+                <span class="text-yellow-300 font-bold opacity-100">{part.text}</span>
+                ) : (
+                part.text
+                )}
+            </>
         )}
     </h2>
 

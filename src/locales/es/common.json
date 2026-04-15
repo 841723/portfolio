@@ -11,18 +11,13 @@
     "presentation-greeting": "Hola, soy ",
     "presentation-name": "Diego Roldán",
     "presentation-description": [
-        { "text": "Ingeniero Informático", "highlight": true },
-        {
-            "text": " de Zaragoza, España. Gran pasión por la ",
-            "highlight": false
-        },
-        { "text": "Ciberseguridad", "highlight": true },
-        { "text": " y el ", "highlight": false },
-        { "text": "Desarrollo Full Stack", "highlight": true },
-        {
-            "text": ". Enfocado en construir soluciones digitales seguras, innovadoras y eficientes.",
-            "highlight": false
-        }
+      { "text": "Analista de ciberseguridad", "highlight": true },
+      { "text": "  enfocado en la defensa y monitorización de entornos en producción, la respuesta ante incidentes y la exploración de técnicas de" },
+      { "text": " red team", "highlight": true },
+      { "text": ", mientras desarrollo aplicaciones "},
+      {"text": "full stack", "highlight": true },
+      {"text": " seguras y eficientes." },
+      { "text": "Asegurando sistemas y construyendo las piezas que los hacen posibles.", "highlight": true, "break": true }
     ],
     "presentation-availableforhire": "Disponible para trabajar",
     "presentation-linkedin": "LinkedIn",

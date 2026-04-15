@@ -9,7 +9,7 @@ description:
   es: >
     Valida experiencia en el uso de Elastic Stack para monitorización y análisis de seguridad. Cubre arquitectura del Stack, Fleet y Elastic Agents, y aplicación del (ECS). Incluye creación de visualizaciones y dashboards para usar la Security App para monitorizar eventos, analizar alertas, correlacionar datos y seguir incidentes. 
 
-img: "https://templates.images.credential.net/17363044335833111771106241425275.png"
+img: "certs/ecsa/logo.png"
 link: "https://www.elastic.co/training/elastic-certified-siem-analyst-exam"
 date: "NOV 2025"
 order: 2

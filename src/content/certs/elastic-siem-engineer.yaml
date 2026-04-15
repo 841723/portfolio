@@ -9,7 +9,7 @@ description:
   es: >
     Valida experiencia en gestión y optimización de Elasticsearch. Cubre diseño y configuración de índices, plantillas y políticas, ejecución de consultas avanzadas y agregaciones, y desarrollo de aplicaciones de búsqueda. También incluye gestión de clústeres y operaciones entre clústeres para soluciones fiables y escalables.
 
-img: "https://images.contentstack.io/v3/assets/bltefdd0b53724fa2ce/blt0d8e5b01396babc4/5e71fff0c013e3505c3e21e8/icon-elastic-certified-engineer-badge-teal-64x64.svg"
+img: "certs/ece/logo.png"
 link: "https://www.elastic.co/training/elastic-certified-engineer-exam"
 date: "APR 2026"
 order: 1
