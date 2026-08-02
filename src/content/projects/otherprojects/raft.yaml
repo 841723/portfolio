@@ -1,0 +1,10 @@
+title: "RAFT - DISTRIBUTED CONSENSUS"
+
+description: "A distributed consensus algorithm that ensures that all the nodes in a cluster agree on the same value."
+
+img: "/raft/states.png"
+gh_link: "https://github.com/841723/raft"
+used_tech:
+  - Golang
+
+order: 1

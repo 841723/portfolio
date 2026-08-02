@@ -4,19 +4,12 @@ import TechPill from "@/components/TechPill.astro";
 import GithubIcon from "@/components/icons/Github.astro";
 import LinkIcon from "@/components/icons/Link.astro";
 
-import { defaultlocale, tcommons, tobj } from "@/i18n";
-import type { Locale } from "@/types";
+import { getWebLabel } from "@/getWebLabel";
 
 interface Props {
-    title: {
-        en: string,
-        es: string
-    },
+    title: string,
     // subtitle?: string,
-    description: {
-        en: string,
-        es: string
-    },
+    description: string,
     img: string,
     gh_link?: string,
     preview_link?: string,
@@ -26,11 +19,7 @@ interface Props {
 const { title, description, img, gh_link, preview_link, used_tech } =
     Astro.props;
 
-const locale = Astro.currentLocale as Locale || defaultlocale
-
-// create a function to translate to locale languaje the objects: {en: "value", es: "valor"}
-const t = tobj(locale);
-const tcommon = tcommons(locale);
+const t = getWebLabel;
 
 ---
 
@@ -41,7 +30,7 @@ const tcommon = tcommons(locale);
         <img
             class="object-cover rounded-t-lg w-full md:w-auto h-full md:aspect-square md:rounded-t-none md:rounded-l-lg group-hover:scale-105 transform transition-all duration-500"
             src={getImgUrl(img)}
-            alt={`${t(title)} icon`}
+            alt={`${(title)} icon`}
         />
     </div>
 
@@ -51,7 +40,7 @@ const tcommon = tcommons(locale);
         <div class="flex flex-row justify-between">
             <div class="mb-2">
                 <h5 class="text-2xl font-bold tracking-tight text-white">
-                    {t(title)}
+                    {(title)}
                 </h5>
                 <!-- {subtitle && 
                     <h6 class="text-sm m-0 italic opacity-80"> 
@@ -68,7 +57,7 @@ const tcommon = tcommons(locale);
                                 target="_blank"
                                 class="flex flex-row gap-x-1 items-center rounded-xl py-1 px-2 border-1 hover:bg-gray-800  transition-all duration-100"
                             >
-                                <LinkIcon /> {tcommon("projects-preview")}
+                                <LinkIcon /> {t("projects-preview")}
                             </a>
                         )
                     }
@@ -82,7 +71,7 @@ const tcommon = tcommons(locale);
                                 target="_blank"
                                 class="flex flex-row gap-x-1 items-center rounded-xl py-1 px-2 border hover:bg-gray-800  transition-all duration-100"
                             >
-                                <GithubIcon /> {tcommon("projects-code")}
+                                <GithubIcon /> {t("projects-code")}
                             </a>
                         )
                     }
@@ -90,7 +79,7 @@ const tcommon = tcommons(locale);
             </ul>
         </div>
         <p class="my-3 font-normal text-gray-400 text-pretty text-justify">
-            {t(description)}
+            {(description)}
         </p>
         <div class="flex flex-wrap gap-2">
             {used_tech?.map((tech) => <TechPill tech={tech} />)}

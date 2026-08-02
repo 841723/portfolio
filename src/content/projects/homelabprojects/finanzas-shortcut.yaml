@@ -1,0 +1,11 @@
+title: "Finances Google Sheets + iPhone Shortcut"
+
+descriptionHtml: "This project provides a simple and efficient way to track personal finances directly from an iPhone using Shortcuts. It connects securely to a home server via SSH (optionally through a VPN) to execute a Python script that logs data into [Google Sheets](https://docs.google.com/spreadsheets/d/1-DjA24rDrpvZSu15PDCt4o1EKj6Ve27yvdrzvtxB6gY/edit?usp=sharing). The system is designed to be fast, private, and fully customizable. It includes built-in error handling that stores failed entries locally on the device to prevent data loss. Users can later retry these entries with automatic field completion. The setup is flexible and can be adapted to other storage systems beyond Google Sheets."
+
+img: "/shortcuts.webp"
+gh_link: "https://github.com/841723/finanzas-from-shortcuts"
+used_tech:
+  - Python
+  - iPhone Shortcuts
+
+order: 4

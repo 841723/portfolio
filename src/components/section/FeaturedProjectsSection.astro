@@ -1,0 +1,22 @@
+---
+import CardProject from "@/components/CardProject.astro";
+import Section from "@/components/section/Section.astro";
+import Project from "@/components/icons/Project.astro";
+import { featuredprojects } from "@/collection";
+
+---
+
+<Section title="nav-featured-projects" id="featured-projects">
+    <Project slot="icon" />
+    <ol class="flex flex-col gap-y-6">
+        {
+            featuredprojects.map((proj) => (
+                <li>
+                    <CardProject {...proj.data} />
+                </li>
+            ))
+        }
+    </ol>
+</Section>
+
+

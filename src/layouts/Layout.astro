@@ -7,7 +7,6 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
 import "@fontsource-variable/onest";
-import { defaultlocale } from "@/i18n";
 
 interface Props {
 	title: string;
@@ -16,12 +15,10 @@ interface Props {
 }
 
 const { title, description, doGradient=true } = Astro.props;
-
-const currentLocale = Astro.currentLocale || defaultlocale;
 ---
 
 <!doctype html>
-<html lang={currentLocale} style="dark" transition:animate="fade">
+<html lang={"en"} style="dark" transition:animate="fade">
 	<head>
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<meta charset="UTF-8" />
@@ -82,7 +79,4 @@ const currentLocale = Astro.currentLocale || defaultlocale;
 			overscroll-behavior: none;
 		}
 	</style>
-	<script>
-		
-    </script>
 </html>

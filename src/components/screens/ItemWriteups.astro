@@ -8,8 +8,8 @@ import DirectionsIcon from "@/components/icons/Directions.astro";
 import LeftArrowIcon from "@/components/icons/LeftArrow.astro";
 import Lock from "@/components/icons/Lock.astro";
 import WriteupsSection from "@/components/section/WriteupsSection.astro";
-import { defaultlocale, tcommons } from "@/i18n";
-import { getFullUrl,getImgUrl } from "@/uri";
+import { getImgUrl } from "@/uri";
+import { getWebLabel } from "@/getWebLabel";
 
 const { slug } = Astro.params;
 const entry = await getEntry('writeups', slug);
@@ -58,10 +58,7 @@ export const getStaticPaths = async () => {
   }));  
 };
 
-const locale = Astro.currentLocale || defaultlocale;
-const back_url = getFullUrl("/writeups", locale);
-
-const t = tcommons(locale);
+const t = getWebLabel
 ---
 
 <Layout title={title} description={description} doGradient={false}>
@@ -76,7 +73,7 @@ const t = tcommons(locale);
           {t("writeups-feelfree")}
         </p>
 
-        <a href={back_url} class="flex items-center w-fit hover:opacity-100 hover:underline opacity-80 transition-opacity duration-500 ease-in-out">
+        <a href={"/writeups"} class="flex items-center w-fit hover:opacity-100 hover:underline opacity-80 transition-opacity duration-500 ease-in-out">
           <LeftArrowIcon class="inline-block mr-2" />
             {t("writeups-seeother")}
         </a>

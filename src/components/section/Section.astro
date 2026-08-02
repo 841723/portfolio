@@ -1,6 +1,5 @@
 ---
-import { defaultlocale, tcommons } from '@/i18n';
-import type { Locale } from '@/types';
+import { getWebLabel } from "@/getWebLabel";
 
 interface Props {
     title: string;
@@ -8,8 +7,7 @@ interface Props {
 }
 const { title, id } = Astro.props;
 
-const currentLocale = (Astro.currentLocale || defaultlocale) as Locale;
-const t = tcommons(currentLocale);
+const t = getWebLabel;
 ---
 
 <section id={id} class="flex flex-col gap-y-4 w-full max-w-[740px] mx-auto pt-20 px-2">

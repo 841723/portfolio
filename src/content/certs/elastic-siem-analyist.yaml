@@ -1,13 +1,6 @@
-title:
-  en: "Elastic Certified SIEM Analyst"
-  es: "Elastic Certified SIEM Analyst"
+title: "Elastic Certified SIEM Analyst"
 
-description:
-  en: >
-      Validates expertise in using the Elastic Stack for security monitoring and analysis. Covers Stack architecture, Fleet and Elastic Agents, and applying ECS. Includes creating visualizations and dashboards for security use cases, using the Security App to monitor events, analyze alerts, correlate data, and track incidents.
-
-  es: >
-    Valida experiencia en el uso de Elastic Stack para monitorización y análisis de seguridad. Cubre arquitectura del Stack, Fleet y Elastic Agents, y aplicación del (ECS). Incluye creación de visualizaciones y dashboards para usar la Security App para monitorizar eventos, analizar alertas, correlacionar datos y seguir incidentes. 
+description: "Validates expertise in using the Elastic Stack for security monitoring and analysis. Covers Stack architecture, Fleet and Elastic Agents, and applying ECS. Includes creating visualizations and dashboards for security use cases, using the Security App to monitor events, analyze alerts, correlate data, and track incidents."
 
 img: "certs/ecsa/logo.png"
 link: "https://www.elastic.co/training/elastic-certified-siem-analyst-exam"

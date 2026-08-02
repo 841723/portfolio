@@ -43,6 +43,8 @@ import HydraIcon from "./components/icons/Hydra.astro";
 import KaliIcon from "./components/icons/Kali.astro";
 import AppleIcon from "./components/icons/Apple.astro";
 import CloudflareIcon from "./components/icons/Cloudflare.astro";
+import RedisIcon from "./components/icons/Redis.astro";
+import ClickHouseIcon from "./components/icons/ClickHouse.astro";
 
 export type TAGInfo = {
     name: string;
@@ -339,6 +341,18 @@ export const TAGS = {
         style: "text-gray-100 bg-orange-500/70",
         icon: CloudflareIcon,
         link: "https://www.cloudflare.com/",
+    },
+    Redis: {
+        name: "Redis",
+        style: "text-gray-100 bg-[#dc382d]/90",
+        icon: RedisIcon,
+        link: "https://redis.io/",
+    },
+    ClickHouse: {
+        name: "ClickHouse",
+        style: "text-gray-900 bg-[#faff69]/90",
+        icon: ClickHouseIcon,
+        link: "https://clickhouse.com/",
     },
 };
 

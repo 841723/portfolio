@@ -3,13 +3,11 @@ import CardCert from "@/components/CardCert.astro";
 import Section from "@/components/section/Section.astro";
 import Medal from "@/components/icons/Medal.astro";
 import { certs } from "@/collection";
-import type { Locale } from "@/types";
-import { defaultlocale, tcommons } from "@/i18n";
+import { getWebLabel } from "@/getWebLabel";
 
-const locale = Astro.currentLocale as Locale || defaultlocale
+const t = getWebLabel
 
 // create a function to translate to locale languaje the objects: {en: "value", es: "valor"}
-const tcommon = tcommons(locale);
 
 const certsNotBlocked = certs.filter((cert) => !cert.data.blocked);
 const certsBlocked = certs.filter((cert) => cert.data.blocked);
@@ -28,7 +26,7 @@ const certsBlocked = certs.filter((cert) => cert.data.blocked);
 
         {certsBlocked.length > 0 && (
             <span class="mt-6 text-gray-300 uppercase text-center">
-                {tcommon("certs-in-progress")}
+                {t("certs-in-progress")}
             </span>
         )}
         {

@@ -1,0 +1,16 @@
+title: "ASESIN-ADA"
+
+description: "Online game to play Cluedo with bots or your friends. Chat with them, find the killer, the weapon, and the room, and win the game."
+
+img: "/asesin-ada/logo.png"
+gh_link: "https://github.com/841723/asesin-ada"
+used_tech:
+  - React
+  - Node.js
+  - Socket.io
+  - CSS
+  - Python
+  - PostgreSQL
+  - AWS
+
+order: 2

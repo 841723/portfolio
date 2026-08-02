@@ -1,0 +1,12 @@
+title: "Wireguard VPN Server"
+
+descriptionHtml: "This project sets up a Wireguard VPN server on a home server, allowing secure remote access to the local network. It includes a Python script that automates the generation of client configuration files and QR codes for easy setup on mobile devices. The system is designed to be fast, secure, and easy to manage, providing a reliable solution for remote access to home resources."
+
+img: "/wireguard.webp"
+# gh_link: "https://github.com/841723/finanzas-from-shortcuts"
+used_tech:
+  - Python
+  - Bash
+
+order: 2
+featured: true

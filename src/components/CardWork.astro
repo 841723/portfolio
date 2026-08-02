@@ -1,14 +1,9 @@
 ---
 import { getImgUrl } from "@/uri";
-import { defaultlocale, tcommons, tobj } from "@/i18n";
-
-import type { Locale } from "@/types";
+import { getWebLabel } from "@/getWebLabel";
 
 interface Props {
-    position: {
-        en: string,
-        es: string
-    };
+    position: string;
     company: {
         name: string;
         href: string;
@@ -17,23 +12,14 @@ interface Props {
     };
     img: string;
     date: string;
-    height: {
-        en: string,
-        es: string
-    };
-     description: {
-        en: string,
-        es: string
-    };
+    height: string;
+    description: string;
 }
 
 const { position, company, img, date, height, description } =
     Astro.props;
 
-const locale = Astro.currentLocale as Locale || defaultlocale;
-const t = tobj(locale);
-const tcommon = tcommons(locale);
-
+const t = getWebLabel;
 ---
 
 <article
@@ -65,7 +51,7 @@ const tcommon = tcommons(locale);
                     </span>
                     <br />
                     <span class="text-gray-400 font-normal text-lg">
-                        {tcommon("workexperience-at")}
+                        {t("workexperience-at")}{" "}
                     </span>
                     <a
                         class=`${company.color} font-semibold hover:underline`
@@ -81,9 +67,7 @@ const tcommon = tcommons(locale);
             </div>
         </div>
         <p class="my-3 font-normal text-gray-400 text-pretty text-justify">
-            {t(description).split("**").map((part, index) => 
-                index % 2 === 1 ? <strong class="text-gray-200">{part}</strong> : part
-            )}
+            {t(description)}
         </p>
     </div>
 </article>

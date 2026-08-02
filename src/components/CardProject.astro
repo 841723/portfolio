@@ -3,49 +3,36 @@ import "@/styles/homelab-markdown.css";
 import TechPill from "@/components/TechPill.astro";
 import GithubIcon from "@/components/icons/Github.astro";
 
-import { defaultlocale, tcommons, tobj } from "@/i18n";
-import type { Locale } from "@/types";
+import { getWebLabel } from "@/getWebLabel";
 import { getImgUrl } from "@/uri";
+import { markdownToHtml } from "@/remark";
 
 interface Props {
-    title: {
-        en: string,
-        es: string
-    },
+    title: string,
     // subtitle?: string,
-    description: {
-        en: string,
-        es: string
-    },
-    descriptionHtml: {
-        en: string,
-        es: string
-    },
+    description?: string,
+    descriptionHtml?: string,
     img: string,
     gh_link?: string,
     used_tech: string[],
 }
 
-const { title, descriptionHtml, img, gh_link, used_tech } =
+const { title, description, descriptionHtml, img, gh_link, used_tech } =
     Astro.props;
 
-const locale = Astro.currentLocale as Locale || defaultlocale
+const valueDescriptionHtml = descriptionHtml ? await markdownToHtml(descriptionHtml) : undefined;
 
-// create a function to translate to locale languaje the objects: {en: "value", es: "valor"}
-const t = tobj(locale);
-const tcommon = tcommons(locale);
-
+const t = getWebLabel;
 ---
 
 <article
-    class="flex flex-col items-stretch border rounded-lg shadow md:flex-row w-full border-gray-700 bg-gray-800 group hover:bg-gray-700 transition-all duration-500"
+    class="flex flex-col items-stretch border rounded-lg shadow md:flex-row w-full border-gray-700 bg-gray-800 group hover:bg-gray-700 transition-all duration-500 min-h-52"
 >   
-    <!-- no me pone el fondo entero rojo -->
     <div class="min-w-48 w-full md:w-48 h-44 md:h-auto overflow-hidden rounded-t-lg md:rounded-t-none md:rounded-l-lg">
         <img
             class="rounded-t-lg w-full md:w-auto h-full object-cover md:rounded-t-none md:rounded-l-lg group-hover:scale-105 transform transition-all duration-500"
             src={getImgUrl(img)}
-            alt={`${t(title)} icon`}
+            alt={`${(title)} icon`}
         />
     </div>
     <div
@@ -54,7 +41,7 @@ const tcommon = tcommons(locale);
         <div class="flex flex-row justify-between">
             <div class="mb-2">
                 <h5 class="text-2xl font-bold tracking-tight text-white">
-                    {t(title)}
+                    {(title)}
                 </h5>
             </div>
             <ul class="flex flex-row justify-end gap-x-2">
@@ -66,14 +53,14 @@ const tcommon = tcommons(locale);
                                 target="_blank"
                                 class="flex flex-row gap-x-1 items-center rounded-xl py-1 px-2 border hover:bg-gray-800  transition-all duration-100"
                             >
-                                <GithubIcon /> {tcommon("projects-code")}
+                                <GithubIcon /> {t("projects-code")}
                             </a>
                         )
                     }
                 </li>
             </ul>
         </div>
-        <div class="homelab-markdown my-3 font-normal text-gray-400 text-pretty text-justify" set:html={t(descriptionHtml)} />
+        {valueDescriptionHtml ? <div class="homelab-markdown my-3 font-normal text-gray-400 text-pretty text-justify" set:html={valueDescriptionHtml} /> : <p class="text-gray-400">{description}</p>}
 
         <div class="flex flex-wrap gap-2">
             {used_tech?.map((tech) => <TechPill tech={tech} />)}

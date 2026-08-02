@@ -1,0 +1,15 @@
+title: "dieGO SIEM"
+
+description: "Developing dieGO SIEM (Security Information and Event Management) from scratch in Go. It collects, processes, and visualizes security events, using ClickHouse for log storage, PostgreSQL for metadata, and React for the web interface. Includes a Docker-based lab to simulate attacks and validate detection capabilities, with integrated log ingestion from Bitwarden/Vaultwarden."
+
+img: "/diego-siem/logo.webp"
+gh_link: "https://github.com/841723/diego-siem"
+used_tech:
+  - Golang
+  - ClickHouse
+  - PostgreSQL
+  - Docker
+  - React
+
+order: 1
+featured: true

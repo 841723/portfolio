@@ -5,46 +5,51 @@
   "nav-techstack": "Tech Stack",
   "nav-webprojects": "Web Projects",
   "nav-otherprojects": "More Projects",
+  "nav-featured-projects": "Featured Projects",
   "nav-certs": "Certifications",
   "nav-homelabprojects": "Home Lab Projects",
-
-
-
   "presentation-greeting": "Hi, I'm ",
   "presentation-name": "Diego Roldan",
   "presentation-description": [
-      { "text": "Cybersecurity Analyst", "highlight": true },
-      { "text": "  focused on defense, monitoring, and incident response, with a strong interest in" },
-      { "text": " red team", "highlight": true },
-      { "text": ", while continuously developing secure and efficient "},
-      {"text": "full stack", "highlight": true },
-      {"text": " applications." },
-      { "text": "Securing systems by day, building them by passion.", "highlight": true, "break": true }
-    ],
+    {
+      "text": "Cybersecurity Analyst",
+      "highlight": true
+    },
+    {
+      "text": "  focused on defense, monitoring, and incident response, with a strong interest in"
+    },
+    {
+      "text": " red team",
+      "highlight": true
+    },
+    {
+      "text": ", while continuously developing secure and efficient "
+    },
+    {
+      "text": "full stack",
+      "highlight": true
+    },
+    {
+      "text": " applications."
+    },
+    {
+      "text": "Securing systems by day, building them by passion.",
+      "highlight": true,
+      "break": true
+    }
+  ],
   "presentation-availableforhire": "Available for hire",
   "presentation-linkedin": "Linkedin",
   "presentation-github": "Github",
-
-
-
   "projects-code": "Code",
   "projects-preview": "Preview",
-
-
-
   "techstack-frontend": "Frontend",
   "techstack-backend": "Backend",
   "techstack-cloud": "Cloud",
   "techstack-others": "Others",
-  "techstack-soc-blue-team": "Cybersecurity Blue Team",
-  "techstack-soc-red-team": "Cybersecurity Red Team",
-
-
-
+  "techstack-soc-blue-team": "Blue Team",
+  "techstack-soc-red-team": "Red Team",
   "workexperience-at": "at",
-
-
-
   "writeups-noavailable": "No writeups available at the moment.",
   "writeups-seeother": "Check out other write ups",
   "writeups-description": "Here you can find some writeups of Hack The Box machines that I have solved. Open them to see the details of each machine, including the steps I took to solve them, the tools I used, and any challenges I faced along the way.",
@@ -58,12 +63,10 @@
   "writeups-search": "You can search by name or filter by difficulty using the buttons below.",
   "writeups-inputplaceholder": "Search writeups...",
   "writeups-feelfree": "Feel free to reach out if you have any questions or want to discuss anything related to cybersecurity or web development.",
-
-    "writeups-difficulty": "Difficulty",
-    "writeups-os": "OS",
-    "writeups-solved-on": "Solved on",
-
-    "certs-link": "View Certification",
-    "certs-in-progress": "Certifications In Progress",
-    "certs-coming-soon": "Coming Soon"
+  "writeups-difficulty": "Difficulty",
+  "writeups-os": "OS",
+  "writeups-solved-on": "Solved on",
+  "certs-link": "View Certification",
+  "certs-in-progress": "Certifications In Progress",
+  "certs-coming-soon": "Coming Soon"
 }

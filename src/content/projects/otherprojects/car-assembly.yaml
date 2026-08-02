@@ -1,0 +1,10 @@
+title: "CAR GAME ASSEMBLY"
+
+description: "A car game developed using assembly language. The user-controlled car must avoid touching the moving walls. It also supports 2 players simultaneously."
+
+img: "/car-assembly/logo.jpg"
+gh_link: "https://github.com/841723/car-assembly"
+used_tech:
+  - ARM Assembly
+
+order: 2

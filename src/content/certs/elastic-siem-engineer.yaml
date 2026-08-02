@@ -1,13 +1,6 @@
-title:
-  en: "Elastic Certified Engineer"
-  es: "Elastic Certified Engineer"
+title: "Elastic Certified Engineer"
 
-description:
-  en: >
-    Validates expertise in managing and optimizing Elasticsearch environments. Covers designing and configuring indexes, executing advanced queries and aggregations, and building search applications. Also includes cluster management, backups, and cross-cluster operations for reliable, scalable solutions.
-
-  es: >
-    Valida experiencia en gestión y optimización de Elasticsearch. Cubre diseño y configuración de índices, plantillas y políticas, ejecución de consultas avanzadas y agregaciones, y desarrollo de aplicaciones de búsqueda. También incluye gestión de clústeres y operaciones entre clústeres para soluciones fiables y escalables.
+description: Validates expertise in managing and optimizing Elasticsearch environments. Covers designing and configuring indexes, executing advanced queries and aggregations, and building search applications. Also includes cluster management, backups, and cross-cluster operations for reliable, scalable solutions.
 
 img: "certs/ece/logo.png"
 link: "https://www.elastic.co/training/elastic-certified-engineer-exam"

@@ -1,0 +1,18 @@
+title: "LOCATOPEDIA"
+
+description: "Wiki-like website to search for locations and their information. Add new locations and edit them. See the most popular locations."
+
+img: "/tfg/logo.jpg"
+gh_link: "https://github.com/841723/locatopedia"
+used_tech:
+  - React
+  - Node.js
+  - PostgreSQL
+  - TailwindCSS
+  - Docker
+  - JavaScript
+  - Nginx
+  - Azure
+
+order: 4
+featured: true

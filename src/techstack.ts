@@ -24,6 +24,8 @@ export const TECH_STACK = [
             TAGS.PostgreSQL,
             TAGS.SQLite,
             TAGS.SocketIo,
+            TAGS.Redis,
+            TAGS.ClickHouse
         ],
     },
     {

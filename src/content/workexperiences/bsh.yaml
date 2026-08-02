@@ -1,6 +1,4 @@
-position:
-  en: "SOFTWARE DIGITALIZATION ENGINEER"
-  es: "INGENIERO DIGITALIZACIÓN DE SOFTWARE"
+position: "SOFTWARE DIGITALIZATION ENGINEER"
 
 company:
     name: "BSH"
@@ -11,13 +9,9 @@ company:
 date: "FEB 2025 - OCT 2025"
 img: "/bsh/logo.png"
 
-height: 
-    en: "364"
-    es: "364"
+height:  "364"
 
 
-description:
-    en: "Developed end-to-end software solutions using Power Platform (Power Apps, Power Automate, SQL, and Power BI) to drive the digitalization of production processes. Led the internal app development initiatives, collaborating directly with plant teams to design tailored solutions for their operational needs. Implemented automated workflows and data dashboards to enhance efficiency and enable data-driven decision-making. Additionally, conducted training sessions to upskill new users and developers in Power Platform."
-    es: "Desarrollo completo de soluciones de software en Power Platform (Power Apps, Power Automate, SQL y Power BI) para la digitalización de procesos de producción. Lideré el desarrollo de aplicaciones internas, trabajando directamente con los equipos de planta para diseñar soluciones adaptadas a sus necesidades operativas. Implementé flujos automatizados y paneles de control para optimizar la eficiencia y facilitar la toma de decisiones basada en datos. Además, formé a nuevos usuarios y desarrolladores en el uso de Power Platform."
+description: "Developed end-to-end software solutions using Power Platform (Power Apps, Power Automate, SQL, and Power BI) to drive the digitalization of production processes. Led the internal app development initiatives, collaborating directly with plant teams to design tailored solutions for their operational needs. Implemented automated workflows and data dashboards to enhance efficiency and enable data-driven decision-making. Additionally, conducted training sessions to upskill new users and developers in Power Platform."
 
 order: 2

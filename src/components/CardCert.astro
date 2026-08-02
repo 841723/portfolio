@@ -1,17 +1,10 @@
 ---
 import { getImgUrl } from "@/uri";
-import { defaultlocale, tcommons, tobj } from "@/i18n";
-import type { Locale } from "@/types";
+import { getWebLabel } from "@/getWebLabel";
 
 interface Props {
-    title: {
-        en: string,
-        es: string
-    },
-    description: {
-        en: string,
-        es: string
-    },
+    title: string,
+    description: string
     img: string,
     date: string,
     link?: string,
@@ -22,11 +15,8 @@ interface Props {
 const { title, description, img, date, link, blocked=false } =
     Astro.props;
 
-const locale = Astro.currentLocale as Locale || defaultlocale
-
 // create a function to translate to locale languaje the objects: {en: "value", es: "valor"}
-const t = tobj(locale);
-const tcommon = tcommons(locale);
+const t = getWebLabel;
 
 ---
 <a 
@@ -64,7 +54,7 @@ const tcommon = tcommons(locale);
         <div class="relative w-32 sm:w-40 md:w-48 aspect-square overflow-hidden flex-shrink-0">
             <img
                 src={getImgUrl(img)}
-                alt={`${t(title)} icon`}
+                alt={`${title} icon`}
                 class="h-full w-full object-cover
                     rounded-l-lg
                     transition-transform duration-500 group-hover:scale-105"
@@ -75,16 +65,16 @@ const tcommon = tcommons(locale);
         <div class="flex flex-col justify-between w-full min-h-32 md:h-[232px] p-4">
             <div class="relative">
                 <h5 class="text-xl sm:text-2xl font-bold tracking-tight text-white decoration-2 decoration-transparent underline-offset-4 group-hover:decoration-white transition-all duration-1000">
-                    {t(title)}
+                    {title}
                 </h5>
 
                 <p class="text-sm uppercase opacity-80 mt-1">
-                    {blocked ? tcommon("certs-coming-soon") : date}
+                    {blocked ? t("certs-coming-soon") : date}
                 </p>
             </div>
 
             <p class="mt-4 md:mt-0 font-normal text-gray-400 text-sm sm:text-base text-justify">
-                {t(description)}
+                {description}
             </p>
         </div>
     </article>

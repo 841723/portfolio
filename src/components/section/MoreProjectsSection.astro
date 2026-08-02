@@ -1,0 +1,21 @@
+---
+import CardProject from "@/components/CardProject.astro";
+import Section from "@/components/section/Section.astro";
+import Home from "@/components/icons/Home.astro";
+import { projects } from "@/collection";
+---
+
+<Section title="nav-otherprojects" id="more-projects">
+    <Home slot="icon" />
+    <ol class="flex flex-col gap-y-6">
+        {
+            projects.map((proj) => (
+                <li>
+                    <CardProject {...proj.data} />
+                </li>
+            ))
+        }
+    </ol>
+</Section>
+
+

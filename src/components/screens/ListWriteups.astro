@@ -3,8 +3,7 @@ import "../../styles/writeup-markdown.css"
 import Layout from '@/layouts/Layout.astro';
 import Section from '@/components/section/Section.astro';
 import WriteupList from "@/components/WriteupList.astro";
-import { defaultlocale, tcommons } from "@/i18n";
-import type { Locale } from "@/types";
+import { getWebLabel } from "@/getWebLabel";
 
 const title = `Writeups - Diego Roldan`;
 const description = `All Writeups for machines on Hack The Box.`;
@@ -32,9 +31,7 @@ const buttonsFilter = [
     }
 ];
 
-const locale = (Astro.currentLocale || defaultlocale) as Locale;
-const t = tcommons(locale);
-
+const t = getWebLabel
 ---
 
 <Layout title={title} description={description} doGradient={false} >
@@ -127,7 +124,6 @@ const t = tcommons(locale);
                     const filter = button.getAttribute('data-filter')?.toLowerCase();
 
                     if (filter && filtersObj.hasOwnProperty(filter)) {
-                        console.log('Toggling filter:', filter);
                         filtersObj[filter].state = !filtersObj[filter].state;
                         button.classList.toggle(filtersObj[filter].color);
                         button.classList.toggle(filtersObj[filter].colorHover);

@@ -1,0 +1,11 @@
+title: "REFORMAS LAS CANTERAS"
+
+description: "Website page for a small kitchen and bathroom reform company. Check their services, projects, and contact them."
+
+img: "/las-canteras/logo.jpg"
+used_tech:
+  - Astro
+  - TypeScript
+  - TailwindCSS
+
+order: 3

@@ -32,10 +32,7 @@ const workexperiences = defineCollection({
         base: "src/content/workexperiences",
     }),
     schema: z.object({
-        position: z.object({
-            en: z.string(),
-            es: z.string(),
-        }),
+        position: z.string(),
         company: z.object({
             name: z.string(),
             color: z.string(),
@@ -44,55 +41,10 @@ const workexperiences = defineCollection({
         }),
         img: z.string(),
         date: z.string(),
-        height: z.object({
-            en: z.string(),
-            es: z.string(),
-        }),
-        description: z.object({
-            en: z.string(),
-            es: z.string(),
-        }),
+        height: z.string(),
+        description: z.string(),
         order: z.number().optional(),
     }),
-});
-
-const webprojects = defineCollection({
-    type: "data",
-    schema: z.object({
-        title: z.object({
-            en: z.string(),
-            es: z.string(),
-        }),
-        description: z.object({
-            en: z.string(),
-            es: z.string(),
-        }),
-        img: z.string(),
-        gh_link: z.string().optional(),
-        preview_link: z.string().optional(),
-        used_tech: z.array(z.enum(Object.values(TAGS).map(t => t.name) as [TagNames, ...TagNames[]])),
-        order: z.number().optional(),
-    }),
-});
-
-const otherprojects = defineCollection({
-    type: "data",
-    schema: z.object({
-        title: z.object({
-            en: z.string(),
-            es: z.string(),
-        }),
-        description: z.object({
-            en: z.string(),
-            es: z.string(),
-        }),
-        img: z.string(),
-        gh_link: z.string().optional(),
-        preview_link: z.string().optional(),
-        used_tech: z.array(z.enum(Object.values(TAGS).map(t => t.name) as [TagNames, ...TagNames[]])),
-        order: z.number().optional(),
-    }),
-
 });
 
 const certs = defineCollection({
@@ -101,14 +53,8 @@ const certs = defineCollection({
         base: "src/content/certs",
     }),
     schema: z.object({
-        title: z.object({
-            en: z.string(),
-            es: z.string(),
-        }),
-        description: z.object({
-            en: z.string(),
-            es: z.string(),
-        }),
+        title: z.string(),
+        description: z.string(),
         img: z.string(),
         date: z.string(),
         link: z.string().optional(),
@@ -117,21 +63,21 @@ const certs = defineCollection({
     }),
 });
 
-const homelabprojects = defineCollection({
-    type: "data",
+const projects = defineCollection({
+    loader: glob({
+        pattern: ["**/*.yaml", "!dev-*"],
+        base: "src/content/projects",
+    }),
     schema: z.object({
-        title: z.object({
-            en: z.string(),
-            es: z.string(),
-        }),
-        description: z.object({
-            en: z.string(),
-            es: z.string(),
-        }),
+        title: z.string(),
+        description: z.string().optional(),
+        descriptionHtml: z.string().optional(),
         img: z.string(),
         gh_link: z.string().optional(),
+        preview_link: z.string().optional(),
         used_tech: z.array(z.enum(Object.values(TAGS).map(t => t.name) as [TagNames, ...TagNames[]])),
         order: z.number().optional(),
+        featured: z.boolean().default(false),
     }),
 });
 
@@ -139,8 +85,6 @@ const homelabprojects = defineCollection({
 export const collections = { 
   writeups,
   workexperiences, 
-  webprojects, 
-  otherprojects,
   certs,
-  homelabprojects
+  projects
 } as const;
