@@ -7,8 +7,6 @@ import { getWebLabel } from "@/getWebLabel";
 
 const t = getWebLabel
 
-// create a function to translate to locale languaje the objects: {en: "value", es: "valor"}
-
 const certsNotBlocked = certs.filter((cert) => !cert.data.blocked);
 const certsBlocked = certs.filter((cert) => cert.data.blocked);
 ---

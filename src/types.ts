@@ -12,5 +12,3 @@ export type Company = {
     href: string;
     color?: string; // Optional color for the company name
 }
-
-export type Locale = "en" | "es";
