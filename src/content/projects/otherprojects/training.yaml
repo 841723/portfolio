@@ -1,0 +1,13 @@
+title: "TRAINING"
+
+descriptionHtml: "Personal training tracker for Ironman 70.3 with a React frontend, Node.js backend, and direct sync with the Garmin Connect API. Includes a Python script that downloads activity data via the unofficial `python-garminconnect` library, a sync pipeline that normalizes sessions into JSON, and a REST API to query and trigger syncs."
+
+img: "/training/logo.webp"
+gh_link: "https://github.com/841723/training"
+used_tech:
+  - React
+  - Node.js
+  - Python
+
+order: 0
+featured: true

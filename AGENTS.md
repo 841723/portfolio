@@ -10,7 +10,7 @@ Astro 7 static site with Tailwind CSS v4 (via the `@tailwindcss/vite` plugin in 
 - No test suite and no lint script. Prettier is installed but not wired to any script or config.
 
 ## Node version requirement
-The active `node` is v20.20.0, which Astro 7 rejects (requires >=22.12.0). Run `source ~/.nvm/nvm.sh && nvm use 24` (v24.18.1 is installed) before any npm script, or `astro` fails to start.
+Astro 7 requires Node >=22.12.0. The nvm default alias is `lts/*` → v24.18.1, which works. If your shell somehow lands on v20.x, run `source ~/.nvm/nvm.sh && nvm use 24` before any npm script.
 
 ## Content collections (`src/content.config.ts`, glob-based loaders)
 - **writeups**: `src/content/writeups/**/*.md`. `*.devmd` files and `cheatsheet.md` are excluded from the build (`.devmd` = drafts; `template.devmd` is a scratch template). Required frontmatter: `name`, `difficulty` (easy|medium|hard|insane), `os` (linux|windows), `platform` (htb|vulnhub|other), `img`.
